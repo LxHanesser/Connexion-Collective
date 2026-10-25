@@ -1,9 +1,18 @@
+# 注意：X-Frame-Options 与 Referrer-Policy 在线上会被 Cloudflare 边缘覆盖为
+#   X-Frame-Options: SAMEORIGIN
+#   Referrer-Policy: same-origin
+# 原因尚未查明（控制台里可能有 Transform Rule / Configuration Rule 之类），
+# 但 frame-ancestors 'none' 已在强制 CSP 里生效，防嵌套由它保证，故不影响安全结论。
+# 这里仍保留更严格的声明：一旦边缘规则被移除，它们会自动生效。
 /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=()
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://giscus.app https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://cdn.connexioncollective.com https://github.com https://avatars.githubusercontent.com; font-src 'self' data:; connect-src 'self' https://giscus.app https://cloudflareinsights.com; frame-src https://giscus.app; worker-src 'self' blob:; media-src 'self' https://cdn.connexioncollective.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+# 上面 script-src 的 'unsafe-inline' 只是**兜底**：构建后 scripts/gen-csp-hashes.mjs 会把
+# 内联脚本的 sha256 注入并删掉它。脚本失败时保留 'unsafe-inline'，宁可策略弱一点也不拦死站点。
+# style-src 的 'unsafe-inline' 必须保留 —— 产物里有 500+ 个 style 属性。
 
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
