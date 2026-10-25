@@ -81,6 +81,9 @@ const config = {
           blogTitle: '博客与碎碎念',
           blogDescription: '记录关于游戏、现实与代码的随想。',
           postsPerPage: 20,
+          // 侧边栏列出全部文章（按时间倒序），不只是最近 5 篇
+          blogSidebarTitle: '全部文章',
+          blogSidebarCount: 'ALL',
           feedOptions: {
             type: ['rss', 'atom'],
             xslt: true,
