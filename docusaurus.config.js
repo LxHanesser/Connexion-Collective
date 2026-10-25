@@ -141,6 +141,15 @@ const config = {
             position: 'left',
           },
           {
+            type: 'dropdown',
+            label: '在线工具',
+            position: 'left',
+            items: [
+              {label: '全部工具', to: '/tools'},
+              {label: '图片压缩', to: '/tools/image-compress'},
+            ],
+          },
+          {
             to: '/docs/info/changelog',
             label: '网站更新日志',
             position: 'left',
@@ -189,6 +198,8 @@ const config = {
           {
             title: '更多',
             items: [
+              {label: '在线工具', to: '/tools'},
+              {label: '图片压缩', to: '/tools/image-compress'},
               {label: '网站更新日志', to: '/docs/info/changelog'},
               {label: '服务条款', to: '/docs/info/terms'},
             ],

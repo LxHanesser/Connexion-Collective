@@ -45,3 +45,7 @@
 - 搜索：`@easyops-cn/docusaurus-search-local@0.55.3`（构建期索引，浏览器端检索）。
 - 评论：Giscus（`LxHanesser/Connexion-Collective` 仓库的 Discussions）。
 - 页脚运行天数：`src/siteMeta.js` + `src/clientModules/siteUptime.js`，浏览器端计算。
+- 在线工具：`/tools`（列表）与 `/tools/image-compress`（图片压缩），全部浏览器端运行。
+  编码器为 `@jsquash/webp@1.5.0`、`@jsquash/jpeg@1.6.0`、`@jsquash/oxipng@2.3.0`，
+  WASM 二进制**自托管**在 `static/wasm/`（禁止改成 CDN），页面零上传、零外域请求。
+- 将来若加 CSP，图片压缩页需要 `script-src 'wasm-unsafe-eval'`，否则 WASM 会被拦。
