@@ -7,3 +7,15 @@
 技术:
   label: 技术
   description: 建站日志、代码折腾与工具推荐。
+在线工具:
+  label: 在线工具
+  description: 在浏览器里跑的工具，以及它们背后的实现取舍。
+前端:
+  label: 前端
+  description: 浏览器能力、交互实现与工程细节。
+性能:
+  label: 性能
+  description: 包体积、加载策略与运行时开销。
+安全:
+  label: 安全
+  description: 纯前端工具的威胁模型与防护措施。
