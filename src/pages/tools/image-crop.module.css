@@ -1,0 +1,14 @@
+.canvasWrap {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.cropCanvas {
+  max-width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  touch-action: none;
+  cursor: crosshair;
+  background: var(--ifm-color-emphasis-100);
+}

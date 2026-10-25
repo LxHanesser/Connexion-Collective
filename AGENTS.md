@@ -48,4 +48,7 @@
 - 在线工具：`/tools`（列表）与 `/tools/image-compress`（图片压缩），全部浏览器端运行。
   编码器为 `@jsquash/webp@1.5.0`、`@jsquash/jpeg@1.6.0`、`@jsquash/oxipng@2.3.0`，
   WASM 二进制**自托管**在 `static/wasm/`（禁止改成 CDN），页面零上传、零外域请求。
+  另有格式转换、裁剪旋转、加水印、二维码（`qrcode-generator@2.0.4`，零依赖）、
+  开发工具（JSON/Base64/哈希/时间戳/UUID，全部原生 API）五个页面，同样零上传。
+  新增工具必须：独立路由（自动代码分割）、重逻辑动态 import、刷新后不留数据。
 - 将来若加 CSP，图片压缩页需要 `script-src 'wasm-unsafe-eval'`，否则 WASM 会被拦。

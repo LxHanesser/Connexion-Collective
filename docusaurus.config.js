@@ -147,6 +147,11 @@ const config = {
             items: [
               {label: '全部工具', to: '/tools'},
               {label: '图片压缩', to: '/tools/image-compress'},
+              {label: '格式转换', to: '/tools/image-convert'},
+              {label: '裁剪旋转', to: '/tools/image-crop'},
+              {label: '加水印', to: '/tools/watermark'},
+              {label: '二维码生成', to: '/tools/qr-code'},
+              {label: '开发工具', to: '/tools/dev-tools'},
             ],
           },
           {
@@ -200,6 +205,8 @@ const config = {
             items: [
               {label: '在线工具', to: '/tools'},
               {label: '图片压缩', to: '/tools/image-compress'},
+              {label: '二维码生成', to: '/tools/qr-code'},
+              {label: '开发工具', to: '/tools/dev-tools'},
               {label: '网站更新日志', to: '/docs/info/changelog'},
               {label: '服务条款', to: '/docs/info/terms'},
             ],
