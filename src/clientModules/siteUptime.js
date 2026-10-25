@@ -8,7 +8,11 @@ import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import {daysSinceLaunch} from '../siteMeta';
 
 const FOOTER_COPYRIGHT_SELECTOR = '.footer__copyright';
-const UPTIME_PATTERN = /(本站已运行\s*)\d+(\s*天)/;
+// 中英文两套文案都可能出现在页脚，按当前语言匹配对应的一种
+const UPTIME_PATTERNS = [
+  /(本站已运行\s*)\d+(\s*天)/,
+  /(Running\s+)\d+(\s+days?)/i,
+];
 
 function syncFooterUptime() {
   if (!ExecutionEnvironment.canUseDOM) {
@@ -21,11 +25,12 @@ function syncFooterUptime() {
   }
 
   const current = el.textContent ?? '';
-  if (!UPTIME_PATTERN.test(current)) {
+  const pattern = UPTIME_PATTERNS.find((item) => item.test(current));
+  if (!pattern) {
     return;
   }
 
-  const next = current.replace(UPTIME_PATTERN, `$1${daysSinceLaunch()}$2`);
+  const next = current.replace(pattern, `$1${daysSinceLaunch()}$2`);
   if (next !== current) {
     // 页脚版权文本是纯字符串，没有子元素，整段替换是安全的
     el.textContent = next;

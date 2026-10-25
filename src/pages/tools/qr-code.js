@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import qrcode from 'qrcode-generator';
 import {canvasToBlob, downloadBlob} from '@site/src/lib/imageTools';
 import styles from './shared.module.css';
@@ -10,13 +11,17 @@ qrcode.stringToBytes = (value) => Array.from(new TextEncoder().encode(value));
 
 const SIZES = [256, 512, 1024];
 const LEVELS = [
-  {value: 'L', label: 'L（最省空间）'},
-  {value: 'M', label: 'M（推荐）'},
-  {value: 'Q', label: 'Q（更强纠错）'},
-  {value: 'H', label: 'H（最强纠错）'},
+  {value: 'L', zh: 'L（最省空间）', en: 'L (smallest)'},
+  {value: 'M', zh: 'M（推荐）', en: 'M (recommended)'},
+  {value: 'Q', zh: 'Q（更强纠错）', en: 'Q (stronger)'},
+  {value: 'H', zh: 'H（最强纠错）', en: 'H (strongest)'},
 ];
 
 export default function QrCodePage() {
+  const {i18n} = useDocusaurusContext();
+  const isEn = i18n.currentLocale === 'en';
+  const t = (zh, en) => (isEn ? en : zh);
+
   const [text, setText] = useState('https://connexioncollective.com');
   const [size, setSize] = useState(512);
   const [margin, setMargin] = useState(2);
@@ -62,13 +67,12 @@ export default function QrCodePage() {
       }
       setError('');
     } catch (renderError) {
+      const detail = renderError instanceof Error ? renderError.message : '';
       setError(
-        renderError instanceof Error
-          ? `内容太长，无法生成二维码：${renderError.message}`
-          : '生成失败',
+        t(`内容太长，无法生成二维码：${detail}`, `Content is too long for a QR code: ${detail}`),
       );
     }
-  }, [bg, fg, level, margin, size, text]);
+  }, [bg, fg, level, margin, size, text, isEn]);
 
   useEffect(() => {
     const timer = setTimeout(render, 150);
@@ -84,39 +88,53 @@ export default function QrCodePage() {
 
   return (
     <Layout
-      title="二维码生成"
-      description="在浏览器里生成二维码，支持中文、自定义尺寸与纠错级别，不上传任何内容。">
+      title={t('二维码生成', 'QR code generator')}
+      description={t(
+        '在浏览器里生成二维码，支持中文、自定义尺寸与纠错级别，不上传任何内容。',
+        'Generate QR codes in your browser with Chinese support, custom size, and error correction. Nothing is uploaded.',
+      )}>
       <main className={styles.page}>
         <header className={styles.header}>
           <Heading as="h1" className={styles.title}>
-            二维码生成
+            {t('二维码生成', 'QR code generator')}
           </Heading>
           <p className={styles.lead}>
-            输入链接或文字，实时生成二维码。内容只在你的浏览器里计算，不会发送到任何服务器。
+            {t(
+              '输入链接或文字，实时生成二维码。内容只在你的浏览器里计算，不会发送到任何服务器。',
+              'Type a link or text and get a QR code instantly. Everything is computed in your browser and never sent to a server.',
+            )}
           </p>
           <p className={styles.badgeRow}>
-            <span className={styles.badge}>🔒 本地生成</span>
-            <span className={styles.badge}>🀄 支持中文</span>
-            <span className={styles.badge}>📦 零依赖请求</span>
+            <span className={styles.badge}>{t('🔒 本地生成', '🔒 Generated locally')}</span>
+            <span className={styles.badge}>{t('🀄 支持中文', '🀄 Unicode support')}</span>
+            <span className={styles.badge}>{t('📦 零依赖请求', '📦 No external requests')}</span>
           </p>
         </header>
 
         <div className={styles.panel}>
           <label className={styles.field}>
-            <span className={styles.fieldLabel}>二维码内容</span>
+            <span className={styles.fieldLabel}>{t('二维码内容', 'QR code content')}</span>
             <textarea
               className={styles.textarea}
               value={text}
               onChange={(event) => setText(event.target.value)}
-              placeholder="输入网址或任意文字，例如 https://connexioncollective.com"
+              placeholder={t(
+                '输入网址或任意文字，例如 https://connexioncollective.com',
+                'Enter a URL or any text, e.g. https://connexioncollective.com',
+              )}
               rows={4}
             />
-            <span className={styles.fieldHint}>支持网址、纯文本、WiFi 配置等，最长约 2000 字符</span>
+            <span className={styles.fieldHint}>
+              {t(
+                '支持网址、纯文本、WiFi 配置等，最长约 2000 字符',
+                'URLs, plain text, Wi-Fi configs, and more — up to about 2000 characters',
+              )}
+            </span>
           </label>
 
           <div className={`${styles.settings} ${styles.settingsTwo}`} style={{marginTop: '1.25rem'}}>
             <label className={styles.field}>
-              <span className={styles.fieldLabel}>图片尺寸</span>
+              <span className={styles.fieldLabel}>{t('图片尺寸', 'Image size')}</span>
               <select className={styles.select} value={size} onChange={(event) => setSize(Number(event.target.value))}>
                 {SIZES.map((value) => (
                   <option key={value} value={value}>{value} × {value}</option>
@@ -125,17 +143,19 @@ export default function QrCodePage() {
             </label>
 
             <label className={styles.field}>
-              <span className={styles.fieldLabel}>纠错级别</span>
+              <span className={styles.fieldLabel}>{t('纠错级别', 'Error correction')}</span>
               <select className={styles.select} value={level} onChange={(event) => setLevel(event.target.value)}>
                 {LEVELS.map((option) => (
-                  <option key={option.value} value={option.value}>{option.label}</option>
+                  <option key={option.value} value={option.value}>
+                    {isEn ? option.en : option.zh}
+                  </option>
                 ))}
               </select>
             </label>
 
             <label className={styles.field}>
               <span className={styles.fieldLabel}>
-                边距 <span>{margin}</span>
+                {t('边距', 'Margin')} <span>{margin}</span>
               </span>
               <input
                 className={styles.range}
@@ -148,35 +168,45 @@ export default function QrCodePage() {
             </label>
 
             <label className={styles.field}>
-              <span className={styles.fieldLabel}>前景色</span>
+              <span className={styles.fieldLabel}>{t('前景色', 'Foreground')}</span>
               <input className={styles.textInput} type="color" value={fg} onChange={(event) => setFg(event.target.value)} style={{padding: '0.25rem'}} />
             </label>
 
             <label className={styles.field}>
-              <span className={styles.fieldLabel}>背景色</span>
+              <span className={styles.fieldLabel}>{t('背景色', 'Background')}</span>
               <input className={styles.textInput} type="color" value={bg} onChange={(event) => setBg(event.target.value)} style={{padding: '0.25rem'}} />
             </label>
           </div>
         </div>
 
         <div className={styles.previewWrap}>
-          <canvas ref={canvasRef} className={styles.previewCanvas} aria-label="二维码预览" />
+          <canvas ref={canvasRef} className={styles.previewCanvas} aria-label={t('二维码预览', 'QR code preview')} />
         </div>
 
         {error && <p className={styles.notice} role="status">{error}</p>}
 
         <div className={styles.toolbar}>
           <button type="button" className="button button--primary" onClick={handleDownload} disabled={!text.trim() || Boolean(error)}>
-            下载 PNG
+            {t('下载 PNG', 'Download PNG')}
           </button>
         </div>
 
         <section className={styles.faq}>
-          <h2 className={styles.faqTitle}>说明</h2>
+          <h2 className={styles.faqTitle}>{t('说明', 'Notes')}</h2>
           <ul className={styles.faqList}>
-            <li>纠错级别越高，二维码越密但越耐污损；一般用 M 就够。</li>
-            <li>前景色建议比背景色深，否则部分手机识别不出来。</li>
-            <li>生成的图片完全在本机，刷新页面后内容不会保留。</li>
+            {isEn ? (
+              <>
+                <li>Higher error correction makes the code denser but more damage-resistant; M is enough for most uses.</li>
+                <li>Keep the foreground darker than the background, or some phones will fail to scan it.</li>
+                <li>The image is generated entirely on your device; refreshing the page discards it.</li>
+              </>
+            ) : (
+              <>
+                <li>纠错级别越高，二维码越密但越耐污损；一般用 M 就够。</li>
+                <li>前景色建议比背景色深，否则部分手机识别不出来。</li>
+                <li>生成的图片完全在本机，刷新页面后内容不会保留。</li>
+              </>
+            )}
           </ul>
         </section>
       </main>

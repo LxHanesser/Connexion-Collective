@@ -1,26 +1,119 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './image-compress.module.css';
 
 const MAX_FILES = 20;
 const MAX_FILE_BYTES = 25 * 1024 * 1024;
 const CONCURRENCY = 2;
 
-const FORMAT_OPTIONS = [
-  {value: 'auto', label: '保持原格式'},
-  {value: 'webp', label: 'WebP（体积最小）'},
-  {value: 'jpeg', label: 'JPEG'},
-  {value: 'png', label: 'PNG（无损优化）'},
-];
-
-const MAX_EDGE_OPTIONS = [
-  {value: 0, label: '不缩放'},
-  {value: 1920, label: '长边 1920px'},
-  {value: 1600, label: '长边 1600px'},
-  {value: 1200, label: '长边 1200px'},
-  {value: 800, label: '长边 800px'},
-];
+const COPY = {
+  zh: {
+    title: '在线图片压缩',
+    description:
+      '在浏览器里压缩图片：图片不会上传到任何服务器，支持 WebP / JPEG / PNG，批量处理。',
+    heading: '在线图片压缩',
+    leadBefore: '选图、压缩、下载。图片全程留在你的浏览器里，',
+    leadStrong: '不会上传到任何服务器',
+    leadAfter: '，也不需要注册。',
+    badges: ['🔒 本地处理', '🚫 无上传', '📦 WASM 编码器'],
+    dropTitle: '点击选择图片，或拖拽到这里',
+    dropHint: `支持 JPG / PNG / WebP，最多 ${MAX_FILES} 张，单张不超过 25 MB`,
+    formatLabel: '输出格式',
+    qualityLabel: '质量',
+    sizeLabel: '最大尺寸',
+    qualityHint: '数值越高越清晰，体积也越大',
+    qualityDisabledHint: 'PNG 走无损优化，质量参数不生效',
+    sizeHint: '超出时等比缩小，适合手机照片',
+    formats: [
+      {value: 'auto', label: '保持原格式'},
+      {value: 'webp', label: 'WebP（体积最小）'},
+      {value: 'jpeg', label: 'JPEG'},
+      {value: 'png', label: 'PNG（无损优化）'},
+    ],
+    sizes: [
+      {value: 0, label: '不缩放'},
+      {value: 1920, label: '长边 1920px'},
+      {value: 1600, label: '长边 1600px'},
+      {value: 1200, label: '长边 1200px'},
+      {value: 800, label: '长边 800px'},
+    ],
+    start: (count) => `开始压缩（${count}）`,
+    startIdle: '开始压缩',
+    recompress: '重新压缩',
+    running: '压缩中…',
+    clear: '清空',
+    summary: (count, before, after, saved) => `已压缩 ${count} 张：${before} → ${after} 省 ${saved}%`,
+    skipped: (count, list, more) => `已跳过 ${count} 个文件：${list}${more ? ' 等' : ''}`,
+    stale: (count) => `设置已修改：点「重新压缩」按当前参数重跑 ${count} 张图。`,
+    download: '下载',
+    remove: (name) => `移除 ${name}`,
+    workingItem: '压缩中…',
+    failed: '压缩失败',
+    faqTitle: '说明',
+    faq: [
+      '图片只在你自己的浏览器里解码、缩放、重新编码，页面不会发起任何上传请求。',
+      '压缩会移除照片里的 EXIF（含拍摄地点等隐私信息），只保留像素数据。',
+      'iPhone 的 HEIC 原图浏览器无法解码，会提示失败，请先在手机里导出成 JPG。',
+      'PNG 选择「保持原格式」时走无损优化，像素完全不变；转 WebP/JPEG 才是有损压缩。',
+    ],
+    bytes: (value) => `${value} B`,
+    kilo: (value) => `${value} KB`,
+  },
+  en: {
+    title: 'Image compression',
+    description:
+      'Compress images in your browser — nothing is uploaded. Supports WebP, JPEG, and PNG with batch processing.',
+    heading: 'Image compression',
+    leadBefore: 'Pick images, compress, download. Everything stays in your browser and ',
+    leadStrong: 'never touches a server',
+    leadAfter: '. No sign-up either.',
+    badges: ['🔒 Local processing', '🚫 No uploads', '📦 WASM encoders'],
+    dropTitle: 'Click to choose images, or drop them here',
+    dropHint: `JPG / PNG / WebP, up to ${MAX_FILES} files, 25 MB each`,
+    formatLabel: 'Output format',
+    qualityLabel: 'Quality',
+    sizeLabel: 'Max dimension',
+    qualityHint: 'Higher means sharper and larger',
+    qualityDisabledHint: 'PNG uses lossless optimisation; quality does not apply',
+    sizeHint: 'Larger images are scaled down proportionally',
+    formats: [
+      {value: 'auto', label: 'Keep original format'},
+      {value: 'webp', label: 'WebP (smallest)'},
+      {value: 'jpeg', label: 'JPEG'},
+      {value: 'png', label: 'PNG (lossless optimisation)'},
+    ],
+    sizes: [
+      {value: 0, label: 'No scaling'},
+      {value: 1920, label: 'Long edge 1920px'},
+      {value: 1600, label: 'Long edge 1600px'},
+      {value: 1200, label: 'Long edge 1200px'},
+      {value: 800, label: 'Long edge 800px'},
+    ],
+    start: (count) => `Compress (${count})`,
+    startIdle: 'Compress',
+    recompress: 'Recompress',
+    running: 'Compressing…',
+    clear: 'Clear',
+    summary: (count, before, after, saved) => `${count} done: ${before} → ${after}, saved ${saved}%`,
+    skipped: (count, list, more) => `Skipped ${count} file(s): ${list}${more ? ' …' : ''}`,
+    stale: (count) => `Settings changed — click “Recompress” to rerun ${count} image(s) with the current settings.`,
+    download: 'Download',
+    remove: (name) => `Remove ${name}`,
+    workingItem: 'Compressing…',
+    failed: 'Compression failed',
+    faqTitle: 'Notes',
+    faq: [
+      'Images are decoded, resized, and re-encoded inside your browser; the page never sends an upload request.',
+      'Compression strips EXIF metadata (including location) and keeps only pixel data.',
+      'Browsers cannot decode HEIC photos from iPhones; export as JPG first.',
+      'With “Keep original format”, PNG goes through lossless optimisation and pixels do not change; converting to WebP or JPEG is lossy.',
+    ],
+    bytes: (value) => `${value} B`,
+    kilo: (value) => `${value} KB`,
+  },
+};
 
 let itemSeq = 0;
 
@@ -43,6 +136,10 @@ function savingPercent(before, after) {
 }
 
 export default function ImageCompressPage() {
+  const {i18n} = useDocusaurusContext();
+  const isEn = i18n.currentLocale === 'en';
+  const copy = isEn ? COPY.en : COPY.zh;
+
   const [items, setItems] = useState([]);
   const [format, setFormat] = useState('auto');
   const [quality, setQuality] = useState(75);
@@ -69,7 +166,6 @@ export default function ImageCompressPage() {
     setItems((current) => current.map((item) => (item.id === id ? {...item, ...patch} : item)));
   }, []);
 
-  // 预热：选完图就提前把对应编码器的 WASM 拉下来，点「开始压缩」时不用再等
   const prewarm = useCallback(async (sample) => {
     if (!sample) {
       return;
@@ -82,7 +178,6 @@ export default function ImageCompressPage() {
     }
   }, []);
 
-  // 改了输出格式且队列里还有图，就按新格式再预热一次（防抖，避免来回切格式时反复下载）
   useEffect(() => {
     if (busy || items.length === 0) {
       return undefined;
@@ -103,15 +198,15 @@ export default function ImageCompressPage() {
 
       for (const file of incoming) {
         if (!file.type.startsWith('image/')) {
-          rejected.push(`${file.name}（不是图片）`);
+          rejected.push(`${file.name}${isEn ? ' (not an image)' : '（不是图片）'}`);
           continue;
         }
         if (file.size > MAX_FILE_BYTES) {
-          rejected.push(`${file.name}（超过 25 MB）`);
+          rejected.push(`${file.name}${isEn ? ' (over 25 MB)' : '（超过 25 MB）'}`);
           continue;
         }
         if (count >= MAX_FILES) {
-          rejected.push(`${file.name}（最多 ${MAX_FILES} 张）`);
+          rejected.push(`${file.name}${isEn ? ` (max ${MAX_FILES} files)` : `（最多 ${MAX_FILES} 张）`}`);
           continue;
         }
         count += 1;
@@ -128,7 +223,7 @@ export default function ImageCompressPage() {
 
       setNotice(
         rejected.length
-          ? `已跳过 ${rejected.length} 个文件：${rejected.slice(0, 3).join('、')}${rejected.length > 3 ? ' 等' : ''}`
+          ? copy.skipped(rejected.length, rejected.slice(0, 3).join(isEn ? ', ' : '、'), rejected.length > 3)
           : '',
       );
 
@@ -139,7 +234,7 @@ export default function ImageCompressPage() {
       setItems([...current, ...accepted]);
       void prewarm(accepted[0].file);
     },
-    [prewarm],
+    [copy, isEn, prewarm],
   );
 
   const handleDrop = useCallback(
@@ -185,7 +280,6 @@ export default function ImageCompressPage() {
     const pendingItems = itemsRef.current.filter(
       (item) => item.status === 'pending' || item.status === 'error',
     );
-    // 没有待处理项时，说明是「改完参数想重来」：全部按新参数重跑
     const isRecompress = pendingItems.length === 0;
     const queue = isRecompress ? [...itemsRef.current] : pendingItems;
 
@@ -197,7 +291,6 @@ export default function ImageCompressPage() {
     setNotice('');
 
     if (isRecompress) {
-      // 回收上一轮的结果，避免内存里堆着旧 blob
       for (const item of itemsRef.current) {
         if (item.result?.url) {
           URL.revokeObjectURL(item.result.url);
@@ -216,7 +309,7 @@ export default function ImageCompressPage() {
         const item = queue.shift();
         patchItem(item.id, {status: 'working', error: null});
         try {
-          const result = await compressImage(item.file, {format, quality, maxEdge});
+          const result = await compressImage(item.file, {format, quality, maxEdge, locale: isEn ? 'en' : 'zh'});
           const url = URL.createObjectURL(result.blob);
           urlsRef.current.add(url);
           patchItem(item.id, {
@@ -235,7 +328,7 @@ export default function ImageCompressPage() {
         } catch (error) {
           patchItem(item.id, {
             status: 'error',
-            error: error instanceof Error ? error.message : '压缩失败',
+            error: error instanceof Error ? error.message : copy.failed,
           });
         }
       }
@@ -243,7 +336,7 @@ export default function ImageCompressPage() {
 
     await Promise.all(Array.from({length: CONCURRENCY}, worker));
     setBusy(false);
-  }, [format, maxEdge, patchItem, quality, settingsKey]);
+  }, [format, maxEdge, patchItem, quality, settingsKey, copy]);
 
   const stats = useMemo(() => {
     const done = items.filter((item) => item.status === 'done' && item.result);
@@ -266,32 +359,33 @@ export default function ImageCompressPage() {
   ).length;
 
   const runLabel = busy
-    ? '压缩中…'
+    ? copy.running
     : pendingCount > 0
-      ? `开始压缩（${pendingCount}）`
+      ? copy.start(pendingCount)
       : doneCount > 0
-        ? '重新压缩'
-        : '开始压缩';
+        ? copy.recompress
+        : copy.startIdle;
 
   const qualityDisabled = format === 'png';
 
   return (
-    <Layout
-      title="在线图片压缩"
-      description="在浏览器里压缩图片：图片不会上传到任何服务器，支持 WebP / JPEG / PNG，批量处理。">
+    <Layout title={copy.title} description={copy.description}>
       <main className={styles.page}>
         <div className={styles.header}>
           <Heading as="h1" className={styles.title}>
-            在线图片压缩
+            {copy.heading}
           </Heading>
           <p className={styles.lead}>
-            选图、压缩、下载。图片全程留在你的浏览器里，
-            <strong>不会上传到任何服务器</strong>，也不需要注册。
+            {copy.leadBefore}
+            <strong>{copy.leadStrong}</strong>
+            {copy.leadAfter}
           </p>
           <p className={styles.badgeRow}>
-            <span className={styles.badge}>🔒 本地处理</span>
-            <span className={styles.badge}>🚫 无上传</span>
-            <span className={styles.badge}>📦 WASM 编码器</span>
+            {copy.badges.map((badge) => (
+              <span key={badge} className={styles.badge}>
+                {badge}
+              </span>
+            ))}
           </p>
         </div>
 
@@ -314,20 +408,18 @@ export default function ImageCompressPage() {
           <span className={styles.dropIcon} aria-hidden="true">
             🖼️
           </span>
-          <span className={styles.dropTitle}>点击选择图片，或拖拽到这里</span>
-          <span className={styles.dropHint}>
-            支持 JPG / PNG / WebP，最多 {MAX_FILES} 张，单张不超过 25 MB
-          </span>
+          <span className={styles.dropTitle}>{copy.dropTitle}</span>
+          <span className={styles.dropHint}>{copy.dropHint}</span>
         </label>
 
-        <section className={styles.settings} aria-label="压缩设置">
+        <section className={styles.settings} aria-label={copy.formatLabel}>
           <label className={styles.field}>
-            <span className={styles.fieldLabel}>输出格式</span>
+            <span className={styles.fieldLabel}>{copy.formatLabel}</span>
             <select
               className={styles.select}
               value={format}
               onChange={(event) => setFormat(event.target.value)}>
-              {FORMAT_OPTIONS.map((option) => (
+              {copy.formats.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
                 </option>
@@ -337,7 +429,7 @@ export default function ImageCompressPage() {
 
           <label className={styles.field}>
             <span className={styles.fieldLabel}>
-              质量 <output className={styles.value}>{quality}</output>
+              {copy.qualityLabel} <output className={styles.value}>{quality}</output>
             </span>
             <input
               className={styles.range}
@@ -350,23 +442,23 @@ export default function ImageCompressPage() {
               onChange={(event) => setQuality(Number(event.target.value))}
             />
             <span className={styles.fieldHint}>
-              {qualityDisabled ? 'PNG 走无损优化，质量参数不生效' : '数值越高越清晰，体积也越大'}
+              {qualityDisabled ? copy.qualityDisabledHint : copy.qualityHint}
             </span>
           </label>
 
           <label className={styles.field}>
-            <span className={styles.fieldLabel}>最大尺寸</span>
+            <span className={styles.fieldLabel}>{copy.sizeLabel}</span>
             <select
               className={styles.select}
               value={maxEdge}
               onChange={(event) => setMaxEdge(Number(event.target.value))}>
-              {MAX_EDGE_OPTIONS.map((option) => (
+              {copy.sizes.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
                 </option>
               ))}
             </select>
-            <span className={styles.fieldHint}>超出时等比缩小，适合手机照片</span>
+            <span className={styles.fieldHint}>{copy.sizeHint}</span>
           </label>
         </section>
 
@@ -383,12 +475,16 @@ export default function ImageCompressPage() {
             className="button button--secondary"
             onClick={clearAll}
             disabled={busy || items.length === 0}>
-            清空
+            {copy.clear}
           </button>
           {stats.count > 0 && (
             <p className={styles.summary} aria-live="polite">
-              已压缩 {stats.count} 张：{formatBytes(stats.before)} → {formatBytes(stats.after)}
-              <strong className={styles.saved}> 省 {stats.saved}%</strong>
+              {copy.summary(
+                stats.count,
+                formatBytes(stats.before),
+                formatBytes(stats.after),
+                stats.saved,
+              )}
             </p>
           )}
         </div>
@@ -401,7 +497,7 @@ export default function ImageCompressPage() {
 
         {staleCount > 0 && !busy && (
           <p className={styles.hint} role="status">
-            设置已修改：点「重新压缩」按当前参数重跑 {staleCount} 张图。
+            {copy.stale(staleCount)}
           </p>
         )}
 
@@ -426,7 +522,9 @@ export default function ImageCompressPage() {
                       </>
                     )}
                   </span>
-                  {item.status === 'working' && <span className={styles.itemStatus}>压缩中…</span>}
+                  {item.status === 'working' && (
+                    <span className={styles.itemStatus}>{copy.workingItem}</span>
+                  )}
                   {item.status === 'error' && (
                     <span className={styles.itemError}>{item.error}</span>
                   )}
@@ -443,14 +541,14 @@ export default function ImageCompressPage() {
                       className="button button--primary button--sm"
                       href={item.result.url}
                       download={item.result.downloadName}>
-                      下载
+                      {copy.download}
                     </a>
                   )}
                   <button
                     type="button"
                     className={styles.removeButton}
                     onClick={() => removeItem(item.id)}
-                    aria-label={`移除 ${item.name}`}>
+                    aria-label={copy.remove(item.name)}>
                     ✕
                   </button>
                 </div>
@@ -460,12 +558,11 @@ export default function ImageCompressPage() {
         )}
 
         <section className={styles.faq}>
-          <h2 className={styles.faqTitle}>说明</h2>
+          <h2 className={styles.faqTitle}>{copy.faqTitle}</h2>
           <ul className={styles.faqList}>
-            <li>图片只在你自己的浏览器里解码、缩放、重新编码，页面不会发起任何上传请求。</li>
-            <li>压缩会移除照片里的 EXIF（含拍摄地点等隐私信息），只保留像素数据。</li>
-            <li>iPhone 的 HEIC 原图浏览器无法解码，会提示失败，请先在手机里导出成 JPG。</li>
-            <li>PNG 选择「保持原格式」时走无损优化，像素完全不变；转 WebP/JPEG 才是有损压缩。</li>
+            {copy.faq.map((line) => (
+              <li key={line}>{line}</li>
+            ))}
           </ul>
         </section>
       </main>

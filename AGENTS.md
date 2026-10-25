@@ -53,4 +53,9 @@
   另有格式转换、裁剪旋转、加水印、二维码（`qrcode-generator@2.0.4`，零依赖）、
   开发工具（JSON/Base64/哈希/时间戳/UUID，全部原生 API）五个页面，同样零上传。
   新增工具必须：独立路由（自动代码分割）、重逻辑动态 import、刷新后不留数据。
+- 多语言：默认 `zh-Hans`，`en` 为第二语言。界面/导航/页脚等主题文案在 `i18n/en/**`；
+  文章与文档的英文版放在 `i18n/en/docusaurus-plugin-content-{blog,docs}/`；
+  少量配置文案（页脚 HTML、版权、JSON-LD）用 `process.env.DOCUSAURUS_CURRENT_LOCALE` 判断；
+  自定义页面组件用 `t(zh, en)` 双语对象模式。
+  新增或修改中文内容后必须同步英文版，否则 `/en` 会回落显示中文。
 - 将来若加 CSP，图片压缩页需要 `script-src 'wasm-unsafe-eval'`，否则 WASM 会被拦。

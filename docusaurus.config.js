@@ -2,6 +2,14 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import {daysSinceLaunch} from './src/siteMeta.js';
 
+// Docusaurus 逐语言构建时会设置这个变量，配置里少数文案需要据此切换
+const currentLocale = process.env.DOCUSAURUS_CURRENT_LOCALE ?? 'zh-Hans';
+const isEnglish = currentLocale === 'en';
+const uptimeDays = daysSinceLaunch();
+const uptimeLabel = isEnglish
+  ? `Running ${uptimeDays} ${uptimeDays === 1 ? 'day' : 'days'}`
+  : `本站已运行 ${uptimeDays} 天`;
+
 // Cloudflare Web Analytics 的站点 token。留空 = 不加载任何外部脚本。
 // 需要统计时：Cloudflare 控制台 → Analytics → Web Analytics 添加站点，把 token 填在这里。
 const CF_WEB_ANALYTICS_TOKEN = '';
@@ -26,7 +34,11 @@ const config = {
 
   i18n: {
     defaultLocale: 'zh-Hans',
-    locales: ['zh-Hans'],
+    locales: ['zh-Hans', 'en'],
+    localeConfigs: {
+      'zh-Hans': {label: '中文', htmlLang: 'zh-Hans'},
+      en: {label: 'English', htmlLang: 'en'},
+    },
   },
 
   // 在浏览器端执行的模块：页脚天数、阅读进度与回到顶部、图片灯箱
@@ -59,10 +71,13 @@ const config = {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
         name: 'Connexion Collective',
-        url: 'https://connexioncollective.com/',
-        inLanguage: 'zh-Hans',
-        description:
-          '记录游戏背后的设计逻辑、现实生活的碎碎念与代码折腾的个人站点。',
+        url: isEnglish
+          ? 'https://connexioncollective.com/en/'
+          : 'https://connexioncollective.com/',
+        inLanguage: currentLocale,
+        description: isEnglish
+          ? 'A personal site on the logic behind games, the small things in life, and a bit of code tinkering.'
+          : '记录游戏背后的设计逻辑、现实生活的碎碎念与代码折腾的个人站点。',
       }),
     },
   ],
@@ -167,6 +182,10 @@ const config = {
             label: '条款',
             position: 'left',
           },
+          {
+            type: 'localeDropdown',
+            position: 'right',
+          },
         ],
       },
       
@@ -185,13 +204,19 @@ const config = {
             className: 'footer-brand',
             items: [
               {
-                html: '<p class="footer-brand__tagline">连接，从这里开始。</p>',
+                html: isEnglish
+                  ? '<p class="footer-brand__tagline">Connection starts here.</p>'
+                  : '<p class="footer-brand__tagline">连接，从这里开始。</p>',
               },
               {
-                html: '<p class="footer-brand__desc">记录游戏背后的设计逻辑、现实生活的碎碎念，和一点代码折腾。</p>',
+                html: isEnglish
+                  ? '<p class="footer-brand__desc">Notes on the logic behind games, the small things in life, and a bit of code tinkering.</p>'
+                  : '<p class="footer-brand__desc">记录游戏背后的设计逻辑、现实生活的碎碎念，和一点代码折腾。</p>',
               },
               {
-                html: '<div class="footer-brand__actions"><a class="footer-cta" href="/subscribe">订阅更新</a><a class="footer-cta" href="/blog/archive" data-random-post title="随机打开一篇博客">🎲 随便看看</a><a class="footer-cta" href="https://github.com/LxHanesser" target="_blank" rel="noopener noreferrer">GitHub</a></div>',
+                html: isEnglish
+                  ? '<div class="footer-brand__actions"><a class="footer-cta" href="/subscribe">Subscribe</a><a class="footer-cta" href="/blog/archive" data-random-post title="Open a random post">🎲 Surprise me</a><a class="footer-cta" href="https://github.com/LxHanesser" target="_blank" rel="noopener noreferrer">GitHub</a></div>'
+                  : '<div class="footer-brand__actions"><a class="footer-cta" href="/subscribe">订阅更新</a><a class="footer-cta" href="/blog/archive" data-random-post title="随机打开一篇博客">🎲 随便看看</a><a class="footer-cta" href="https://github.com/LxHanesser" target="_blank" rel="noopener noreferrer">GitHub</a></div>',
               },
             ],
           },
@@ -213,7 +238,7 @@ const config = {
           },
         ],
         // 构建时先写入一个正确值做兜底（禁用 JS 也能读到），浏览器端由 siteUptime 换成访问当天
-        copyright: `© ${new Date().getFullYear()} Connexion Collective · 本站已运行 ${daysSinceLaunch()} 天 · Powered by Docusaurus`,
+        copyright: `© ${new Date().getFullYear()} Connexion Collective · ${uptimeLabel} · Powered by Docusaurus`,
       },
       prism: {
         theme: prismThemes.github,

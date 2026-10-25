@@ -90,14 +90,18 @@ export function resolveFormat(requested, inputType) {
 /**
  * 把文件解码成 ImageData，必要时等比缩放。
  * @param {File} file
- * @param {{maxEdge?: number, background?: string|null}} options
+ * @param {{maxEdge?: number, background?: string|null, locale?: 'zh'|'en'}} options
  */
-export async function decodeToImageData(file, {maxEdge = 0, background = null} = {}) {
+export async function decodeToImageData(file, {maxEdge = 0, background = null, locale = 'zh'} = {}) {
   let bitmap;
   try {
     bitmap = await createImageBitmap(file);
   } catch {
-    throw new Error('浏览器无法解码这张图片，可能是 HEIC 等格式，请先转成 JPG/PNG');
+    throw new Error(
+      locale === 'en'
+        ? 'The browser cannot decode this image — it may be HEIC. Export it as JPG/PNG first.'
+        : '浏览器无法解码这张图片，可能是 HEIC 等格式，请先转成 JPG/PNG',
+    );
   }
 
   try {
@@ -158,7 +162,7 @@ function canvasToBlob(canvas, type, quality) {
  * @param {File} file
  * @param {{format: 'auto'|'webp'|'jpeg'|'png', quality: number, maxEdge: number}} options
  */
-export async function compressImage(file, {format = 'auto', quality = 75, maxEdge = 0} = {}) {
+export async function compressImage(file, {format = 'auto', quality = 75, maxEdge = 0, locale = 'zh'} = {}) {
   const targetFormat = resolveFormat(format, file.type);
 
   // PNG → PNG 且不需要缩放：走无损优化，像素完全不变
@@ -180,6 +184,7 @@ export async function compressImage(file, {format = 'auto', quality = 75, maxEdg
   const {imageData, width, height, resized} = await decodeToImageData(file, {
     maxEdge,
     background: targetFormat === 'jpeg' ? '#ffffff' : null,
+    locale,
   });
 
   let blob;

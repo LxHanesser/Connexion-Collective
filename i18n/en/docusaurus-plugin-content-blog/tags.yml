@@ -1,0 +1,21 @@
+Engineering:
+  label: Engineering
+  description: Build logs, code tinkering, and tool recommendations.
+Web tools:
+  label: Web tools
+  description: Tools that run entirely in the browser, and the trade-offs behind them.
+Frontend:
+  label: Frontend
+  description: Browser capabilities, interaction details, and engineering notes.
+Performance:
+  label: Performance
+  description: Bundle size, loading strategy, and runtime cost.
+Security:
+  label: Security
+  description: Threat models and defences for pure front-end tools.
+Notes:
+  label: Notes
+  description: Life, thoughts, and random scribbles.
+Games:
+  label: Games
+  description: Reviews, mechanics, and playing experience.

@@ -1,22 +1,27 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import {canvasToBlob, createCanvas, downloadBlob, baseName, loadBitmap} from '@site/src/lib/imageTools';
 import styles from './shared.module.css';
 import local from './image-crop.module.css';
 
 const ASPECTS = [
-  {value: 'free', label: '自由比例', ratio: null},
-  {value: '1:1', label: '1:1 方形', ratio: 1},
-  {value: '4:3', label: '4:3', ratio: 4 / 3},
-  {value: '3:4', label: '3:4', ratio: 3 / 4},
-  {value: '16:9', label: '16:9', ratio: 16 / 9},
+  {value: 'free', zh: '自由比例', en: 'Free ratio', ratio: null},
+  {value: '1:1', zh: '1:1 方形', en: '1:1 square', ratio: 1},
+  {value: '4:3', zh: '4:3', en: '4:3', ratio: 4 / 3},
+  {value: '3:4', zh: '3:4', en: '3:4', ratio: 3 / 4},
+  {value: '16:9', zh: '16:9', en: '16:9', ratio: 16 / 9},
 ];
 
 const MAX_PREVIEW_WIDTH = 640;
 const MAX_PREVIEW_HEIGHT = 460;
 
 export default function ImageCropPage() {
+  const {i18n} = useDocusaurusContext();
+  const isEn = i18n.currentLocale === 'en';
+  const t = (zh, en) => (isEn ? en : zh);
+
   const [bitmap, setBitmap] = useState(null);
   const [fileName, setFileName] = useState('');
   const [rotation, setRotation] = useState(0);
@@ -79,20 +84,31 @@ export default function ImageCropPage() {
     draw();
   }, [draw]);
 
-  const handleFile = useCallback(async (file) => {
-    if (!file) return;
-    try {
-      const loaded = await loadBitmap(file);
-      setBitmap(loaded);
-      setFileName(file.name);
-      setRotation(0);
-      setFlipH(false);
-      setCrop({x: 0, y: 0, w: 1, h: 1});
-      setError('');
-    } catch (loadError) {
-      setError(loadError instanceof Error ? loadError.message : '读取图片失败');
-    }
-  }, []);
+  const handleFile = useCallback(
+    async (file) => {
+      if (!file) return;
+      try {
+        const loaded = await loadBitmap(file);
+        setBitmap(loaded);
+        setFileName(file.name);
+        setRotation(0);
+        setFlipH(false);
+        setCrop({x: 0, y: 0, w: 1, h: 1});
+        setError('');
+      } catch (loadError) {
+        const message = loadError instanceof Error ? loadError.message : '';
+        setError(
+          message.includes('HEIC')
+            ? t(
+                message,
+                'The browser cannot decode this image — it may be HEIC. Export it as JPG/PNG first.',
+              )
+            : t('读取图片失败', 'Could not read the image'),
+        );
+      }
+    },
+    [isEn],
+  );
 
   const pointFromEvent = (event) => {
     const canvas = canvasRef.current;
@@ -133,9 +149,9 @@ export default function ImageCropPage() {
       const displayH = (y2 - y1) * point.rectH;
       const targetH = displayW / ratio;
       if (displayH > targetH) {
-        y2 = y1 + (targetH / point.rectH);
+        y2 = y1 + targetH / point.rectH;
       } else {
-        x2 = x1 + ((displayH * ratio) / point.rectW);
+        x2 = x1 + (displayH * ratio) / point.rectW;
       }
     }
 
@@ -173,11 +189,11 @@ export default function ImageCropPage() {
       const blob = await canvasToBlob(out, 'image/png');
       downloadBlob(blob, `${baseName(fileName || 'image')}-cropped.png`);
     } catch (downloadError) {
-      setError(downloadError instanceof Error ? downloadError.message : '导出失败');
+      setError(t('导出失败', 'Export failed'));
     } finally {
       setBusy(false);
     }
-  }, [crop, fileName, rotated]);
+  }, [crop, fileName, rotated, isEn]);
 
   const outputSize = rotated
     ? {
@@ -188,20 +204,26 @@ export default function ImageCropPage() {
 
   return (
     <Layout
-      title="图片裁剪"
-      description="在浏览器里裁剪、旋转、翻转图片，支持常用比例，图片不上传。">
+      title={t('图片裁剪', 'Crop & rotate')}
+      description={t(
+        '在浏览器里裁剪、旋转、翻转图片，支持常用比例，图片不上传。',
+        'Crop, rotate, and flip images in your browser with common aspect ratios. Nothing is uploaded.',
+      )}>
       <main className={styles.page}>
         <header className={styles.header}>
           <Heading as="h1" className={styles.title}>
-            图片裁剪 / 旋转
+            {t('图片裁剪 / 旋转', 'Crop & rotate')}
           </Heading>
           <p className={styles.lead}>
-            选图后在预览图上拖拽框出要保留的区域，可以旋转、翻转，最后导出 PNG。图片不上传。
+            {t(
+              '选图后在预览图上拖拽框出要保留的区域，可以旋转、翻转，最后导出 PNG。图片不上传。',
+              'Pick an image, drag on the preview to select the area to keep, rotate or flip it, then export as PNG. Nothing is uploaded.',
+            )}
           </p>
           <p className={styles.badgeRow}>
-            <span className={styles.badge}>🔒 本地处理</span>
-            <span className={styles.badge}>✋ 拖拽框选</span>
-            <span className={styles.badge}>📐 常用比例</span>
+            <span className={styles.badge}>{t('🔒 本地处理', '🔒 Local processing')}</span>
+            <span className={styles.badge}>{t('✋ 拖拽框选', '✋ Drag to select')}</span>
+            <span className={styles.badge}>{t('📐 常用比例', '📐 Common ratios')}</span>
           </p>
         </header>
 
@@ -216,8 +238,10 @@ export default function ImageCropPage() {
             }}
           />
           <span className={styles.dropIcon} aria-hidden="true">✂️</span>
-          <span className={styles.dropTitle}>{fileName || '点击选择一张图片'}</span>
-          <span className={styles.dropHint}>支持 JPG / PNG / WebP</span>
+          <span className={styles.dropTitle}>
+            {fileName || t('点击选择一张图片', 'Click to choose an image')}
+          </span>
+          <span className={styles.dropHint}>{t('支持 JPG / PNG / WebP', 'JPG / PNG / WebP')}</span>
         </label>
 
         {error && <p className={styles.notice} role="status">{error}</p>}
@@ -232,48 +256,76 @@ export default function ImageCropPage() {
                 onPointerMove={handlePointerMove}
                 onPointerUp={handlePointerUp}
                 onPointerCancel={handlePointerUp}
-                aria-label="裁剪区域预览，拖拽以框选"
+                aria-label={t('裁剪区域预览，拖拽以框选', 'Crop preview — drag to select an area')}
               />
             </div>
 
             <div className={`${styles.settings} ${styles.settingsTwo}`}>
               <label className={styles.field}>
-                <span className={styles.fieldLabel}>裁剪比例</span>
+                <span className={styles.fieldLabel}>{t('裁剪比例', 'Crop ratio')}</span>
                 <select className={styles.select} value={aspect} onChange={(event) => setAspect(event.target.value)}>
                   {ASPECTS.map((item) => (
-                    <option key={item.value} value={item.value}>{item.label}</option>
+                    <option key={item.value} value={item.value}>
+                      {isEn ? item.en : item.zh}
+                    </option>
                   ))}
                 </select>
               </label>
 
               <div className={styles.field}>
-                <span className={styles.fieldLabel}>旋转与翻转</span>
+                <span className={styles.fieldLabel}>{t('旋转与翻转', 'Rotate & flip')}</span>
                 <div className={styles.buttonRow}>
-                  <button type="button" className="button button--secondary button--sm" onClick={() => setRotation((value) => (value + 270) % 360)}>↺ 左转</button>
-                  <button type="button" className="button button--secondary button--sm" onClick={() => setRotation((value) => (value + 90) % 360)}>↻ 右转</button>
-                  <button type="button" className="button button--secondary button--sm" onClick={() => setFlipH((value) => !value)}>⇋ 水平翻转</button>
-                  <button type="button" className="button button--secondary button--sm" onClick={resetCrop}>全选</button>
+                  <button type="button" className="button button--secondary button--sm" onClick={() => setRotation((value) => (value + 270) % 360)}>
+                    {t('↺ 左转', '↺ Left')}
+                  </button>
+                  <button type="button" className="button button--secondary button--sm" onClick={() => setRotation((value) => (value + 90) % 360)}>
+                    {t('↻ 右转', '↻ Right')}
+                  </button>
+                  <button type="button" className="button button--secondary button--sm" onClick={() => setFlipH((value) => !value)}>
+                    {t('⇋ 水平翻转', '⇋ Flip')}
+                  </button>
+                  <button type="button" className="button button--secondary button--sm" onClick={resetCrop}>
+                    {t('全选', 'Select all')}
+                  </button>
                 </div>
               </div>
             </div>
 
             <div className={styles.toolbar}>
               <button type="button" className="button button--primary" onClick={handleDownload} disabled={busy}>
-                {busy ? '导出中…' : `导出裁剪结果${outputSize ? `（${outputSize.w} × ${outputSize.h}）` : ''}`}
+                {busy
+                  ? t('导出中…', 'Exporting…')
+                  : t(
+                      `导出裁剪结果${outputSize ? `（${outputSize.w} × ${outputSize.h}）` : ''}`,
+                      `Export crop${outputSize ? ` (${outputSize.w} × ${outputSize.h})` : ''}`,
+                    )}
               </button>
               <span className={styles.summary}>
-                原图 {rotated.width} × {rotated.height}，当前选区 {outputSize ? `${outputSize.w} × ${outputSize.h}` : '—'}
+                {t(
+                  `原图 ${rotated.width} × ${rotated.height}，当前选区 ${outputSize ? `${outputSize.w} × ${outputSize.h}` : '—'}`,
+                  `Original ${rotated.width} × ${rotated.height}, selection ${outputSize ? `${outputSize.w} × ${outputSize.h}` : '—'}`,
+                )}
               </span>
             </div>
           </>
         )}
 
         <section className={styles.faq}>
-          <h2 className={styles.faqTitle}>说明</h2>
+          <h2 className={styles.faqTitle}>{t('说明', 'Notes')}</h2>
           <ul className={styles.faqList}>
-            <li>在预览图上按住拖动即可框选，松手完成；重新拖一次会覆盖选区。</li>
-            <li>选择固定比例后，拖拽方向会自动约束到该比例。</li>
-            <li>导出为 PNG（无损）；需要 JPG 可以先裁剪再用「图片格式转换」。</li>
+            {isEn ? (
+              <>
+                <li>Press and drag on the preview to select an area; releasing finishes it. Dragging again replaces the selection.</li>
+                <li>With a fixed ratio selected, dragging is constrained to that ratio.</li>
+                <li>Export is lossless PNG. For JPG, crop here and then use the format converter.</li>
+              </>
+            ) : (
+              <>
+                <li>在预览图上按住拖动即可框选，松手完成；重新拖一次会覆盖选区。</li>
+                <li>选择固定比例后，拖拽方向会自动约束到该比例。</li>
+                <li>导出为 PNG（无损）；需要 JPG 可以先裁剪再用「图片格式转换」。</li>
+              </>
+            )}
           </ul>
         </section>
       </main>

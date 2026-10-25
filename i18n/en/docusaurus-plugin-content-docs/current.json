@@ -1,0 +1,14 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.关于本站": {
+    "message": "About",
+    "description": "The label for category '关于本站' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.关于本站.link.generated-index.description": {
+    "message": "An overview of Connexion Collective: updates and terms.",
+    "description": "The generated-index page description for category '关于本站' in sidebar 'tutorialSidebar'"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "title": {
+    "message": "Blog & Notes",
+    "description": "The title for the blog used in SEO"
+  },
+  "description": {
+    "message": "Notes on the logic behind games, the small things in life, and a bit of code.",
+    "description": "The description for the blog used in SEO"
+  },
+  "sidebar.title": {
+    "message": "Recent posts",
+    "description": "The label for the left sidebar"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "title": {
+    "message": "Connexion Collective",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "Connexion Collective logo",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.写在开始": {
+    "message": "Start Here",
+    "description": "Navbar item with label 写在开始"
+  },
+  "item.label.博客": {
+    "message": "Blog",
+    "description": "Navbar item with label 博客"
+  },
+  "item.label.在线工具": {
+    "message": "Tools",
+    "description": "Navbar item with label 在线工具"
+  },
+  "item.label.网站更新日志": {
+    "message": "Changelog",
+    "description": "Navbar item with label 网站更新日志"
+  },
+  "item.label.条款": {
+    "message": "Terms",
+    "description": "Navbar item with label 条款"
+  },
+  "item.label.全部工具": {
+    "message": "All tools",
+    "description": "Navbar item with label 全部工具"
+  },
+  "item.label.图片压缩": {
+    "message": "Image compression",
+    "description": "Navbar item with label 图片压缩"
+  },
+  "item.label.格式转换": {
+    "message": "Image converter",
+    "description": "Navbar item with label 格式转换"
+  },
+  "item.label.裁剪旋转": {
+    "message": "Crop & rotate",
+    "description": "Navbar item with label 裁剪旋转"
+  },
+  "item.label.加水印": {
+    "message": "Watermark",
+    "description": "Navbar item with label 加水印"
+  },
+  "item.label.二维码生成": {
+    "message": "QR code",
+    "description": "Navbar item with label 二维码生成"
+  },
+  "item.label.开发工具": {
+    "message": "Dev tools",
+    "description": "Navbar item with label 开发工具"
+  }
+}
