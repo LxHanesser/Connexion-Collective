@@ -80,7 +80,7 @@ const config = {
           showReadingTime: true,
           blogTitle: '博客与碎碎念',
           blogDescription: '记录关于游戏、现实与代码的随想。',
-          postsPerPage: 20,
+          postsPerPage: 10,
           // 侧边栏列出全部文章（按时间倒序），不只是最近 5 篇
           blogSidebarTitle: '全部文章',
           blogSidebarCount: 'ALL',
@@ -191,7 +191,7 @@ const config = {
                 html: '<p class="footer-brand__desc">记录游戏背后的设计逻辑、现实生活的碎碎念，和一点代码折腾。</p>',
               },
               {
-                html: '<div class="footer-brand__actions"><a class="footer-cta" href="/subscribe">订阅更新</a><a class="footer-cta" href="/blog" data-random-post>🎲 随便看看</a><a class="footer-cta" href="https://github.com/LxHanesser" target="_blank" rel="noopener noreferrer">GitHub</a></div>',
+                html: '<div class="footer-brand__actions"><a class="footer-cta" href="/subscribe">订阅更新</a><a class="footer-cta" href="/blog/archive" data-random-post title="随机打开一篇博客">🎲 随便看看</a><a class="footer-cta" href="https://github.com/LxHanesser" target="_blank" rel="noopener noreferrer">GitHub</a></div>',
               },
             ],
           },
