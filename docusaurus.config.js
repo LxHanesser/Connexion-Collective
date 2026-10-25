@@ -95,7 +95,7 @@ const config = {
           showReadingTime: true,
           blogTitle: '博客与碎碎念',
           blogDescription: '记录关于游戏、现实与代码的随想。',
-          postsPerPage: 10,
+          postsPerPage: 12,
           // 侧边栏只显示最近 5 篇，末尾附「查看全部文章」链接
           blogSidebarTitle: '最近发布',
           blogSidebarCount: 5,
@@ -135,7 +135,7 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      image: 'img/docusaurus-social-card.jpg',
+      image: 'img/social-card.png',
       colorMode: {
         defaultMode: 'light',
         disableSwitch: false,

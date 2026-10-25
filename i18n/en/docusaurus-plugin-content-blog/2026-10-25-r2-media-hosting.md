@@ -5,6 +5,7 @@ authors: [lxhanesser]
 tags: [Engineering, Security]
 date: 2026-10-25T21:20:00+08:00
 description: The site is thirty times away from its Pages quota — the real thing to move is repo size and build time, and it forced me to think hotlinking through.
+image: https://cdn.connexioncollective.com/media/blog/2026/r2-request-flow-9bc14955f92c.webp
 ---
 
 I wanted to drop screenshots straight into posts without watching the repository get fatter every week. So the site got an object store — and I ended up thinking the whole hotlinking question through.
@@ -15,7 +16,7 @@ I wanted to drop screenshots straight into posts without watching the repository
 
 Plenty of people add a CDN because they are "afraid of exceeding the quota". So I did the arithmetic first:
 
-<img src="https://cdn.connexioncollective.com/media/blog/2026/r2-quota-78c61d52be20.png" alt="Pages quota usage: 1.6% of files, 2.2% of the per-file limit, 0.5% of build time" width="1200" height="560" />
+<img src="https://cdn.connexioncollective.com/media/blog/2026/r2-quota-dceb05f7bc74.webp" alt="Pages quota usage: 1.6% of files, 2.2% of the per-file limit, 0.5% of build time" width="1200" height="560" />
 
 The conclusion is blunt: 1.6% of the file limit, 2.2% of the per-file limit, 0.5% of the build budget. There is roughly thirty times the headroom left.
 
@@ -39,7 +40,7 @@ There are three ways to attach object storage to a static site:
 
 I took the third. Objects live in the `connexion-media` bucket and are served directly from `cdn.connexioncollective.com` — same Cloudflare account, certificate issued automatically, egress free.
 
-<img src="https://cdn.connexioncollective.com/media/blog/2026/r2-request-flow-41501a3bfde3.png" alt="Request path: visitor browser to WAF referer check to edge cache to R2 bucket" width="1200" height="580" loading="lazy" />
+<img src="https://cdn.connexioncollective.com/media/blog/2026/r2-request-flow-9bc14955f92c.webp" alt="Request path: visitor browser to WAF referer check to edge cache to R2 bucket" width="1200" height="580" loading="lazy" />
 
 The important part: **no server is involved**. Requests are handled at Cloudflare's edge; a cache hit returns immediately, a miss fetches once from R2. The site still ships nothing but build output.
 
@@ -47,7 +48,7 @@ The important part: **no server is involved**. Requests are handled at Cloudflar
 
 Long cache lifetimes only work if "the same URL is always the same bytes". So the filename carries a content hash:
 
-<img src="https://cdn.connexioncollective.com/media/blog/2026/r2-content-addressed-25d7da129c36.png" alt="Content addressing: hero.webp becomes hero-a1b2c3d4e5f6.webp after hashing" width="1200" height="460" loading="lazy" />
+<img src="https://cdn.connexioncollective.com/media/blog/2026/r2-content-addressed-a890d33d7839.webp" alt="Content addressing: hero.webp becomes hero-a1b2c3d4e5f6.webp after hashing" width="1200" height="460" loading="lazy" />
 
 The upload script does very little: hash the file with SHA-256, take the first 12 characters, put them in the filename, set `Content-Type` and `Cache-Control`. Which makes this safe:
 

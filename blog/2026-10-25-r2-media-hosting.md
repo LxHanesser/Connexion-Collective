@@ -5,6 +5,7 @@ authors: [lxhanesser]
 tags: [技术, 安全]
 date: 2026-10-25T21:20:00+08:00
 description: 站点离 Pages 配额还差三十倍，真正该挪走的是仓库体积和构建时间——顺便把防盗链从头想了一遍。
+image: https://cdn.connexioncollective.com/media/blog/2026/r2-request-flow-9bc14955f92c.webp
 ---
 
 想把截图直接贴进文章，又不想看着仓库一天天长胖。于是给站点接了个对象存储，顺手把「防盗链」这件事想清楚了。
@@ -15,7 +16,7 @@ description: 站点离 Pages 配额还差三十倍，真正该挪走的是仓库
 
 很多人加 CDN 的理由是「怕超配额」。我先把账算了一遍：
 
-<img src="https://cdn.connexioncollective.com/media/blog/2026/r2-quota-78c61d52be20.png" alt="Pages 配额占用：文件数 1.6%、单文件 2.2%、构建耗时 0.5%" width="1200" height="560" />
+<img src="https://cdn.connexioncollective.com/media/blog/2026/r2-quota-dceb05f7bc74.webp" alt="Pages 配额占用：文件数 1.6%、单文件 2.2%、构建耗时 0.5%" width="1200" height="560" />
 
 结论很直白：文件数用了 1.6%，单文件用了 2.2%，构建耗时 0.5%。离上限还有三十倍的余量。
 
@@ -39,7 +40,7 @@ description: 站点离 Pages 配额还差三十倍，真正该挪走的是仓库
 
 选了第三条。所有对象放在 `connexion-media` 桶里，通过 `cdn.connexioncollective.com` 直接提供——域名在同一个 Cloudflare 账号下，证书自动签发，出站流量免费。
 
-<img src="https://cdn.connexioncollective.com/media/blog/2026/r2-request-flow-41501a3bfde3.png" alt="请求链路：访客浏览器 → WAF 防盗链 → 边缘缓存 → R2 桶" width="1200" height="580" loading="lazy" />
+<img src="https://cdn.connexioncollective.com/media/blog/2026/r2-request-flow-9bc14955f92c.webp" alt="请求链路：访客浏览器 → WAF 防盗链 → 边缘缓存 → R2 桶" width="1200" height="580" loading="lazy" />
 
 关键点：**没有任何服务端参与**。请求打到 Cloudflare 边缘就被处理掉了，命中就返回，未命中才回源到 R2 取一次。站点依然只有构建产物。
 
@@ -47,7 +48,7 @@ description: 站点离 Pages 配额还差三十倍，真正该挪走的是仓库
 
 缓存想开得长，前提是「同一个 URL 永远是同一份内容」。所以文件名里带上内容的哈希：
 
-<img src="https://cdn.connexioncollective.com/media/blog/2026/r2-content-addressed-25d7da129c36.png" alt="内容寻址：hero.webp 经 sha256 取前 12 位后变成 hero-a1b2c3d4e5f6.webp" width="1200" height="460" loading="lazy" />
+<img src="https://cdn.connexioncollective.com/media/blog/2026/r2-content-addressed-a890d33d7839.webp" alt="内容寻址：hero.webp 经 sha256 取前 12 位后变成 hero-a1b2c3d4e5f6.webp" width="1200" height="460" loading="lazy" />
 
 上传脚本做的事很简单：算 SHA-256、取前 12 位塞进文件名、设好 `Content-Type` 和 `Cache-Control`。于是可以放心地写：
 
