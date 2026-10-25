@@ -165,7 +165,11 @@ async function main() {
       for (let attempt = 1; attempt <= opts.retries; attempt += 1) {
         await send('Page.navigate', {url: base + route});
         await sleep(opts.retries > 1 ? 13000 : 3500);
-        const ok = await evaluate('document.readyState === "complete" && !!document.body');
+        // 必须确认落在真站点上：Cloudflare 人机校验页的 readyState 也是 complete，
+        // 只判断 readyState 会把挑战页当成加载成功，从而把它的违规算到我们头上。
+        const ok = await evaluate(
+          'document.readyState === "complete" && !!document.getElementById("__docusaurus")',
+        );
         if (ok === true) return true;
       }
       return false;
