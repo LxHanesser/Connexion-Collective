@@ -3,7 +3,6 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import RandomPostButton from '@site/src/components/RandomPostButton';
 
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
@@ -58,35 +57,6 @@ export default function Home() {
       
       <main>
         <HomepageFeatures />
-        
-        {/* 丰富版的底部信息栏 */}
-        <div style={{ borderTop: '1px solid rgba(128,128,128,0.1)', padding: '3rem 0', marginTop: '2rem' }}>
-          <div className="container">
-            <div className="row" style={{ textAlign: 'center', opacity: 0.7, fontSize: '0.9rem' }}>
-              <div className="col col--4 homepage-info-col" style={{ marginBottom: '1.5rem' }}>
-                <h4 style={{ fontWeight: 'bold' }}>关于</h4>
-                <p>Connexion Collective</p>
-                <p>连接，从这里开始。</p>
-              </div>
-              <div className="col col--4 homepage-info-col" style={{ marginBottom: '1.5rem' }}>
-                <h4 style={{ fontWeight: 'bold' }}>快速导航</h4>
-                <p><Link to="/docs/info/about">写在开始</Link></p>
-                <p><Link to="/blog">我的博客</Link></p>
-                <p><Link to="/subscribe">订阅更新</Link></p>
-                <p><RandomPostButton className="link-button" label="🎲 随便看看" /></p>
-              </div>
-              <div className="col col--4 homepage-info-col" style={{ marginBottom: '1.5rem' }}>
-                <h4 style={{ fontWeight: 'bold' }}>技术栈</h4>
-                <p>🟢 站点状态：运行良好</p>
-                <p>⚡ Docusaurus / Cloudflare</p>
-              </div>
-            </div>
-            <div style={{ textAlign: 'center', marginTop: '2rem', opacity: 0.5, fontSize: '0.8rem' }}>
-              © {new Date().getFullYear()} Connexion Collective. Built with ❤️ & Code.
-            </div>
-          </div>
-        </div>
-        
       </main>
     </Layout>
   );

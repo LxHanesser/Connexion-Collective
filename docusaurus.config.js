@@ -34,6 +34,7 @@ const config = {
     './src/clientModules/siteUptime.js',
     './src/clientModules/readingProgress.js',
     './src/clientModules/imageLightbox.js',
+    './src/clientModules/randomPostLink.js',
   ],
 
   // 站点级结构化数据（JSON-LD），帮助搜索引擎理解站点身份
@@ -163,6 +164,21 @@ const config = {
         style: 'dark',
         links: [
           {
+            title: 'Connexion Collective',
+            className: 'footer-brand',
+            items: [
+              {
+                html: '<p class="footer-brand__tagline">连接，从这里开始。</p>',
+              },
+              {
+                html: '<p class="footer-brand__desc">记录游戏背后的设计逻辑、现实生活的碎碎念，和一点代码折腾。</p>',
+              },
+              {
+                html: '<div class="footer-brand__actions"><a class="footer-cta" href="/subscribe">订阅更新</a><a class="footer-cta" href="/blog" data-random-post>🎲 随便看看</a><a class="footer-cta" href="https://github.com/LxHanesser" target="_blank" rel="noopener noreferrer">GitHub</a></div>',
+              },
+            ],
+          },
+          {
             title: '站点',
             items: [
               {label: '写在开始', to: '/docs/info/about'},
@@ -174,13 +190,12 @@ const config = {
             title: '更多',
             items: [
               {label: '网站更新日志', to: '/docs/info/changelog'},
-              {label: '条款', to: '/docs/info/terms'},
-              {label: 'GitHub', href: 'https://github.com/LxHanesser'},
+              {label: '服务条款', to: '/docs/info/terms'},
             ],
           },
         ],
         // 构建时先写入一个正确值做兜底（禁用 JS 也能读到），浏览器端由 siteUptime 换成访问当天
-        copyright: `本站已运行 ${daysSinceLaunch()} 天 | Powered by Docusaurus`,
+        copyright: `© ${new Date().getFullYear()} Connexion Collective · 本站已运行 ${daysSinceLaunch()} 天 · Powered by Docusaurus`,
       },
       prism: {
         theme: prismThemes.github,
