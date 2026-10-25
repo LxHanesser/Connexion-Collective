@@ -7,5 +7,17 @@
   },
   "theme.blog.post.readingTime.plurals": {
     "message": "{readingTime} 分钟阅读"
+  },
+  "theme.blog.sidebar.navAriaLabel": {
+    "message": "最近发布"
+  },
+  "theme.blog.sidebar.recentPosts": {
+    "message": "最近发布"
+  },
+  "theme.blog.sidebar.tags": {
+    "message": "文章标签"
+  },
+  "theme.blog.archive.title": {
+    "message": "文章归档"
   }
 }

@@ -22,8 +22,14 @@ function HomepageHeader() {
           <Link
             className="button button--primary button--lg"
             to="/docs/info/about"
-            style={{ borderRadius: '30px', padding: '0.8rem 2rem' }}>
+            style={{ borderRadius: '30px', padding: '0.8rem 2rem', marginRight: '1rem' }}>
             写在开始
+          </Link>
+          <Link
+            className="button button--lg custom-blog-btn"
+            to="/blog"
+            style={{ borderRadius: '30px', padding: '0.8rem 2rem' }}>
+            我的博客
           </Link>
         </div>
       </div>
@@ -36,21 +42,46 @@ export default function Home() {
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="梦开始的地方">
+      description="开始">
+      
+      {/* 顶部滚动公告栏 */}
+      <div className="marquee-container">
+        <div className="marquee-content">
+          <span>✨ 欢迎来到 Connexion Collective，连接从这里开始。</span>
+          <span>📝 博客系统已上线，欢迎阅读我的第一篇碎碎念。</span>
+          <span>🎮 站点仍在建设中，未完待续...</span>
+        </div>
+      </div>
+
       <HomepageHeader />
+      
       <main>
         <HomepageFeatures />
         
-        {/* 极客风底部状态栏 */}
-        <div className="container" style={{ textAlign: 'center', padding: '4rem 0 6rem', opacity: 0.7 }}>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap', marginBottom: '1.5rem', fontSize: '0.9rem', fontWeight: '500' }}>
-            <span>🟢 站点状态：运行良好</span>
-            <span>⚡ 驱动引擎：Docusaurus</span>
-            <span>☁️ 托管平台：Cloudflare Pages</span>
+        {/* 丰富版的底部信息栏 */}
+        <div style={{ borderTop: '1px solid rgba(128,128,128,0.1)', padding: '3rem 0', marginTop: '2rem' }}>
+          <div className="container">
+            <div className="row" style={{ textAlign: 'center', opacity: 0.7, fontSize: '0.9rem' }}>
+              <div className="col col--4" style={{ marginBottom: '1.5rem' }}>
+                <h4 style={{ fontWeight: 'bold' }}>关于</h4>
+                <p>Connexion Collective</p>
+                <p>连接，从这里开始。</p>
+              </div>
+              <div className="col col--4" style={{ marginBottom: '1.5rem' }}>
+                <h4 style={{ fontWeight: 'bold' }}>快速导航</h4>
+                <p><Link to="/docs/info/about">写在开始</Link></p>
+                <p><Link to="/blog">我的博客</Link></p>
+              </div>
+              <div className="col col--4" style={{ marginBottom: '1.5rem' }}>
+                <h4 style={{ fontWeight: 'bold' }}>技术栈</h4>
+                <p>🟢 站点状态：运行良好</p>
+                <p>⚡ Docusaurus / Cloudflare</p>
+              </div>
+            </div>
+            <div style={{ textAlign: 'center', marginTop: '2rem', opacity: 0.5, fontSize: '0.8rem' }}>
+              © {new Date().getFullYear()} Connexion Collective. Built with ❤️ & Code.
+            </div>
           </div>
-          <p style={{ fontSize: '0.85rem' }}>
-            © {new Date().getFullYear()} Connexion Collective. Built with ❤️ & Code.
-          </p>
         </div>
         
       </main>

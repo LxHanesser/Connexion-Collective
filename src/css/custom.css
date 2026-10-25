@@ -28,7 +28,21 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+/* ==========================================
+   全站微网格背景质感
+   ========================================== */
+body {
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
 
+[data-theme='dark'] body {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
 /* ==========================================
    1. 动态背景（纯 CSS 动画）
    ========================================== */
@@ -141,4 +155,311 @@
 
 [data-theme='dark'] .footer a {
   color: #25c2a0 !important;
+}
+/* ==========================================
+   自定义“我的博客”按钮样式
+   ========================================== */
+
+/* 亮色模式：浅灰半透明底 + 深色边框 + 磨砂质感 */
+.custom-blog-btn {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  color: #1c1e21 !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.custom-blog-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+}
+
+/* 暗色模式：白色半透明底 + 浅色文字 + 发光质感 */
+[data-theme='dark'] .custom-blog-btn {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+[data-theme='dark'] .custom-blog-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+/* ==========================================
+   博客列表页优化：卡片化与呼吸感
+   ========================================== */
+
+/* 1. 调整博客主容器宽度，避免太宽或太窄 */
+main[class*='blog-wrapper'] {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* 2. 将每一篇文章变成悬浮卡片 */
+article.margin-bottom--xl {
+  background: var(--ifm-background-surface-color, #ffffff);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+  padding: 2rem 2rem 1.5rem !important;
+  margin-bottom: 2.5rem !important;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+/* 暗色模式下的卡片背景 */
+[data-theme='dark'] article.margin-bottom--xl {
+  background: #161b22; /* 贴合你顶部深色背景的色调 */
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+/* 鼠标悬浮时卡片微微浮起 */
+article.margin-bottom--xl:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.08);
+  border-color: rgba(46, 133, 85, 0.3);
+}
+[data-theme='dark'] article.margin-bottom--xl:hover {
+  box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.4);
+  border-color: rgba(37, 194, 160, 0.4);
+}
+
+/* 3. 文章标题美化 */
+article h2 a {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+article h2 a:hover {
+  text-decoration: none;
+  color: var(--ifm-color-primary);
+}
+
+/* 4. 优化底部“阅读全文”按钮（如果它是默认的按钮样式） */
+article footer a {
+  border-radius: 20px;
+  padding: 0.5rem 1.2rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+/* ==========================================
+   博客左侧边栏优化：模块化卡片
+   ========================================== */
+
+/* 1. 侧边栏整体背景与圆角 */
+aside.col--3 {
+  padding-left: 1.5rem;
+}
+
+/* 2. 将侧边栏的每一个区块（如Recent posts, Tags, Archive）变成卡片 */
+aside.col--3 > div {
+  background: var(--ifm-background-surface-color, #ffffff);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  transition: border-color 0.3s ease;
+}
+
+/* 暗黑模式下的侧边栏卡片 */
+[data-theme='dark'] aside.col--3 > div {
+  background: #161b22;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 3. 侧边栏模块标题（如 Recent posts 改成的中文字体） */
+aside.col--3 h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  letter-spacing: 0.05em;
+}
+[data-theme='dark'] aside.col--3 h3 {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* 4. 侧边栏列表项排版优化 */
+aside.col--3 ul {
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+aside.col--3 li {
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.05); /* 增加虚线分隔 */
+  list-style: none;
+}
+aside.col--3 li:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+[data-theme='dark'] aside.col--3 li {
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+}
+
+/* 5. 列表文字与日期的间距 */
+aside.col--3 li a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.3rem;
+  transition: color 0.2s;
+}
+aside.col--3 li a:hover {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+aside.col--3 li time {
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+/* 6. 标签云按钮的圆角与间距 */
+aside.col--3 a[class*='tag_'] {
+  border-radius: 20px !important;
+  font-size: 0.75rem !important;
+  padding: 0.2rem 0.6rem !important;
+  margin: 0 0.3rem 0.5rem 0 !important;
+}
+
+/* ==========================================
+   移动端导航菜单优化
+   ========================================== */
+
+@media (max-width: 996px) {
+  /* 1. 修复毛玻璃特效导致的菜单层级/遮挡问题 */
+  .navbar-sidebar {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: var(--ifm-background-surface-color) !important;
+    z-index: 1000 !important; /* 确保菜单在最顶层 */
+  }
+  
+  [data-theme='dark'] .navbar-sidebar {
+    background-color: #161b22 !important; /* 暗色模式下的菜单背景 */
+  }
+
+  /* 2. 让菜单项（文字链接）变大、更好点按 */
+  .navbar-sidebar__items .menu__link {
+    padding: 0.8rem 1rem; /* 增加上下左右的点按面积 */
+    border-radius: 8px;   /* 圆角，看起来更现代 */
+    margin-bottom: 0.25rem; /* 菜单项之间的间距 */
+    font-size: 1.05rem;   /* 稍微放大字体 */
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+
+  /* 3. 点击菜单项时的按压反馈 */
+  .navbar-sidebar__items .menu__link:active {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  [data-theme='dark'] .navbar-sidebar__items .menu__link:active {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* 4. 优化菜单顶部的站点标题和返回按钮区域 */
+  .navbar-sidebar__brand {
+    padding: 1rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* 5. 让二级菜单（文档侧边栏）在移动端也有足够的间距 */
+  .menu__list-item-collapsible .menu__link {
+    padding-left: 1rem;
+  }
+}
+/* ==========================================
+   顶部滚动公告栏
+   ========================================== */
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  background: var(--ifm-color-primary);
+  color: #fff;
+  padding: 0.5rem 0;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  /* 这里稍微加一点内阴影，让文字更有质感 */
+  box-shadow: inset 0 -2px 5px rgba(0,0,0,0.05);
+}
+
+.marquee-content {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 20s linear infinite;
+}
+
+/* 鼠标放上去时暂停滚动，方便用户看清 */
+.marquee-container:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+.marquee-content span {
+  margin-right: 4rem;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+/* ==========================================
+   博客列表：双列网格布局
+   ========================================== */
+
+/* 找到存放博客文章的列表容器 */
+main[class*='blog-list'] > article {
+  display: inline-block;
+  vertical-align: top;
+  width: calc(50% - 1rem); /* 宽度调整为一半，留出间距 */
+  margin-right: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* 确保每行的第二个元素去掉右边距，避免换行 */
+main[class*='blog-list'] > article:nth-child(2n) {
+  margin-right: 0;
+}
+
+/* 适配手机端：单列显示 */
+@media (max-width: 768px) {
+  main[class*='blog-list'] > article {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+/* 优化文章头部的元信息（作者、时间、标签） */
+article header .margin-vert--md {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(128, 128, 128, 0.1);
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+  margin-bottom: 2rem !important;
+}
+
+/* 作者头像稍微大一点 */
+article header img.avatar__photo {
+  width: 40px;
+  height: 40px;
+}
+
+/* 标签美化 */
+article header a[class*='tag_'] {
+  font-weight: 500;
+  border-radius: 12px;
+  padding: 0.2rem 0.8rem;
 }
