@@ -1,0 +1,11 @@
+{
+  "theme.blog.post.readMore": {
+    "message": "阅读全文"
+  },
+  "theme.blog.post.readMoreLabel": {
+    "message": "阅读全文：{title}"
+  },
+  "theme.blog.post.readingTime.plurals": {
+    "message": "{readingTime} 分钟阅读"
+  }
+}

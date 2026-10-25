@@ -28,3 +28,117 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+/* ==========================================
+   1. 动态背景（纯 CSS 动画）
+   ========================================== */
+
+/* 亮色模式：浅灰网格 + 缓慢呼吸的渐变色 */
+[data-theme='light'] .hero {
+  background-color: #f8fafc;
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(0, 118, 255, 0.08), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(46, 133, 85, 0.08), transparent 25%),
+    linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* 暗色模式：深色网格 + 缓慢移动的星云光晕 */
+[data-theme='dark'] .hero {
+  background-color: #0d1117;
+  background-image: 
+    radial-gradient(circle at 20% 40%, rgba(37, 194, 160, 0.15), transparent 30%),
+    radial-gradient(circle at 80% 60%, rgba(139, 92, 246, 0.15), transparent 30%),
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  animation: pulse-bg 10s ease-in-out infinite alternate;
+}
+
+/* 给暗色背景加一个缓慢呼吸/移动的动画 */
+@keyframes pulse-bg {
+  0% { background-position: 0% 0%, 100% 100%, 0 0, 0 0; }
+  100% { background-position: 10% 10%, 90% 90%, 0 0, 0 0; }
+}
+
+/* 修复网格背景下的文字颜色，确保清晰可读 */
+[data-theme='light'] .hero { color: #1c1e21; }
+[data-theme='light'] .hero .hero__title { color: #1c1e21; }
+[data-theme='light'] .hero .hero__subtitle { color: #4b5563; }
+
+[data-theme='dark'] .hero { color: #f3f4f6; }
+[data-theme='dark'] .hero .hero__title { color: #ffffff; }
+[data-theme='dark'] .hero .hero__subtitle { color: #9ca3af; }
+
+
+/* ==========================================
+   2. 按钮与卡片交互动效
+   ========================================== */
+
+/* 按钮过渡与悬浮抬升 */
+.buttons a {
+  transition: all 0.3s ease !important;
+}
+.buttons a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 卡片整体悬浮 */
+.row .col {
+  transition: transform 0.3s ease;
+}
+.row .col:hover {
+  transform: translateY(-8px);
+}
+
+/* 卡片内 SVG 图标放大 */
+.row .col svg {
+  transition: transform 0.3s ease;
+}
+.row .col:hover svg {
+  transform: scale(1.1);
+}
+/* 让页脚和上方内容保持呼吸感 */
+.footer {
+  padding: 3rem 0;
+  background-color: #f8fafc; /* 亮色模式下页脚背景 */
+}
+
+[data-theme='dark'] .footer {
+  background-color: #0d1117; /* 暗色模式页脚背景，与顶部保持一致 */
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+/* ==========================================
+   修复页脚文字对比度与背景
+   ========================================== */
+
+/* 亮色模式下的页脚：浅色背景 + 深色文字 */
+.footer {
+  background-color: #f8fafc !important;
+  color: #4b5563 !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* 如果页脚里有链接，改成深蓝/绿色，并带点悬浮效果 */
+.footer a {
+  color: #2e8555 !important;
+  transition: opacity 0.2s;
+}
+.footer a:hover {
+  opacity: 0.8;
+}
+
+/* 暗色模式下的页脚：深色背景 + 浅色文字 */
+[data-theme='dark'] .footer {
+  background-color: #0d1117 !important;
+  color: #9ca3af !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+[data-theme='dark'] .footer a {
+  color: #25c2a0 !important;
+}

@@ -1,19 +1,9 @@
-facebook:
-  label: Facebook
-  permalink: /facebook
-  description: Facebook tag description
-
-hello:
-  label: Hello
-  permalink: /hello
-  description: Hello tag description
-
-docusaurus:
-  label: Docusaurus
-  permalink: /docusaurus
-  description: Docusaurus tag description
-
-hola:
-  label: Hola
-  permalink: /hola
-  description: Hola tag description
+杂谈:
+  label: 杂谈
+  description: 关于生活、想法与碎碎念。
+游戏:
+  label: 游戏
+  description: 游戏评测、机制解析与游玩体验。
+技术:
+  label: 技术
+  description: 建站日志、代码折腾与工具推荐。
