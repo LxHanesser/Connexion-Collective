@@ -2,6 +2,10 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import {daysSinceLaunch} from './src/siteMeta.js';
 
+// Cloudflare Web Analytics 的站点 token。留空 = 不加载任何外部脚本。
+// 需要统计时：Cloudflare 控制台 → Analytics → Web Analytics 添加站点，把 token 填在这里。
+const CF_WEB_ANALYTICS_TOKEN = '';
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Connexion Collective',
@@ -25,14 +29,28 @@ const config = {
     locales: ['zh-Hans'],
   },
 
-  // 在浏览器端执行的模块：页脚天数、阅读进度与回到顶部
+  // 在浏览器端执行的模块：页脚天数、阅读进度与回到顶部、图片灯箱
   clientModules: [
     './src/clientModules/siteUptime.js',
     './src/clientModules/readingProgress.js',
+    './src/clientModules/imageLightbox.js',
   ],
 
   // 站点级结构化数据（JSON-LD），帮助搜索引擎理解站点身份
   headTags: [
+    // 默认不加载：只有填了 token 才会插入 Cloudflare 官方的无 Cookie 统计脚本
+    ...(CF_WEB_ANALYTICS_TOKEN
+      ? [
+          {
+            tagName: 'script',
+            attributes: {
+              src: 'https://static.cloudflareinsights.com/beacon.min.js',
+              defer: 'defer',
+              'data-cf-beacon': JSON.stringify({token: CF_WEB_ANALYTICS_TOKEN}),
+            },
+          },
+        ]
+      : []),
     {
       tagName: 'script',
       attributes: {type: 'application/ld+json'},
@@ -143,7 +161,24 @@ const config = {
 
       footer: {
         style: 'dark',
-        links: [],
+        links: [
+          {
+            title: '站点',
+            items: [
+              {label: '写在开始', to: '/docs/info/about'},
+              {label: '博客', to: '/blog'},
+              {label: '订阅更新', to: '/subscribe'},
+            ],
+          },
+          {
+            title: '更多',
+            items: [
+              {label: '网站更新日志', to: '/docs/info/changelog'},
+              {label: '条款', to: '/docs/info/terms'},
+              {label: 'GitHub', href: 'https://github.com/LxHanesser'},
+            ],
+          },
+        ],
         // 构建时先写入一个正确值做兜底（禁用 JS 也能读到），浏览器端由 siteUptime 换成访问当天
         copyright: `本站已运行 ${daysSinceLaunch()} 天 | Powered by Docusaurus`,
       },

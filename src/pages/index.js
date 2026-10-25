@@ -13,23 +13,23 @@ function HomepageHeader() {
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
-        <Heading as="h1" className="hero__title" style={{ fontSize: '3.5rem', fontWeight: '800' }}>
+        <Heading as="h1" className={clsx('hero__title', styles.heroTitle)}>
           {siteConfig.title}
         </Heading>
-        <p className="hero__subtitle" style={{ fontSize: '1.2rem', opacity: 0.85, marginBottom: '2.5rem' }}>
+        <p className={clsx('hero__subtitle', styles.heroSubtitle)}>
           {siteConfig.tagline}
         </p>
         <div className={styles.buttons}>
           <Link
             className="button button--primary button--lg"
             to="/docs/info/about"
-            style={{ borderRadius: '30px', padding: '0.8rem 2rem', marginRight: '1rem' }}>
+            style={{borderRadius: '30px', padding: '0.8rem 2rem'}}>
             写在开始
           </Link>
           <Link
             className="button button--lg custom-blog-btn"
             to="/blog"
-            style={{ borderRadius: '30px', padding: '0.8rem 2rem' }}>
+            style={{borderRadius: '30px', padding: '0.8rem 2rem'}}>
             我的博客
           </Link>
         </div>
@@ -63,18 +63,19 @@ export default function Home() {
         <div style={{ borderTop: '1px solid rgba(128,128,128,0.1)', padding: '3rem 0', marginTop: '2rem' }}>
           <div className="container">
             <div className="row" style={{ textAlign: 'center', opacity: 0.7, fontSize: '0.9rem' }}>
-              <div className="col col--4" style={{ marginBottom: '1.5rem' }}>
+              <div className="col col--4 homepage-info-col" style={{ marginBottom: '1.5rem' }}>
                 <h4 style={{ fontWeight: 'bold' }}>关于</h4>
                 <p>Connexion Collective</p>
                 <p>连接，从这里开始。</p>
               </div>
-              <div className="col col--4" style={{ marginBottom: '1.5rem' }}>
+              <div className="col col--4 homepage-info-col" style={{ marginBottom: '1.5rem' }}>
                 <h4 style={{ fontWeight: 'bold' }}>快速导航</h4>
                 <p><Link to="/docs/info/about">写在开始</Link></p>
                 <p><Link to="/blog">我的博客</Link></p>
+                <p><Link to="/subscribe">订阅更新</Link></p>
                 <p><RandomPostButton className="link-button" label="🎲 随便看看" /></p>
               </div>
-              <div className="col col--4" style={{ marginBottom: '1.5rem' }}>
+              <div className="col col--4 homepage-info-col" style={{ marginBottom: '1.5rem' }}>
                 <h4 style={{ fontWeight: 'bold' }}>技术栈</h4>
                 <p>🟢 站点状态：运行良好</p>
                 <p>⚡ Docusaurus / Cloudflare</p>

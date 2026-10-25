@@ -146,6 +146,11 @@ body {
   opacity: 0.8;
 }
 
+/* 页脚标题跟随自定义浅色背景，否则 dark 主题的白色标题会看不见 */
+.footer__title {
+  color: #374151 !important;
+}
+
 /* 暗色模式下的页脚：深色背景 + 浅色文字 */
 [data-theme='dark'] .footer {
   background-color: #0d1117 !important;
@@ -155,6 +160,10 @@ body {
 
 [data-theme='dark'] .footer a {
   color: #25c2a0 !important;
+}
+
+[data-theme='dark'] .footer__title {
+  color: #e5e7eb !important;
 }
 /* ==========================================
    自定义“我的博客”按钮样式
@@ -486,3 +495,108 @@ article header a[class*='tag_'] {
   cursor: progress;
   text-decoration: none;
 }
+
+/* ==========================================
+   移动端适配（<= 768px）
+   ========================================== */
+
+@media (max-width: 768px) {
+  /* 首页底部三栏信息改为单列，Infima 的 col--4 在手机上仍是三列 */
+  .homepage-info-col {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  /* 博客卡片内边距收紧，给小屏留出正文宽度 */
+  article.margin-bottom--xl {
+    padding: 1.25rem 1.25rem 1rem !important;
+  }
+
+  /* 列表页标题降一档 */
+  article h2 a {
+    font-size: 1.4rem;
+  }
+
+  /* 文章头部元信息允许换行（作者、时间、标签在窄屏会挤） */
+  article header .margin-vert--md {
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    padding: 0.75rem 0;
+  }
+
+  /* 正文表格横向滚动，不撑破页面 */
+  .markdown table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  /* 正文与卡片内图片自适应 */
+  .markdown img,
+  article img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* 回到顶部按钮贴近拇指区 */
+  #site-back-to-top {
+    right: 1rem;
+    bottom: 1rem;
+  }
+
+  /* 页脚导航列在窄屏堆叠，避免两列挤成窄条 */
+  .footer__col {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  /* 跑马灯在手机上改为静态单行：滚动文字在窄屏既看不清也占空间 */
+  .marquee-content {
+    animation: none;
+    transform: none;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .marquee-content span {
+    margin-right: 0;
+  }
+
+  .marquee-content span:not(:first-child) {
+    display: none;
+  }
+
+  .marquee-container {
+    font-size: 0.8rem;
+    padding: 0.4rem 0;
+  }
+}
+
+/* 尊重系统的「减少动态效果」偏好：停掉跑马灯、呼吸背景与悬浮位移 */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-content {
+    animation: none;
+    transform: none;
+  }
+
+  [data-theme='dark'] .hero {
+    animation: none;
+  }
+
+  .row .col,
+  .row .col svg,
+  article.margin-bottom--xl,
+  .buttons a {
+    transition: none !important;
+  }
+
+  .row .col:hover,
+  .row .col:hover svg,
+  article.margin-bottom--xl:hover,
+  .buttons a:hover {
+    transform: none !important;
+  }
+}
+

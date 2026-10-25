@@ -5,7 +5,26 @@
   width: 100%;
 }
 
+.featureCol {
+  margin-bottom: 2rem;
+}
+
 .featureSvg {
   height: 200px;
   width: 200px;
+  max-width: 100%;
+}
+
+/* 窄屏改单列，图标同步缩小，避免固定 200px 撑破三列布局 */
+@media (max-width: 768px) {
+  .featureCol {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 2.5rem;
+  }
+
+  .featureSvg {
+    height: 140px;
+    width: 140px;
+  }
 }
