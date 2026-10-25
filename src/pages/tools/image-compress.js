@@ -149,16 +149,35 @@ export default function ImageCompressPage() {
     setNotice('');
   }, []);
 
+  const settingsKey = useMemo(() => `${format}:${quality}:${maxEdge}`, [format, maxEdge, quality]);
+
   const runCompression = useCallback(async () => {
-    const queue = itemsRef.current.filter(
+    const pendingItems = itemsRef.current.filter(
       (item) => item.status === 'pending' || item.status === 'error',
     );
+    // 没有待处理项时，说明是「改完参数想重来」：全部按新参数重跑
+    const isRecompress = pendingItems.length === 0;
+    const queue = isRecompress ? [...itemsRef.current] : pendingItems;
+
     if (queue.length === 0) {
       return;
     }
 
     setBusy(true);
     setNotice('');
+
+    if (isRecompress) {
+      // 回收上一轮的结果，避免内存里堆着旧 blob
+      for (const item of itemsRef.current) {
+        if (item.result?.url) {
+          URL.revokeObjectURL(item.result.url);
+          urlsRef.current.delete(item.result.url);
+        }
+      }
+      setItems((current) =>
+        current.map((item) => ({...item, status: 'working', error: null, result: null})),
+      );
+    }
 
     const {compressImage, buildOutputName} = await import('@site/src/lib/imageCompressor');
 
@@ -180,6 +199,7 @@ export default function ImageCompressPage() {
               engine: result.engine,
               note: result.note ?? '',
               downloadName: buildOutputName(item.file, result.format),
+              settingsKey,
             },
           });
         } catch (error) {
@@ -193,7 +213,7 @@ export default function ImageCompressPage() {
 
     await Promise.all(Array.from({length: CONCURRENCY}, worker));
     setBusy(false);
-  }, [format, maxEdge, patchItem, quality]);
+  }, [format, maxEdge, patchItem, quality, settingsKey]);
 
   const stats = useMemo(() => {
     const done = items.filter((item) => item.status === 'done' && item.result);
@@ -205,6 +225,23 @@ export default function ImageCompressPage() {
   const pendingCount = items.filter(
     (item) => item.status === 'pending' || item.status === 'error',
   ).length;
+
+  const doneCount = items.filter((item) => item.status === 'done').length;
+
+  const staleCount = items.filter(
+    (item) =>
+      item.status === 'done' &&
+      item.result?.settingsKey &&
+      item.result.settingsKey !== settingsKey,
+  ).length;
+
+  const runLabel = busy
+    ? '压缩中…'
+    : pendingCount > 0
+      ? `开始压缩（${pendingCount}）`
+      : doneCount > 0
+        ? '重新压缩'
+        : '开始压缩';
 
   const qualityDisabled = format === 'png';
 
@@ -308,8 +345,8 @@ export default function ImageCompressPage() {
             type="button"
             className="button button--primary"
             onClick={runCompression}
-            disabled={busy || pendingCount === 0}>
-            {busy ? '压缩中…' : pendingCount > 0 ? `开始压缩（${pendingCount}）` : '开始压缩'}
+            disabled={busy || items.length === 0}>
+            {runLabel}
           </button>
           <button
             type="button"
@@ -329,6 +366,12 @@ export default function ImageCompressPage() {
         {notice && (
           <p className={styles.notice} role="status">
             {notice}
+          </p>
+        )}
+
+        {staleCount > 0 && !busy && (
+          <p className={styles.hint} role="status">
+            设置已修改：点「重新压缩」按当前参数重跑 {staleCount} 张图。
           </p>
         )}
 
