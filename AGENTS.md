@@ -61,8 +61,9 @@
   自定义页面组件用 `t(zh, en)` 双语对象模式。
   新增或修改中文内容后必须同步英文版，否则 `/en` 会回落显示中文。
 - 静态媒体：Cloudflare R2 桶 `connexion-media` → 自定义域 `cdn.connexioncollective.com`。
-  基础设施**已建**（桶、域、CORS），但站内**尚未引用任何媒体**，防盗链与缓存规则仍待配。
-  首次正式使用前按本地手册 `ops/r2-media.md`（不入库）逐项验证。媒体源文件放 `media-src/`，该目录不入库。
+  已启用：博客配图托管在此（文章用 `<img>` 直链，须带 `width`/`height`，首屏以下加 `loading="lazy"`）。
+  防盗链与缓存规则已在控制台配好。媒体源文件放 `media-src/`，该目录不入库；
+  运维细节见本地手册 `ops/r2-media.md`（不入库）。
 - 将来若加 CSP，图片压缩页需要 `script-src 'wasm-unsafe-eval'`，否则 WASM 会被拦；
   启用 R2 媒体后还需 `img-src 'self' data: https://cdn.connexioncollective.com`、
   `media-src https://cdn.connexioncollective.com`。
