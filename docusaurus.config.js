@@ -80,7 +80,7 @@ const config = {
           showReadingTime: true,
           blogTitle: '博客与碎碎念',
           blogDescription: '记录关于游戏、现实与代码的随想。',
-          postsPerPage: 10,
+          postsPerPage: 20,
           feedOptions: {
             type: ['rss', 'atom'],
             xslt: true,
