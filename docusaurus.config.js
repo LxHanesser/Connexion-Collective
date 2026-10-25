@@ -25,8 +25,28 @@ const config = {
     locales: ['zh-Hans'],
   },
 
-  // 在浏览器端执行的模块，用于把页脚的运行天数改成访问当天的真实值
-  clientModules: ['./src/clientModules/siteUptime.js'],
+  // 在浏览器端执行的模块：页脚天数、阅读进度与回到顶部
+  clientModules: [
+    './src/clientModules/siteUptime.js',
+    './src/clientModules/readingProgress.js',
+  ],
+
+  // 站点级结构化数据（JSON-LD），帮助搜索引擎理解站点身份
+  headTags: [
+    {
+      tagName: 'script',
+      attributes: {type: 'application/ld+json'},
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'Connexion Collective',
+        url: 'https://connexioncollective.com/',
+        inLanguage: 'zh-Hans',
+        description:
+          '记录游戏背后的设计逻辑、现实生活的碎碎念与代码折腾的个人站点。',
+      }),
+    },
+  ],
 
   presets: [
     [

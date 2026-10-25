@@ -463,3 +463,26 @@ article header a[class*='tag_'] {
   border-radius: 12px;
   padding: 0.2rem 0.8rem;
 }
+
+/* 把按钮渲染成链接样式（用于「随便看看」这类行内操作） */
+.link-button {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: var(--ifm-link-color);
+  cursor: pointer;
+  text-decoration: var(--ifm-link-decoration);
+}
+
+.link-button:hover,
+.link-button:focus-visible {
+  color: var(--ifm-link-hover-color);
+  text-decoration: underline;
+}
+
+.link-button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+  text-decoration: none;
+}

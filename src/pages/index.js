@@ -3,6 +3,7 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
+import RandomPostButton from '@site/src/components/RandomPostButton';
 
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
@@ -71,6 +72,7 @@ export default function Home() {
                 <h4 style={{ fontWeight: 'bold' }}>快速导航</h4>
                 <p><Link to="/docs/info/about">写在开始</Link></p>
                 <p><Link to="/blog">我的博客</Link></p>
+                <p><RandomPostButton className="link-button" label="🎲 随便看看" /></p>
               </div>
               <div className="col col--4" style={{ marginBottom: '1.5rem' }}>
                 <h4 style={{ fontWeight: 'bold' }}>技术栈</h4>
