@@ -224,6 +224,26 @@ export function buildOutputName(file, format) {
   return `${base}-compressed.${extensionFor(format)}`;
 }
 
+/**
+ * 预热编码器：用户选完图就提前把对应格式的 WASM 拉下来，
+ * 真正点「开始压缩」时不用再等下载。失败不影响后续压缩。
+ * @param {'auto'|'webp'|'jpeg'|'png'} format
+ * @param {string} sampleType 第一张图的 MIME 类型
+ */
+export async function warmup(format, sampleType = 'image/jpeg') {
+  const target = resolveFormat(format, sampleType);
+  if (target === 'png') {
+    await ensureOxipng();
+    return 'png';
+  }
+  if (target === 'webp') {
+    await ensureWebp();
+    return 'webp';
+  }
+  await ensureJpeg();
+  return 'jpeg';
+}
+
 export function describeFormat(format) {
   return formatLabel(format);
 }

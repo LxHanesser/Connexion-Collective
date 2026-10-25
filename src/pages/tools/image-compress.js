@@ -53,8 +53,10 @@ export default function ImageCompressPage() {
   const inputRef = useRef(null);
   const itemsRef = useRef(items);
   const urlsRef = useRef(new Set());
+  const formatRef = useRef(format);
 
   itemsRef.current = items;
+  formatRef.current = format;
 
   useEffect(() => {
     return () => {
@@ -67,49 +69,77 @@ export default function ImageCompressPage() {
     setItems((current) => current.map((item) => (item.id === id ? {...item, ...patch} : item)));
   }, []);
 
+  // 预热：选完图就提前把对应编码器的 WASM 拉下来，点「开始压缩」时不用再等
+  const prewarm = useCallback(async (sample) => {
+    if (!sample) {
+      return;
+    }
+    try {
+      const {warmup} = await import('@site/src/lib/imageCompressor');
+      await warmup(formatRef.current, sample.type || 'image/jpeg');
+    } catch {
+      // 预热失败不提示，正式压缩时会再试一次并给出错误
+    }
+  }, []);
+
+  // 改了输出格式且队列里还有图，就按新格式再预热一次（防抖，避免来回切格式时反复下载）
+  useEffect(() => {
+    if (busy || items.length === 0) {
+      return undefined;
+    }
+    const timer = setTimeout(() => {
+      void prewarm(itemsRef.current[0]?.file);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [busy, format, items.length, prewarm]);
+
   const addFiles = useCallback(
     (fileList) => {
       const incoming = Array.from(fileList ?? []);
+      const current = itemsRef.current;
       const accepted = [];
       const rejected = [];
+      let count = current.length;
 
-      setItems((current) => {
-        let count = current.length;
-        for (const file of incoming) {
-          const isImage = file.type.startsWith('image/');
-          if (!isImage) {
-            rejected.push(`${file.name}（不是图片）`);
-            continue;
-          }
-          if (file.size > MAX_FILE_BYTES) {
-            rejected.push(`${file.name}（超过 25 MB）`);
-            continue;
-          }
-          if (count >= MAX_FILES) {
-            rejected.push(`${file.name}（最多 ${MAX_FILES} 张）`);
-            continue;
-          }
-          count += 1;
-          accepted.push({
-            id: nextId(),
-            file,
-            name: file.name,
-            size: file.size,
-            status: 'pending',
-            result: null,
-            error: null,
-          });
+      for (const file of incoming) {
+        if (!file.type.startsWith('image/')) {
+          rejected.push(`${file.name}（不是图片）`);
+          continue;
         }
-        return accepted.length ? [...current, ...accepted] : current;
-      });
+        if (file.size > MAX_FILE_BYTES) {
+          rejected.push(`${file.name}（超过 25 MB）`);
+          continue;
+        }
+        if (count >= MAX_FILES) {
+          rejected.push(`${file.name}（最多 ${MAX_FILES} 张）`);
+          continue;
+        }
+        count += 1;
+        accepted.push({
+          id: nextId(),
+          file,
+          name: file.name,
+          size: file.size,
+          status: 'pending',
+          result: null,
+          error: null,
+        });
+      }
 
       setNotice(
         rejected.length
           ? `已跳过 ${rejected.length} 个文件：${rejected.slice(0, 3).join('、')}${rejected.length > 3 ? ' 等' : ''}`
           : '',
       );
+
+      if (accepted.length === 0) {
+        return;
+      }
+
+      setItems([...current, ...accepted]);
+      void prewarm(accepted[0].file);
     },
-    [],
+    [prewarm],
   );
 
   const handleDrop = useCallback(
