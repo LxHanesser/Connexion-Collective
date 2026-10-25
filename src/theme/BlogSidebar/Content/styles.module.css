@@ -1,0 +1,27 @@
+.allPostsLink {
+  display: block;
+  margin-top: 0.85rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.allPostsLink:hover {
+  color: var(--ifm-color-primary);
+  opacity: 0.75;
+  text-decoration: none;
+}
+
+/* 手机二级菜单里也保持可点、够大 */
+:global(.navbar-sidebar__items) .allPostsLink {
+  margin: 0.5rem 0 1rem;
+  padding: 0.6rem 1rem;
+  border-top: none;
+  border-radius: 8px;
+  background: var(--ifm-color-emphasis-100);
+  font-size: 0.95rem;
+}

@@ -81,9 +81,9 @@ const config = {
           blogTitle: '博客与碎碎念',
           blogDescription: '记录关于游戏、现实与代码的随想。',
           postsPerPage: 10,
-          // 侧边栏列出全部文章（按时间倒序），不只是最近 5 篇
-          blogSidebarTitle: '全部文章',
-          blogSidebarCount: 'ALL',
+          // 侧边栏只显示最近 5 篇，末尾附「查看全部文章」链接
+          blogSidebarTitle: '最近发布',
+          blogSidebarCount: 5,
           feedOptions: {
             type: ['rss', 'atom'],
             xslt: true,
@@ -207,9 +207,6 @@ const config = {
             title: '更多',
             items: [
               {label: '在线工具', to: '/tools'},
-              {label: '图片压缩', to: '/tools/image-compress'},
-              {label: '二维码生成', to: '/tools/qr-code'},
-              {label: '开发工具', to: '/tools/dev-tools'},
               {label: '网站更新日志', to: '/docs/info/changelog'},
               {label: '服务条款', to: '/docs/info/terms'},
             ],
