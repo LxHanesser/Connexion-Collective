@@ -1,5 +1,6 @@
 // @ts-check
 import {themes as prismThemes} from 'prism-react-renderer';
+import {daysSinceLaunch} from './src/siteMeta.js';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -15,14 +16,17 @@ const config = {
   baseUrl: '/',
 
   organizationName: 'LxHanesser',
-  projectName: 'Connexion Collective',
+  projectName: 'Connexion-Collective',
 
   onBrokenLinks: 'throw',
 
   i18n: {
-  defaultLocale: 'zh-Hans',
-  locales: ['zh-Hans'],
-},
+    defaultLocale: 'zh-Hans',
+    locales: ['zh-Hans'],
+  },
+
+  // 在浏览器端执行的模块，用于把页脚的运行天数改成访问当天的真实值
+  clientModules: ['./src/clientModules/siteUptime.js'],
 
   presets: [
     [
@@ -31,7 +35,7 @@ const config = {
       ({
         docs: {
           sidebarPath: './sidebars.js',
-          editUrl: 'https://github.com/LxHanesser/my-website/edit/main/',
+          editUrl: 'https://github.com/LxHanesser/Connexion-Collective/edit/main/',
         },
         blog: {
           showReadingTime: true,
@@ -42,7 +46,7 @@ const config = {
             type: ['rss', 'atom'],
             xslt: true,
           },
-          editUrl: 'https://github.com/LxHanesser/my-website/edit/main/',
+          editUrl: 'https://github.com/LxHanesser/Connexion-Collective/edit/main/',
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
@@ -103,7 +107,8 @@ const config = {
       footer: {
         style: 'dark',
         links: [],
-        copyright: `本站已运行 ${Math.floor((Date.now() - new Date('2026-10-25').getTime()) / (1000 * 60 * 60 * 24))} 天 | Powered by Docusaurus`,
+        // 构建时先写入一个正确值做兜底（禁用 JS 也能读到），浏览器端由 siteUptime 换成访问当天
+        copyright: `本站已运行 ${daysSinceLaunch()} 天 | Powered by Docusaurus`,
       },
       prism: {
         theme: prismThemes.github,
