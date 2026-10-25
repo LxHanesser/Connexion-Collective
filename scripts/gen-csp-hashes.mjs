@@ -2,11 +2,22 @@
 /**
  * 构建后处理：把内联脚本的 sha256 哈希注入 CSP，去掉 script-src 的 'unsafe-inline'。
  *
- * 为什么需要：Docusaurus 在每页输出两段内联脚本（主题初始化、base-URL 兜底横幅），
- * 它们没有 nonce，只能靠 hash 放行。哈希随构建内容变化，所以必须在 build 之后算。
+ * ⚠️ 当前**未接入** `npm run build`，默认不执行。原因（2026-10-25 实测）：
+ *    Cloudflare 会在边缘往 HTML 里注入一段内联脚本：
+ *        window.__CF$cv$params={r:'<随机 ray>',t:'<随机时间戳>'}
+ *    内容每次请求都变，无法预先算哈希。开启哈希后它会变成 `script-src-elem` 违规，
+ *    而那是 Cloudflare 挑战平台的初始化参数 —— 拦掉可能让真实访客卡在挑战流程里。
+ *    可用性优先，所以默认保留 'unsafe-inline'。
  *
- * 安全降级策略：如果扫描不到任何内联脚本、或改写出错，**保持原样不动**
- * （即保留 'unsafe-inline'）。宁可安全策略弱一点，也不能把站点脚本拦死。
+ * 何时可以启用：
+ *    - 关闭该 zone 的 Bot Fight Mode / 托管挑战后（边缘不再注入内联脚本）；
+ *    - 或改用 Cloudflare 不注入脚本的部署方式。
+ *    启用方式：CSP_HASHES=1 npm run build，并把本脚本接回 build 脚本。
+ *
+ * 为什么只需 4 个哈希：全站 192 个内联 <script> 中，112 个是 JSON-LD 数据块
+ * （不执行，CSP 不管），真正执行的 80 个内容只有 4 种（主题初始化 ×2、base-URL 横幅 ×2）。
+ *
+ * 安全降级策略：扫描不到内联脚本、或找不到 script-src 时**保持原样不动**。
  *
  * 用法：node scripts/gen-csp-hashes.mjs [buildDir]
  */
@@ -67,6 +78,10 @@ function rewriteCsp(value, hashes) {
 }
 
 async function main() {
+  if (process.env.CSP_HASHES !== '1') {
+    console.log('跳过 CSP 哈希注入（需显式设置 CSP_HASHES=1）——原因见文件头注释');
+    return;
+  }
   let headers;
   try {
     headers = await readFile(HEADERS_FILE, 'utf8');
