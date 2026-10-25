@@ -4,10 +4,12 @@
 
 ## 一、安全第一
 
-- **纯静态**：本站只有构建产物（`build/`）被托管。不得引入服务端代码、Cloudflare Pages Functions、Workers、数据库、KV、R2，也不得有需要常驻进程的功能。所有逻辑只能发生在「构建时」或「访客浏览器里」。
+- **纯静态**：本站只有构建产物（`build/`）被托管。不得引入服务端代码、Cloudflare Pages Functions、Workers、数据库、KV，也不得有需要常驻进程的功能。所有逻辑只能发生在「构建时」或「访客浏览器里」。
+- **R2 仅限静态媒体**（唯一例外，2026-10-25 起）：允许把大体积媒体（图片、视频、PDF）放 Cloudflare R2 公开桶，经 `cdn.connexioncollective.com` 提供。边界：①只放静态文件，不得用 Worker/Functions 代理或做鉴权；②不得用私有桶或签名 URL（那会引入服务端）；③WASM 编码器**必须**继续自托管在 `static/wasm/`，不得移到 R2；④新增媒体走 `npm run media:upload`，不要手工上传到别的桶；⑤上传前先压缩，单文件尽量 <1 MB。运维细节见本地手册 `ops/r2-media.md`（该目录不入库）。
 - **零信任输入**：任何来自 URL、评论、搜索词、第三方接口的数据都当作不可信。当前站内没有表单；将来要加评论投稿、订阅、留言板，必须先过一遍 XSS/滥用评估再动手。
 - **第三方代码要审**：新增依赖必须 ①锁定精确版本（`--save-exact`）②提交 `package-lock.json` ③确认维护活跃 ④看清 `postinstall` 等安装脚本 ⑤优先选无原生编译、无远程脚本的方案。禁止引入来源不明的统计、字体、CDN、A/B 测试脚本。
-- **外部资源白名单**：目前只允许 `giscus.app`（评论）与 GitHub 头像。新增任何外域请求都要先说明理由。
+- **外部资源白名单**：目前只允许 `giscus.app`（评论）、GitHub 头像，以及 `cdn.connexioncollective.com`（自建 R2 媒体，只放图片/视频/PDF）。新增任何外域请求都要先说明理由。
+  白名单只是允许主动引用；`cdn.` 域必须配防盗链规则（见本地手册 `ops/r2-media.md`，不入库），且它**不**参与站内工具的数据通路——工具页仍需零上传、零外域。
 - **密钥不入库**：Cloudflare API Token、GitHub Token 等一律不写进仓库、不写进 `docusaurus.config.js`。
 - **安全头**：`static/_headers` 里的 `X-Frame-Options`、`X-Content-Type-Options`、`Referrer-Policy`、`Permissions-Policy` 不得削弱。改动 CSP 属于高风险操作，必须实测搜索与评论后再提交。
 - **最小暴露**：构建产物里不应出现草稿、内部备注、本地路径、个人隐私信息。
@@ -58,4 +60,9 @@
   少量配置文案（页脚 HTML、版权、JSON-LD）用 `process.env.DOCUSAURUS_CURRENT_LOCALE` 判断；
   自定义页面组件用 `t(zh, en)` 双语对象模式。
   新增或修改中文内容后必须同步英文版，否则 `/en` 会回落显示中文。
-- 将来若加 CSP，图片压缩页需要 `script-src 'wasm-unsafe-eval'`，否则 WASM 会被拦。
+- 静态媒体：Cloudflare R2 桶 `connexion-media` → 自定义域 `cdn.connexioncollective.com`。
+  基础设施**已建**（桶、域、CORS），但站内**尚未引用任何媒体**，防盗链与缓存规则仍待配。
+  首次正式使用前按本地手册 `ops/r2-media.md`（不入库）逐项验证。媒体源文件放 `media-src/`，该目录不入库。
+- 将来若加 CSP，图片压缩页需要 `script-src 'wasm-unsafe-eval'`，否则 WASM 会被拦；
+  启用 R2 媒体后还需 `img-src 'self' data: https://cdn.connexioncollective.com`、
+  `media-src https://cdn.connexioncollective.com`。

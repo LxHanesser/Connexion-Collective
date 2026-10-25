@@ -8,6 +8,12 @@
 .docusaurus
 .cache-loader
 
+# wrangler 本地状态（media:upload 的 dry-run/本地回读会生成）
+/.wrangler
+
+# R2 媒体暂存：源文件不进仓库，只上传到 cdn.connexioncollective.com
+/media-src
+
 # Misc
 .DS_Store
 .env.local
