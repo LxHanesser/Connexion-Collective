@@ -42,7 +42,7 @@ export default function Home() {
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="开始">
+      description="Connexion Collective：记录游戏背后的设计逻辑、现实生活的碎碎念与代码折腾的个人站点。连接，从这里开始。">
       
       {/* 顶部滚动公告栏 */}
       <div className="marquee-container">

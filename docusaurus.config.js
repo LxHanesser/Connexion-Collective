@@ -58,6 +58,23 @@ const config = {
     ],
   ],
 
+  // 站内搜索：构建时生成离线索引，浏览器端本地检索（无外部服务、无查询接口）
+  themes: [
+    [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        hashed: true,
+        language: ['zh', 'en'],
+        highlightSearchTermsOnTargetPage: true,
+        searchResultLimits: 8,
+        searchBarShortcutKeymap: 'mod+k',
+        docsRouteBasePath: '/docs',
+        blogRouteBasePath: '/blog',
+        indexPages: false,
+      },
+    ],
+  ],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
