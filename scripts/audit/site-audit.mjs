@@ -182,6 +182,9 @@ async function main() {
     for (const route of ROUTES) {
       await send('Emulation.setDeviceMetricsOverride', {width: 375, height: 812, deviceScaleFactor: 1, mobile: true});
       await load(route);
+      // 进站后清空一次：重试过程中可能先在 Cloudflare 挑战页上记录过违规，
+      // 那属于 Cloudflare 自己的页面，不是我们的问题。清空后再统计才干净。
+      await evaluate('window.__csp = []');
       const overflows = {};
       for (const width of [320, 375]) {
         await send('Emulation.setDeviceMetricsOverride', {width, height: 812, deviceScaleFactor: 1, mobile: true});
