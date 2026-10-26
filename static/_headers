@@ -1,27 +1,34 @@
-# 注意：X-Frame-Options 与 Referrer-Policy 在线上会被 Cloudflare 边缘覆盖为
-#   X-Frame-Options: SAMEORIGIN
-#   Referrer-Policy: same-origin
-# 原因尚未查明（控制台里可能有 Transform Rule / Configuration Rule 之类），
-# 但 frame-ancestors 'none' 已在强制 CSP 里生效，防嵌套由它保证，故不影响安全结论。
-# 这里仍保留更严格的声明：一旦边缘规则被移除，它们会自动生效。
+# 说明（Cloudflare Pages 的 _headers 文件）
+#
+# 1) 注释只能写在规则块**外面**。块内部的 # 行会让解析器忽略该块后续的头部，
+#    曾经因此让 /img/* 的缓存规则失效、回落到默认的 86400。
+#
+# 2) X-Frame-Options 与 Referrer-Policy 在线上会被 Cloudflare 边缘覆盖为
+#    X-Frame-Options: SAMEORIGIN
+#    Referrer-Policy: same-origin
+#    原因尚未查明（控制台里可能有 Transform Rule / Configuration Rule）。
+#    但 frame-ancestors 'none' 已包含在强制 CSP 里，防嵌套由它保证。
+#    这里仍保留更严格的声明：一旦边缘规则被移除，它们会自动生效。
+#
+# 3) script-src 的 'unsafe-inline' 目前**必须保留**：Cloudflare 会在边缘注入
+#    window.__CF$cv$params={r:'<随机>',t:'<随机>'} 这类内联脚本，每次请求都不同，
+#    无法用 sha256 覆盖。试过用 scripts/gen-csp-hashes.mjs 注入哈希，实测该脚本被拦，
+#    而它是挑战平台的初始化参数，拦掉可能让访客卡在验证流程里，故回滚。
+#    style-src 的 'unsafe-inline' 同样必须保留 —— 产物里有 500+ 个 style 属性。
+#
+# 4) /img/* 曾经是 max-age=604800，导致改了 logo 之后线上仍有 12 小时发旧文件
+#    （文件名不变就永远命中缓存）。现在改成 1 小时 + must-revalidate：到期走 304，
+#    成本极低，改动最多 1 小时生效。品牌图这类会变的资源另外用文件名带尺寸/哈希。
+
 /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=()
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://giscus.app https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://cdn.connexioncollective.com https://github.com https://avatars.githubusercontent.com; font-src 'self' data:; connect-src 'self' https://giscus.app https://cloudflareinsights.com; frame-src https://giscus.app; worker-src 'self' blob:; media-src 'self' https://cdn.connexioncollective.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
-# script-src 的 'unsafe-inline' 目前**必须保留**：Cloudflare 会在边缘注入
-#   window.__CF$cv$params={r:'<随机>',t:'<随机>'} 这样的内联脚本，内容每次请求都变，
-# 无法用 sha256 覆盖。曾试过用 scripts/gen-csp-hashes.mjs 注入哈希，实测该脚本被拦，
-# 而它是挑战平台的初始化参数，拦掉可能让访客卡在验证流程里，故回滚。
-# style-src 的 'unsafe-inline' 同样必须保留 —— 产物里有 500+ 个 style 属性。
 
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
 /img/*
-  # 曾经是 604800（7 天）—— 结果改了 logo 之后线上连续 12 小时还在发旧文件，
-  # 因为文件名不变、边缘缓存不过期。图片改动频繁，改成 1 小时 + 强制复验：
-  # 到期后走 304，成本极低，但改动最多 1 小时就能生效。
-  # 更彻底的做法是给图片文件名加内容哈希（像 R2 那样），这里先不上。
   Cache-Control: public, max-age=3600, must-revalidate
