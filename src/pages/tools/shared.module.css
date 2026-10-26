@@ -2,6 +2,8 @@
   max-width: 920px;
   margin: 0 auto;
   padding: 3rem 1rem 4rem;
+  /* 页面是 .main-wrapper 的 flex 子项，默认 min-width:auto 会被长内容顶宽 */
+  min-width: 0;
 }
 
 .header {
@@ -197,6 +199,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  min-width: 0;
 }
 
 .item {
@@ -207,6 +210,8 @@
   border: 1px solid var(--ifm-color-emphasis-200);
   border-radius: 12px;
   background: var(--ifm-background-surface-color);
+  /* 等宽长路径（如 data/ns/function/x.mcfunction）不能把条目顶宽 */
+  min-width: 0;
 }
 
 .itemMain {
@@ -245,10 +250,18 @@
   gap: 0.5rem;
 }
 
+/* 触摸目标不小于 44×44（AGENTS 要求） */
+.itemActions button {
+  min-width: 44px;
+  min-height: 44px;
+}
+
 .itemActions a {
   display: inline-flex;
   align-items: center;
-  min-height: 38px;
+  justify-content: center;
+  min-height: 44px;
+  padding-inline: 0.75rem;
 }
 
 .removeButton {
