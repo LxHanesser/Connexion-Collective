@@ -51,6 +51,23 @@ const config = {
 
   // 站点级结构化数据（JSON-LD），帮助搜索引擎理解站点身份
   headTags: [
+    // 提前建连：文章配图来自 R2 CDN、评论来自 giscus，各自省一次 TLS 握手
+    {
+      tagName: 'link',
+      attributes: {rel: 'preconnect', href: 'https://cdn.connexioncollective.com', crossorigin: 'anonymous'},
+    },
+    {
+      tagName: 'link',
+      attributes: {rel: 'dns-prefetch', href: 'https://cdn.connexioncollective.com'},
+    },
+    {
+      tagName: 'link',
+      attributes: {rel: 'preconnect', href: 'https://giscus.app', crossorigin: 'anonymous'},
+    },
+    {
+      tagName: 'link',
+      attributes: {rel: 'dns-prefetch', href: 'https://giscus.app'},
+    },
     // 默认不加载：只有填了 token 才会插入 Cloudflare 官方的无 Cookie 统计脚本
     ...(CF_WEB_ANALYTICS_TOKEN
       ? [
@@ -96,6 +113,8 @@ const config = {
           blogTitle: '博客与碎碎念',
           blogDescription: '记录关于游戏、现实与代码的随想。',
           postsPerPage: 12,
+          // 让 sitemap 能输出 lastmod（信息来自 git 提交时间）
+          showLastUpdateTime: true,
           // 侧边栏只显示最近 5 篇，末尾附「查看全部文章」链接
           blogSidebarTitle: '最近发布',
           blogSidebarCount: 5,
@@ -110,6 +129,12 @@ const config = {
         },
         theme: {
           customCss: './src/css/custom.css',
+        },
+        // 让搜索引擎知道每篇文章的更新时间
+        sitemap: {
+          lastmod: 'date',
+          changefreq: null,
+          priority: null,
         },
       }),
     ],
@@ -144,8 +169,10 @@ const config = {
       navbar: {
         title: 'Connexion Collective',
         logo: {
-          alt: 'My Site Logo',
-          src: 'img/logo.svg',
+          // 导航栏里只显示 32px 高，用 117x128 的 WebP（4.9KB）代替 45KB 的 SVG。
+          // 文件名带尺寸后缀：/img/* 有缓存，换文件必须换名字才不会被旧缓存挡住。
+          alt: 'Connexion Collective',
+          src: 'img/logo-128.webp',
         },
         items: [
           {

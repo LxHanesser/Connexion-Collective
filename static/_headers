@@ -20,4 +20,8 @@
   Cache-Control: public, max-age=31536000, immutable
 
 /img/*
-  Cache-Control: public, max-age=604800
+  # 曾经是 604800（7 天）—— 结果改了 logo 之后线上连续 12 小时还在发旧文件，
+  # 因为文件名不变、边缘缓存不过期。图片改动频繁，改成 1 小时 + 强制复验：
+  # 到期后走 304，成本极低，但改动最多 1 小时就能生效。
+  # 更彻底的做法是给图片文件名加内容哈希（像 R2 那样），这里先不上。
+  Cache-Control: public, max-age=3600, must-revalidate

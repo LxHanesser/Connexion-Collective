@@ -46,10 +46,11 @@ function Feature({Svg, title, description}) {
   return (
     <div className={clsx('col', 'col--4', styles.featureCol)}>
       <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
+        {/* 装饰性图标：旁边的标题已经表达了含义，对屏幕阅读器隐藏 */}
+        <Svg className={styles.featureSvg} aria-hidden="true" focusable="false" />
       </div>
       <div className="text--center padding-horiz--md">
-        <Heading as="h3">{title}</Heading>
+        <Heading as="h2">{title}</Heading>
         <p>{description}</p>
       </div>
     </div>
