@@ -25,9 +25,11 @@ Every change this site goes through.
 
 - The tools section is split into **Everyday tools** (images, PDF, SVG, EXIF, developer utilities) and **Game tools** (the Minecraft coordinate converter and datapack generator).
 - Eight new tools: image to ICO, image to Base64, pixel-art converter, SVG optimiser, EXIF viewer/remover, PDF merge/split, Minecraft coordinate converter, and a datapack generator. All run locally; nothing is uploaded.
+- Four new CS2 tools: crosshair command generator with a live preview, sensitivity converter (cm/360 across four games), viewmodel generator, and an autoexec.cfg generator.
 - Every tool page now has a switcher at the top for jumping between tools. On phones it becomes the system's own dropdown, so nothing scrolls sideways.
 - The tools list has a search box — type "PDF" or "coordinates" to filter.
 - The navbar tools menu now goes by category, so it no longer grows with every new tool.
+- Fixed a visual glitch where tool buttons kept their hover colour after being tapped on touch devices.
 
 **Writing**
 

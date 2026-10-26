@@ -57,11 +57,29 @@
   transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
-.chip:hover,
-.chip:focus-visible {
+/* 只在支持 hover 的设备上做悬停效果；
+   触摸设备上 :hover 会「粘住」，导致点过的每个 chip 都永久变色。 */
+@media (hover: hover) {
+  .chip:hover {
+    border-color: var(--ifm-color-primary);
+    color: var(--ifm-color-primary);
+    text-decoration: none;
+  }
+
+  .allLink:hover {
+    border-color: var(--ifm-color-primary);
+    color: var(--ifm-color-primary);
+    text-decoration: none;
+  }
+}
+
+.chip:focus-visible,
+.allLink:focus-visible {
   border-color: var(--ifm-color-primary);
   color: var(--ifm-color-primary);
   text-decoration: none;
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
 }
 
 .active {
@@ -116,13 +134,6 @@
   border: 1px solid var(--ifm-color-emphasis-300);
   font-size: 0.82rem;
   color: var(--ifm-font-color-base);
-  text-decoration: none;
-}
-
-.allLink:hover,
-.allLink:focus-visible {
-  border-color: var(--ifm-color-primary);
-  color: var(--ifm-color-primary);
   text-decoration: none;
 }
 

@@ -114,6 +114,42 @@ export const TOOL_GROUPS = [
     },
     tools: [
       {
+        slug: 'cs2-crosshair',
+        icon: '🎯',
+        zh: {name: 'CS2 准星生成', desc: '可视化调准星参数，实时预览并生成 cl_crosshair* 控制台命令。'},
+        en: {
+          name: 'CS2 crosshair',
+          desc: 'Tune the crosshair with a live preview and generate cl_crosshair* console commands.',
+        },
+      },
+      {
+        slug: 'cs2-sensitivity',
+        icon: '🖱️',
+        zh: {name: 'CS2 灵敏度换算', desc: '在 CS2 / Valorant / Apex / 守望先锋之间按 cm/360 换算灵敏度。'},
+        en: {
+          name: 'CS2 sensitivity',
+          desc: 'Convert sensitivity between CS2, Valorant, Apex and Overwatch at equal cm/360.',
+        },
+      },
+      {
+        slug: 'cs2-viewmodel',
+        icon: '🔫',
+        zh: {name: 'CS2 视角模型', desc: '调 viewmodel_fov 与三轴偏移，带示意图，可导出 cfg。'},
+        en: {
+          name: 'CS2 viewmodel',
+          desc: 'Tune viewmodel_fov and the three offsets with a schematic, then export a cfg.',
+        },
+      },
+      {
+        slug: 'cs2-autoexec',
+        icon: '⚙️',
+        zh: {name: 'CS2 autoexec', desc: '勾选常用设置，生成可直接使用的 autoexec.cfg 与启动项。'},
+        en: {
+          name: 'CS2 autoexec',
+          desc: 'Tick the settings you want and generate a ready-to-use autoexec.cfg plus launch options.',
+        },
+      },
+      {
         slug: 'mc-coords',
         icon: '🧭',
         zh: {name: 'MC 坐标换算', desc: '主世界与下界 8:1 互转，算出区块坐标、区块内偏移与 region 文件名。'},
