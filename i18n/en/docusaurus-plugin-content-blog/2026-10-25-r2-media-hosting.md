@@ -38,7 +38,7 @@ There are three ways to attach object storage to a static site:
 | Worker proxying | Yes | ❌ breaks "static only" |
 | Public bucket + custom domain | No | ✅ |
 
-I took the third. Objects live in the `connexion-media` bucket and are served directly from `cdn.connexioncollective.com` — same Cloudflare account, certificate issued automatically, egress free.
+I took the third. Objects live in an R2 bucket and are served directly from a dedicated `cdn.` subdomain — same Cloudflare account, certificate issued automatically, egress free.
 
 <img src="https://cdn.connexioncollective.com/media/blog/2026/r2-request-flow-9bc14955f92c.webp" alt="Request path: visitor browser to WAF referer check to edge cache to R2 bucket" width="1200" height="580" loading="lazy" />
 
@@ -70,17 +70,11 @@ This was the main takeaway, and the easiest thing to get wrong.
 
 In other words, **CORS controls whether scripts may read the bytes — it has nothing to do with whether someone may display your image**. Configuring CORS does not stop hotlinking, because `<img>` was never subject to it.
 
-The only real defence is checking `Referer` at the edge. One WAF rule on the `cdn.` host:
+The only real defence is a `Referer` allowlist at the edge: accept references that come from this site's own domain, reject everything else.
 
-```
-(http.host eq "cdn.connexioncollective.com"
- and http.referer ne ""
- and not http.referer contains "connexioncollective.com")
-```
+There is a deliberate trade-off here — **empty referers must be allowed**. Opening an image URL directly, RSS readers, and privacy-focused browsers may all omit it, and blocking those would break legitimate visits.
 
-Action: Block. There is a deliberate trade-off here — **empty referers are allowed**. Opening an image URL directly, RSS readers, and privacy-focused browsers may all omit it, and blocking them would break legitimate visits.
-
-This rule will not stop `curl -H "Referer: ..."`. Do not expect it to. The point of a public bucket is "stop casual hotlinking and keep the cost bounded". Genuinely preventing it needs signed URLs, which needs a server — which exits this design entirely.
+A check like this stops people from casually borrowing your images; it will not stop anyone who deliberately crafts the request header, and it is not meant to. The point of a public bucket is to keep the cost bounded. Genuinely preventing it needs signed URLs, which needs a server — which exits this design entirely.
 
 ## Ten minutes to configure, two hours to prove
 

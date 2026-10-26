@@ -38,7 +38,7 @@ image: https://cdn.connexioncollective.com/media/blog/2026/r2-request-flow-9bc14
 | Worker 代理转发 | 要 | ❌ 破坏纯静态 |
 | 公开桶 + 自定义域 | 不要 | ✅ |
 
-选了第三条。所有对象放在 `connexion-media` 桶里，通过 `cdn.connexioncollective.com` 直接提供——域名在同一个 Cloudflare 账号下，证书自动签发，出站流量免费。
+选了第三条。所有对象放在一个 R2 桶里，通过独立的 `cdn.` 子域直接提供——域名在同一个 Cloudflare 账号下，证书自动签发，出站流量免费。
 
 <img src="https://cdn.connexioncollective.com/media/blog/2026/r2-request-flow-9bc14955f92c.webp" alt="请求链路：访客浏览器 → WAF 防盗链 → 边缘缓存 → R2 桶" width="1200" height="580" loading="lazy" />
 
@@ -70,17 +70,11 @@ Cache-Control: public, max-age=31536000, immutable
 
 也就是说，**CORS 是「脚本能不能读字节」的开关，跟「别人能不能展示你的图」没半点关系**。配了 CORS 也挡不住盗链，因为它压根不管 `<img>`。
 
-真正的防盗链只有一层可用的东西：在边缘比对 `Referer`。给 `cdn.` 域加一条 WAF 规则：
+真正的防盗链只有一层可用的东西：在边缘按 `Referer` 做白名单——只放行来自本站域名的引用，其它来源一律拒绝。
 
-```
-(http.host eq "cdn.connexioncollective.com"
- and http.referer ne ""
- and not http.referer contains "connexioncollective.com")
-```
+这里有个刻意的取舍：**空 Referer 要放行**。直接打开图片链接、RSS 阅读器、隐私模式浏览器都可能不带 `Referer`，全拦掉会把正常访问一起误伤。
 
-命中就 Block。这里有个刻意的取舍——**放行空 Referer**。因为直接打开图片链接、RSS 阅读器、隐私模式浏览器都可能不发 Referer，全拦掉会误伤正常访问。
-
-这套规则挡不住 `curl -H "Referer: ..."` 这种认真伪造，也别指望它能。公开桶的定位就是「挡住顺手盗链，把成本压到可控」，真要防住只有签名 URL——而那需要服务端，直接退出这个方案。
+这类基于 `Referer` 的判断只能挡住「顺手拿别人的图」，挡不住有心伪造请求头的人，也别指望它能。公开桶的定位就是「把成本压到可控」，真要防住只有签名 URL——而那需要服务端，直接退出这个方案。
 
 ## 配置十分钟，验证两小时
 
