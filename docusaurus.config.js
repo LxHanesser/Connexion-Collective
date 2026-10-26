@@ -190,21 +190,16 @@ const config = {
             type: 'dropdown',
             label: isEnglish ? 'Tools' : '在线工具',
             position: 'left',
-            // 菜单项来自 src/toolsCatalog.js —— 新增工具只需改那一个文件
+            // 工具变多后，下拉只保留分组入口；具体工具交给列表页和页内切换条，
+            // 这样无论加到多少工具，菜单长度都恒定。
             items: [
+              ...TOOL_GROUPS.map((group) => ({
+                label: isEnglish
+                  ? `${group.en.title} (${group.tools.length})`
+                  : `${group.zh.title}（${group.tools.length}）`,
+                to: `/tools#${group.id}`,
+              })),
               {label: isEnglish ? 'All tools' : '全部工具', to: '/tools'},
-              ...TOOL_GROUPS.flatMap((group) => [
-                {
-                  type: 'html',
-                  value: `<span class="navbar-tools__group">${
-                    isEnglish ? group.en.title : group.zh.title
-                  }</span>`,
-                },
-                ...group.tools.map((tool) => ({
-                  label: isEnglish ? tool.en.name : tool.zh.name,
-                  to: `/tools/${tool.slug}`,
-                })),
-              ]),
             ],
           },
           {

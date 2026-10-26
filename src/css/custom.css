@@ -796,15 +796,3 @@ article header a[class*='tag_'] {
   }
 }
 
-
-/* 导航栏「工具」下拉里的分组标题：由 src/toolsCatalog.js 生成，不可点击 */
-.navbar-tools__group {
-  display: block;
-  padding: 0.45rem 0.75rem 0.2rem;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  opacity: 0.55;
-  cursor: default;
-}

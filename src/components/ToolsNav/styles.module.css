@@ -10,12 +10,17 @@
 }
 
 .inner {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
   max-width: 920px;
   margin: 0 auto;
   padding: 0.5rem 1rem;
+  min-width: 0;
+}
+
+/* 宽屏：横向 chip */
+.chips {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
   overflow-x: auto;
   scrollbar-width: thin;
   -webkit-overflow-scrolling: touch;
@@ -71,14 +76,67 @@
   line-height: 1;
 }
 
-@media (max-width: 560px) {
-  .inner {
-    padding: 0.4rem 0.75rem;
+/* 窄屏：原生选择器（默认隐藏） */
+.selectWrap {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.selectLabel {
+  flex: 0 0 auto;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  white-space: nowrap;
+}
+
+.select {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0.35rem 0.6rem;
+  border-radius: 10px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-surface-color);
+  color: var(--ifm-font-color-base);
+  font-size: 0.9rem;
+}
+
+.allLink {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 0.7rem;
+  border-radius: 10px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  font-size: 0.82rem;
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+}
+
+.allLink:hover,
+.allLink:focus-visible {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  .chips {
+    display: none;
   }
 
-  .chip {
-    font-size: 0.78rem;
-    padding: 0 0.7rem;
+  .selectWrap {
+    display: flex;
+  }
+
+  .inner {
+    padding: 0.4rem 0.75rem;
   }
 }
 

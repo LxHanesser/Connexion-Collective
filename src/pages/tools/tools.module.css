@@ -22,6 +22,47 @@
   opacity: 0.85;
 }
 
+.filterWrap {
+  margin: 0 auto 1.5rem;
+  max-width: 34rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.filterLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  text-align: center;
+}
+
+.filterInput {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-surface-color);
+  color: var(--ifm-font-color-base);
+  font-size: 0.95rem;
+}
+
+.filterMeta {
+  margin: 0;
+  font-size: 0.78rem;
+  opacity: 0.65;
+  text-align: center;
+}
+
+.empty {
+  margin: 2.5rem 0;
+  text-align: center;
+  opacity: 0.75;
+}
+
 .anchorNav {
   display: flex;
   flex-wrap: wrap;
