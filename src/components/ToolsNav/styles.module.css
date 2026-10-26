@@ -1,0 +1,89 @@
+.bar {
+  position: sticky;
+  top: var(--ifm-navbar-height);
+  z-index: 90;
+  width: 100%;
+  background: var(--ifm-background-surface-color);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  /* 横向滚动不能传染给页面 */
+  min-width: 0;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.group {
+  flex: 0 0 auto;
+  padding: 0 0.35rem 0 0.6rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0.55;
+}
+
+.group:first-child {
+  padding-left: 0;
+}
+
+.chip {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 44px;
+  padding: 0 0.8rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 999px;
+  color: var(--ifm-font-color-base);
+  font-size: 0.82rem;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.chip:hover,
+.chip:focus-visible {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+.active {
+  border-color: var(--ifm-color-primary);
+  background: rgba(46, 133, 85, 0.1);
+  color: var(--ifm-color-primary);
+  font-weight: 700;
+}
+
+.icon {
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+@media (max-width: 560px) {
+  .inner {
+    padding: 0.4rem 0.75rem;
+  }
+
+  .chip {
+    font-size: 0.78rem;
+    padding: 0 0.7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip {
+    transition: none;
+  }
+}

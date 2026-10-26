@@ -1,6 +1,7 @@
 // @ts-check
 import {themes as prismThemes} from 'prism-react-renderer';
 import {daysSinceLaunch} from './src/siteMeta.js';
+import {TOOL_GROUPS} from './src/toolsCatalog.js';
 
 // Docusaurus 逐语言构建时会设置这个变量，配置里少数文案需要据此切换
 const currentLocale = process.env.DOCUSAURUS_CURRENT_LOCALE ?? 'zh-Hans';
@@ -187,16 +188,23 @@ const config = {
           },
           {
             type: 'dropdown',
-            label: '在线工具',
+            label: isEnglish ? 'Tools' : '在线工具',
             position: 'left',
+            // 菜单项来自 src/toolsCatalog.js —— 新增工具只需改那一个文件
             items: [
-              {label: '全部工具', to: '/tools'},
-              {label: '图片压缩', to: '/tools/image-compress'},
-              {label: '格式转换', to: '/tools/image-convert'},
-              {label: '裁剪旋转', to: '/tools/image-crop'},
-              {label: '加水印', to: '/tools/watermark'},
-              {label: '二维码生成', to: '/tools/qr-code'},
-              {label: '开发工具', to: '/tools/dev-tools'},
+              {label: isEnglish ? 'All tools' : '全部工具', to: '/tools'},
+              ...TOOL_GROUPS.flatMap((group) => [
+                {
+                  type: 'html',
+                  value: `<span class="navbar-tools__group">${
+                    isEnglish ? group.en.title : group.zh.title
+                  }</span>`,
+                },
+                ...group.tools.map((tool) => ({
+                  label: isEnglish ? tool.en.name : tool.zh.name,
+                  to: `/tools/${tool.slug}`,
+                })),
+              ]),
             ],
           },
           {
