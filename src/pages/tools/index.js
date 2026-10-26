@@ -1,7 +1,8 @@
-import React, {useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import Heading from '@theme/Heading';
+import {useLocation} from '@docusaurus/router';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import {TOOL_COUNT, getToolGroups} from '@site/src/toolsCatalog';
 import styles from './tools.module.css';
@@ -42,6 +43,15 @@ export default function ToolsPage() {
   const copy = i18n.currentLocale === 'en' ? COPY.en : COPY.zh;
   const groups = getToolGroups(i18n.currentLocale);
   const [query, setQuery] = useState('');
+  const {search} = useLocation();
+
+  // 导航栏下拉用 ?group=xxx 进分类，这里负责滚到对应分区
+  useEffect(() => {
+    const group = new URLSearchParams(search).get('group');
+    if (!group) return;
+    const target = document.getElementById(group);
+    if (target) target.scrollIntoView({block: 'start'});
+  }, [search]);
 
   const filtered = useMemo(() => {
     const needle = query.trim().toLowerCase();

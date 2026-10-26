@@ -21,6 +21,18 @@ Every change this site goes through.
 - Decorative icons on the homepage are hidden from screen readers instead of being announced as unnamed graphics.
 - The sitemap now includes a last-modified date for every post, so search engines can tell how fresh each page is.
 
+**Tools**
+
+- The tools section is split into **Everyday tools** (images, PDF, SVG, EXIF, developer utilities) and **Game tools** (the Minecraft coordinate converter and datapack generator).
+- Eight new tools: image to ICO, image to Base64, pixel-art converter, SVG optimiser, EXIF viewer/remover, PDF merge/split, Minecraft coordinate converter, and a datapack generator. All run locally; nothing is uploaded.
+- Every tool page now has a switcher at the top for jumping between tools. On phones it becomes the system's own dropdown, so nothing scrolls sideways.
+- The tools list has a search box — type "PDF" or "coordinates" to filter.
+- The navbar tools menu now goes by category, so it no longer grows with every new tool.
+
+**Writing**
+
+- Five new posts cover this batch: hand-written ICO and ZIP encoders, the boundaries of SVG optimisation, pixel-art palettes, PDFs in the browser, and a mobile overflow hunt. English editions ship alongside.
+
 ## 2026-10-25
 
 **Content**

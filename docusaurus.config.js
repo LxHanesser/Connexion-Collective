@@ -197,7 +197,9 @@ const config = {
                 label: isEnglish
                   ? `${group.en.title} (${group.tools.length})`
                   : `${group.zh.title}（${group.tools.length}）`,
-                to: `/tools#${group.id}`,
+                // 用查询参数而不是 #锚点：锚点校验只认 markdown 标题，
+                // 自定义 React 页面里的 id 会被判定为坏链。
+                to: `/tools?group=${group.id}`,
               })),
               {label: isEnglish ? 'All tools' : '全部工具', to: '/tools'},
             ],
