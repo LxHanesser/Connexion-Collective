@@ -30,6 +30,7 @@ Every change this site goes through.
 - The tools list has a search box — type "PDF" or "coordinates" to filter.
 - The navbar tools menu now goes by category, so it no longer grows with every new tool.
 - Fixed a visual glitch where tool buttons kept their hover colour after being tapped on touch devices.
+- Fixed the tools menu in the navbar: all three entries were previously marked as the current page at the same time.
 
 **Writing**
 

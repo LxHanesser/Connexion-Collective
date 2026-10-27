@@ -200,8 +200,17 @@ const config = {
                 // 用查询参数而不是 #锚点：锚点校验只认 markdown 标题，
                 // 自定义 React 页面里的 id 会被判定为坏链。
                 to: `/tools?group=${group.id}`,
+                // 关键修复：三项共用 /tools 路径（只有 query 不同），
+                // Docusaurus 的默认激活判定会把它们同时点亮。
+                // 显式给一个永不匹配的正则，让「全部工具」单独承担高亮。
+                activeBaseRegex: '^$',
               })),
-              {label: isEnglish ? 'All tools' : '全部工具', to: '/tools'},
+              {
+                label: isEnglish ? 'All tools' : '全部工具',
+                to: '/tools',
+                // 在任意工具页高亮这一项（兼顾英文站的 /en 前缀）
+                activeBaseRegex: '^(/en)?/tools',
+              },
             ],
           },
           {
