@@ -1417,3 +1417,32 @@ article header a[class*='tag_'] {
     transition: none;
   }
 }
+/* ===== 导航项较多时的窄屏压缩 =====
+   条目增加到 7 个后，1100px 附近文字会换行。1280 以上不受影响。 */
+@media (max-width: 1200px) and (min-width: 997px) {
+  .navbar__item {
+    font-size: 0.85rem;
+  }
+
+  .navbar__link {
+    padding-left: 0.45rem;
+    padding-right: 0.45rem;
+  }
+}
+
+/* 再窄一点时把「条款」收进页脚（页脚与文档侧栏都还有入口），避免挤压 */
+@media (max-width: 1099px) and (min-width: 997px) {
+  a.navbar__item[href='/docs/info/terms'],
+  a.navbar__item[href='/en/docs/info/terms'] {
+    display: none;
+  }
+
+  .navbar__item {
+    font-size: 0.82rem;
+  }
+
+  .navbar__link {
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+  }
+}

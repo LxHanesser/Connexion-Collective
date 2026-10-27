@@ -24,15 +24,30 @@ module.exports = function blogPostIndexPlugin(context) {
       const dir = path.join(context.siteDir, 'blog');
       if (!fs.existsSync(dir)) return {posts: []};
 
+      // 英文标题直接从 i18n 目录里同名文件读，供统计页按语言展示
+      const enDir = path.join(
+        context.siteDir,
+        'i18n',
+        'en',
+        'docusaurus-plugin-content-blog',
+      );
+
       const posts = fs
         .readdirSync(dir)
         .filter((file) => file.endsWith('.md'))
         .map((file) => {
           const data = readFrontMatter(path.join(dir, file));
           const slug = data.slug || file.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, '');
+          let titleEn = '';
+          const enFile = path.join(enDir, file);
+          if (fs.existsSync(enFile)) {
+            const enData = readFrontMatter(enFile);
+            if (enData.title) titleEn = enData.title.replace(/^["']|["']$/g, '');
+          }
           return {
             slug,
             title: data.title || slug,
+            titleEn,
             date: (data.date || '').slice(0, 10),
           };
         })

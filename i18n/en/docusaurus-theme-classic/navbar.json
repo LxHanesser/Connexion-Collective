@@ -23,6 +23,10 @@
     "message": "Changelog",
     "description": "Navbar item with label 网站更新日志"
   },
+  "item.label.站点统计": {
+    "message": "Stats",
+    "description": "Navbar item with label 站点统计"
+  },
   "item.label.条款": {
     "message": "Terms",
     "description": "Navbar item with label 条款"

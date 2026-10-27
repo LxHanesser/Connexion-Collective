@@ -1,0 +1,333 @@
+/* 站点统计页 */
+
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 1rem 4rem;
+  min-width: 0;
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.lead {
+  margin: 0;
+  opacity: 0.75;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.empty {
+  padding: 3rem 0;
+  text-align: center;
+  opacity: 0.65;
+}
+
+/* 概览卡片 */
+
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 14px;
+}
+
+.kpiValue {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 1.55rem;
+  font-weight: 700;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+  color: var(--ifm-color-primary);
+}
+
+.kpiLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+/* 区块 */
+
+.section {
+  margin-top: 2.5rem;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.sectionTitle {
+  margin: 0 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.sectionHead .sectionTitle {
+  margin-bottom: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.sectionMeta {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.78rem;
+  opacity: 0.55;
+  white-space: nowrap;
+}
+
+/* 图表 */
+
+.chart {
+  margin: 0;
+  padding: 0.75rem 0.5rem 0;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 14px;
+}
+
+.chartSvg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.gridLine {
+  stroke: var(--ifm-color-emphasis-200);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+}
+
+.axisText {
+  fill: var(--ifm-color-emphasis-600);
+  font-size: 11px;
+  font-family: var(--ifm-font-family-monospace);
+}
+
+.bar {
+  fill: var(--ifm-color-primary);
+  opacity: 0.85;
+}
+
+.dot {
+  fill: var(--ifm-background-surface-color);
+  stroke: var(--ifm-color-primary);
+  stroke-width: 2;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0.4rem 0.75rem;
+  font-size: 0.78rem;
+  opacity: 0.75;
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.legendBar {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--ifm-color-primary);
+  opacity: 0.85;
+}
+
+.legendDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 2px solid var(--ifm-color-primary);
+}
+
+.axisRange {
+  margin-left: auto;
+  font-family: var(--ifm-font-family-monospace);
+  opacity: 0.8;
+}
+
+/* 热门页面 */
+
+.table {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 2.2rem minmax(0, 1fr) 7rem 4.5rem;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.65rem 0.3rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.rank {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.82rem;
+  opacity: 0.45;
+}
+
+.rowBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.rowTitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.langTag {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0 0.3rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  vertical-align: middle;
+  opacity: 0.7;
+}
+
+.rowPath {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.72rem;
+  opacity: 0.45;
+  overflow-wrap: anywhere;
+}
+
+.rowBar {
+  display: block;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--ifm-color-emphasis-200);
+  overflow: hidden;
+}
+
+.rowBarFill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--ifm-color-primary);
+  opacity: 0.7;
+}
+
+.rowValue {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.88rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.note {
+  margin: 2.5rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  font-size: 0.78rem;
+  line-height: 1.7;
+  opacity: 0.6;
+}
+
+/* 手机 */
+
+@media (max-width: 767px) {
+  .page {
+    padding: 2rem 1rem 3rem;
+  }
+
+  .kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .kpiValue {
+    font-size: 1.35rem;
+  }
+
+  .row {
+    grid-template-columns: 1.8rem minmax(0, 1fr) auto;
+    gap: 0.6rem;
+    padding: 0.7rem 0.2rem;
+  }
+
+  /* 手机上隐藏占比条，保留数字 */
+  .rowBar {
+    display: none;
+  }
+
+  .rowValue {
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+}
+
+/* 图表：访问数折线与横轴日期 */
+.visitLine {
+  fill: none;
+  stroke: var(--ifm-color-emphasis-900);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  opacity: 0.45;
+}
+
+.visitDot {
+  fill: var(--ifm-color-emphasis-900);
+  opacity: 0.6;
+}
+
+.xAxisText {
+  fill: var(--ifm-color-emphasis-600);
+  font-size: 11px;
+  font-family: var(--ifm-font-family-monospace);
+}
+
+.legendLine {
+  display: inline-block;
+  width: 14px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ifm-color-emphasis-900);
+  opacity: 0.45;
+}

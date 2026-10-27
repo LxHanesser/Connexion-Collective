@@ -228,6 +228,11 @@ const config = {
             position: 'left',
           },
           {
+            to: '/stats',
+            label: isEnglish ? 'Stats' : '站点统计',
+            position: 'left',
+          },
+          {
             to: '/docs/info/terms',
             label: '条款',
             position: 'left',
