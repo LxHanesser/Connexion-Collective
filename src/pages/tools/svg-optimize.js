@@ -84,7 +84,14 @@ function optimizeSvg(source, {precision, keepMeta}) {
 
   output = output.replace(/<\?xml[\s\S]*?\?>/g, '');
   output = output.replace(/<!DOCTYPE[\s\S]*?>/gi, '');
-  output = output.replace(/<!--[\s\S]*?-->/g, '');
+  // 注释剥离：单次 replace 会被嵌套注释绕过（例如 <!--<!-->--> 会残留片段），
+  // 因此循环到不再变化为止；同时兼容 HTML5 的 --!> 结束符。
+  const COMMENT_RE = /<!--[\s\S]*?(?:-->|--!>)/g;
+  let previous;
+  do {
+    previous = output;
+    output = output.replace(COMMENT_RE, '');
+  } while (output !== previous);
 
   if (!keepMeta) {
     output = output.replace(/<metadata[\s\S]*?<\/metadata>/gi, '');
