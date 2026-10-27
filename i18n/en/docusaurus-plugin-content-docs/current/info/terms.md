@@ -3,75 +3,147 @@ sidebar_position: 3
 title: Terms
 ---
 
-# Terms
+# Terms of Use
 
-**Connexion Collective — Terms of Service and Disclaimer**
+**Connexion Collective — Terms of Use**
 
-Last updated: 2026-10-25
+- Effective: 27 October 2026
+- Last updated: 27 October 2026
 
-Welcome to Connexion Collective (the "Site" or "we"). The Site is operated by the Connexion Collective team.
+Welcome to Connexion Collective (the "Site"). The Site is a personal website offering articles, browser-based tools, and reference material.
 
-Please read the following terms carefully before using the Site. By accessing, browsing, or using any content or service on the Site, you confirm that you have read, understood, and agreed to be bound by these terms and our privacy policy. If you do not agree with any part of these terms, please stop using the Site immediately.
+By accessing or using the Site you agree to these terms. If you do not agree with any part of them, please stop using the Site.
 
-## Article 1 — Intellectual property and reposting
+## 1. Definitions
 
-### 1.1 Ownership
+- **The Site** — the website and services operated by Connexion Collective and served from `connexioncollective.com` and its subdomains.
+- **Content** — text, images, graphics, audio, video, code snippets, data, and other material published on the Site.
+- **You** — anyone who accesses or uses the Site.
 
-Copyright, trademark rights, and other intellectual property rights in all content created and published on the Site by Connexion Collective (including but not limited to text, images, audio, video, charts, layout design, and data compilations) belong to Connexion Collective or the respective rights holders, and are protected by the laws of the People's Republic of China and international conventions.
+## 2. Licensing
 
-### 1.2 No unauthorised reposting
+Different parts of the Site are licensed differently. **Unless stated otherwise**, the following applies.
 
-Without explicit written permission from the Site or the relevant rights holder, no entity or individual may, in any way (including but not limited to copying, reposting, excerpting, mirroring, scraping, building mirror sites, or malicious crawling), use copyrighted content from the Site for commercial or non-commercial purposes. So-called "rewriting", illegal aggregation, or stripping the Site's content for traffic generation is expressly prohibited.
+### 2.1 Articles and text: CC BY-NC-SA 4.0
 
-### 1.3 Reasonable quotation and licensed reposting
+Original articles, essays, and explanatory text on the Site are licensed under **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International** (CC BY-NC-SA 4.0).
 
-If you need to quote content from the Site for personal study, research, or commentary, you must credit the source (including the author's name and "Source: Connexion Collective") and must not distort or misrepresent the original meaning. For commercial reposting or large-scale non-commercial reposting, please obtain written authorisation in advance through the contact details published on the Site. Authorised reposts must be clearly marked "Reposted with permission from Connexion Collective" and must retain a link to the original.
+You are free to:
 
-### 1.4 User-generated content
+- **Share** — copy and redistribute the material in any medium or format
+- **Adapt** — remix, transform, and build upon the material
 
-If you post comments or submit content to the Site, you warrant that you hold the lawful rights to that content, and you grant the Site a worldwide, royalty-free, non-exclusive, sublicensable licence to use, copy, modify, and distribute that content for display, promotion, and operational purposes. You are responsible for the legality of what you publish; if your publication infringes third-party intellectual property or other rights, you bear full legal responsibility and shall compensate the Site for any losses suffered as a result.
+Under the following conditions:
 
-## Article 2 — Content disclaimer
+- **Attribution** — credit Connexion Collective, name the original article, and link back to it
+- **NonCommercial** — you may not use the material for commercial purposes
+- **ShareAlike** — if you remix, transform, or build upon the material, you must distribute your contribution under the same licence
+- **No additional restrictions** — you may not apply legal terms or technological measures that legally restrict others from doing anything the licence permits
 
-### 2.1 Informational nature
+Full licence text: [https://creativecommons.org/licenses/by-nc-sa/4.0/](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-Articles, opinions, tutorials, and news published on the Site represent the author's personal views or serve informational purposes only, and do not constitute professional advice of any kind (including but not limited to legal, medical, financial, or investment advice). Any decision or action taken by a reader based on the Site's content is purely personal, and neither the Site nor the author bears any joint liability.
+### 2.2 Code and source: MIT
 
-### 2.2 No warranty of accuracy
+The Site's **source code** (repository below) and **code samples** inside articles are licensed under the **MIT Licence**, unless stated otherwise.
 
-While we strive to provide accurate and timely information, the Site makes no express or implied warranty as to the accuracy, completeness, timeliness, or fitness of the content. Information on the internet changes rapidly; some content may become outdated or factually inaccurate over time. You should verify and judge information from the Site yourself.
+You may use, copy, modify, merge, publish, distribute, sublicense, and even sell copies, provided the copyright and licence notices are retained. The code is provided "as is", without warranty of any kind.
 
-### 2.3 External links
+- Full licence text: [https://opensource.org/license/mit](https://opensource.org/license/mit)
+- Source repository: [https://github.com/LxHanesser/Connexion-Collective](https://github.com/LxHanesser/Connexion-Collective)
 
-The Site may contain links to third-party websites (including advertising links, partner links, or reference links). These links are provided for convenience only; the Site cannot control and is not responsible for the content, privacy policies, or conduct of any third-party site. Risks and consequences of visiting third-party sites are yours to bear.
+### 2.3 What the above does not cover
 
-### 2.4 Service interruption and force majeure
+- **Branding** — the site name, logo, and overall visual design; all rights reserved.
+- **Third-party material** — quotations, screenshots, and licensed assets remain the property of their owners; check their terms before reuse.
+- **Your files** — files you process with the online tools, and the results, remain entirely yours. The Site claims no rights over them (the files never leave your browser).
 
-Given the nature of internet services, the Site does not guarantee uninterrupted service. The Site is not liable for compensation for service suspension, data loss, or access delays caused by system maintenance, upgrades, hacking attacks, computer virus intrusion, government regulation, or force majeure (such as natural disasters, war, or epidemics), but we will make reasonable efforts to restore service as soon as possible.
+### 2.4 Attribution example
 
-### 2.5 Reader interaction and comments
+```
+Reposted from Connexion Collective, "Article title"
+Original: https://connexioncollective.com/blog/...
+Licence: CC BY-NC-SA 4.0
+```
 
-Comments below blog posts represent the personal views of the commenters and not the position of the Site. For defamatory, infringing, or illegal information that may appear in comments, the Site will take deletion or blocking measures in accordance with relevant laws and regulations only after receiving a valid notice and verifying it. The Site bears no direct responsibility for any dispute arising from comment content.
+## 3. Acceptable use
 
-## Article 3 — User conduct
+You must not:
 
-You agree not to engage in the following while using Connexion Collective:
+1. use the Site in breach of applicable law or these terms;
+2. interfere with the Site's normal operation, including automated attacks or request volumes beyond reasonable use;
+3. **scrape the Site in bulk to train commercial models**, or to build a service that competes substantially with the Site, without written permission (non-commercial research and personal reading are unaffected);
+4. remove or alter attribution, copyright notices, or licence markings;
+5. state or imply a partnership, sponsorship, or endorsement that does not exist.
 
-1. uploading, publishing, or transmitting any virus, trojan, malicious code, or program intended to disrupt the normal operation of the Site;
-2. using the Site for any activity that violates the laws and regulations of the People's Republic of China, including but not limited to spreading obscene, gambling, violent, terrorist, or crime-inciting information;
-3. infringing the privacy, reputation, trade secrets, or other lawful rights of others;
-4. collecting, scraping, or copying the Site's data without authorisation to build competing products or services.
+## 4. Disclaimers
 
-If you violate these rules, we may, without prior notice, remove the offending content, suspend, or permanently terminate your access, and reserve the right to pursue legal liability.
+### 4.1 Information only
 
-## Article 4 — Changes and governing law
+Articles, opinions, and tutorials reflect the author's personal views and **do not constitute professional advice** of any kind (legal, medical, financial, or investment). Decisions you make based on the Site are your own responsibility.
 
-### 4.1 Updates
+### 4.2 No warranty of accuracy
 
-Connexion Collective may revise these terms from time to time in line with business developments or changes in laws and regulations. Revised terms will be published on this page with an updated date. Continued use of the Site after an update constitutes acceptance of the revised terms.
+We aim for accuracy but make no express or implied warranty about the accuracy, completeness, or timeliness of the content. Material may become outdated; please verify it yourself.
 
-### 4.2 Governing law and jurisdiction
+### 4.3 Online tools
 
-The formation, performance, and interpretation of these terms are governed by the laws of the People's Republic of China (excluding conflict-of-law rules). Any dispute arising from these terms or from use of the Site shall first be resolved through friendly negotiation; failing that, either party may bring a lawsuit before a competent people's court at the place where the operating entity of Connexion Collective is located.
+All tools run **inside your browser**; files are never uploaded, so we cannot view, retain, or recover them.
 
-**Connexion Collective reserves the right of final interpretation of these terms (to the extent permitted by law).**
+The tools are provided "as is", with no liability for their output — including possible quality loss, format incompatibility, or failed conversions. **Keep an original copy before processing anything important.**
+
+### 4.4 Availability
+
+The Site is not guaranteed to be uninterrupted. We accept no liability for suspension, delay, or data loss caused by maintenance, upgrades, network faults, attacks, or force majeure, but we will make reasonable efforts to restore service.
+
+## 5. Third-party services and links
+
+The Site relies on a small number of third-party services:
+
+- **Hosting and delivery** — Cloudflare
+- **Comments** — Giscus, backed by GitHub Discussions; commenting requires a GitHub account and is also subject to GitHub's terms and privacy policy
+- **Subscriptions** — via RSS / Atom; no email address or account is collected by us
+
+The Site may link to third-party websites. Such links are provided for convenience and do not imply endorsement; we are not responsible for their content or conduct.
+
+## 6. User content and comments
+
+When you comment:
+
+- you confirm you hold the rights to what you publish;
+- you grant the Site a worldwide, royalty-free, non-exclusive, sublicensable licence to display, store, and distribute that content (comments are stored in GitHub Discussions);
+- you are responsible for its legality, and for any third-party rights it may infringe.
+
+We may remove or block unlawful, infringing, or clearly inappropriate content after receiving a valid notice and verifying it.
+
+## 7. Privacy and data
+
+- There is **no account or login system** on the Site, and we do not actively collect personal identity information.
+- The Site runs **no third-party advertising** and deploys no cross-site tracking or behavioural analytics scripts.
+- Online tools process everything locally in your browser; files never leave your device.
+- Subscriptions use RSS / Atom, so no email addresses are collected.
+- Our hosting provider may keep access logs (such as IP address and User-Agent) under its own practices; that processing is governed by its privacy policy.
+
+## 8. Changes to these terms
+
+We may revise these terms to reflect changes in features or legal requirements. Revised versions are published on this page with an updated "Last updated" date.
+
+If a change materially affects your rights, we will highlight it on the Site. Continued use after a revision takes effect constitutes acceptance.
+
+## 9. Governing law and disputes
+
+These terms are governed by the laws of the **People's Republic of China**, excluding conflict-of-law rules.
+
+Disputes arising from these terms or from use of the Site should first be raised with us for an amicable resolution. Failing that, either party may bring proceedings before a competent people's court where the operating entity of Connexion Collective is located.
+
+## 10. General
+
+- **Severability** — if any provision is held invalid or unenforceable, the remaining provisions stay in force.
+- **Language** — these terms exist in Chinese and English. **In case of conflict, the Chinese version prevails.**
+- **Entire agreement** — these terms constitute the entire agreement between you and the Site regarding its use.
+
+## 11. Contact
+
+For questions about these terms, or to request permission beyond the licences above:
+
+- GitHub: [https://github.com/LxHanesser](https://github.com/LxHanesser)
+- Repository discussions: [https://github.com/LxHanesser/Connexion-Collective/discussions](https://github.com/LxHanesser/Connexion-Collective/discussions)

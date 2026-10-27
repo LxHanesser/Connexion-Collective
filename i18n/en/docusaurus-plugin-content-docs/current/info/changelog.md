@@ -27,6 +27,11 @@ Every change this site goes through.
 
 - Removed the “Edit this page” / “Edit this post” links from docs and blog pages — that is an authoring entry point, and visitors who click it only reach GitHub’s editor.
 
+**Terms and docs**
+
+- Rewrote the terms of use: explicit open licences (articles **CC BY-NC-SA 4.0**, code and source **MIT**), a privacy and data section, the third-party services involved, and a structure following common international practice. A proper `LICENSE` file now sits in the repository.
+- “Start here” gained a “Code and tools” section covering the online tools, the source licence, and the site’s static-first approach.
+
 ## 2026-10-26
 
 **Performance**
