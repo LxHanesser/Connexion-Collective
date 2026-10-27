@@ -7,6 +7,26 @@ title: Changelog
 
 Every change this site goes through.
 
+## 2026-10-27
+
+**Footer**
+
+- The footer now carries a row of clickable security badges: SSL Labs A+, Security Headers A, HSTS, DNSSEC, and “Hosted on Cloudflare”. Each one opens the corresponding live third-party report.
+- They are local HTML/CSS plus a same-origin SVG — **no requests to any third party**, and no visitor IP handed to an outside service.
+
+**Mobile**
+
+- On docs and blog pages the mobile menu opens straight into that section’s own navigation. Three quick entries — Home, Blog, Tools — now sit above it, so switching sections no longer requires tapping “back to main menu” first.
+
+**Blog**
+
+- List pagination now shows page numbers (1, 2, …) with “Page X of Y”, and the arrows grey out at the ends.
+- The previous/next post links at the bottom of an article are now cards with the publication date and a “Post N of M” position.
+
+**Cleanup**
+
+- Removed the “Edit this page” / “Edit this post” links from docs and blog pages — that is an authoring entry point, and visitors who click it only reach GitHub’s editor.
+
 ## 2026-10-26
 
 **Performance**
