@@ -33,6 +33,7 @@ Every change this site goes through.
 
 - Rewrote the terms of use: explicit open licences (articles **CC BY-NC-SA 4.0**, code and source **MIT**), a privacy and data section, the third-party services involved, and a structure following common international practice. A proper `LICENSE` file now sits in the repository.
 - “Start here” gained a “Code and tools” section covering the online tools, the source licence, and the site’s static-first approach.
+- Privacy section corrected: traffic statistics come from **Cloudflare Web Analytics** (no cookies, no cross-site tracking, no device fingerprinting). The earlier wording claiming no behavioural analytics was no longer accurate.
 
 ## 2026-10-26
 

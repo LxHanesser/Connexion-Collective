@@ -118,7 +118,8 @@ We may remove or block unlawful, infringing, or clearly inappropriate content af
 ## 7. Privacy and data
 
 - There is **no account or login system** on the Site, and we do not actively collect personal identity information.
-- The Site runs **no third-party advertising** and deploys no cross-site tracking or behavioural analytics scripts.
+- The Site runs **no third-party advertising** and deploys no cross-site tracking scripts.
+- Traffic statistics come from **Cloudflare Web Analytics**, provided by our hosting provider: it sets no cookies, uses no cross-site identifiers and no device fingerprinting, and records only aggregate page views. No other analytics or statistics service is loaded.
 - Online tools process everything locally in your browser; files never leave your device.
 - Subscriptions use RSS / Atom, so no email addresses are collected.
 - Our hosting provider may keep access logs (such as IP address and User-Agent) under its own practices; that processing is governed by its privacy policy.
