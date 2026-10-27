@@ -1354,3 +1354,60 @@ article header a[class*='tag_'] {
     transition: none;
   }
 }
+/* ===== 移动端导航栏汉堡按钮 =====
+   原本是 30×30 的三条裸线，无容器、无边界，视觉上不像可点元素，
+   也低于 44×44 的触摸标准。这里改成与右侧搜索按钮同款的圆角按钮。 */
+.navbar__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  margin-right: 6px;
+  border-radius: 12px;
+  background: var(--ifm-color-emphasis-100);
+  color: var(--ifm-color-emphasis-900);
+  transition: background-color 0.15s ease;
+}
+
+.navbar__toggle svg {
+  width: 24px;
+  height: 24px;
+}
+
+@media (hover: hover) {
+  .navbar__toggle:hover {
+    background: var(--ifm-color-emphasis-200);
+  }
+}
+
+.navbar__toggle:active {
+  background: var(--ifm-color-emphasis-300);
+}
+
+.navbar__toggle:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar__toggle {
+    transition: none;
+  }
+}
+/* 深色模式下 emphasis-100（#1c1e21）与导航栏底色（#242526）几乎相同，
+   按钮会「消失」，因此单独提亮一档。 */
+[data-theme='dark'] .navbar__toggle {
+  background: var(--ifm-color-emphasis-200);
+}
+
+@media (hover: hover) {
+  [data-theme='dark'] .navbar__toggle:hover {
+    background: var(--ifm-color-emphasis-300);
+  }
+}
+
+[data-theme='dark'] .navbar__toggle:active {
+  background: var(--ifm-color-emphasis-300);
+}

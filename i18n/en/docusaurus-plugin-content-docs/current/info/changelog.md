@@ -17,6 +17,7 @@ Every change this site goes through.
 **Mobile**
 
 - On docs and blog pages the mobile menu opens straight into that section’s own navigation. Three quick entries — Home, Blog, Tools — now sit above it, so switching sections no longer requires tapping “back to main menu” first.
+- The mobile menu toggle in the navbar was a bare 30px three-line icon with no background, easy to miss as a button. It is now a 44px rounded button that meets the touch-target size, with its own contrast tuning for dark mode.
 
 **Blog**
 
