@@ -22,6 +22,7 @@ Every change this site goes through.
 
 - List pagination now shows page numbers (1, 2, …) with “Page X of Y”, and the arrows grey out at the ends.
 - The previous/next post links at the bottom of an article are now cards with the publication date and a “Post N of M” position.
+- The archive page was rebuilt: a single column grouped by year and month, each row showing tags and reading time, a search box for titles and tags, and year jump links once there is more than one year.
 
 **Cleanup**
 
