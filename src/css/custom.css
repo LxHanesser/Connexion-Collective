@@ -1356,58 +1356,64 @@ article header a[class*='tag_'] {
 }
 /* ===== 移动端导航栏汉堡按钮 =====
    原本是 30×30 的三条裸线，无容器、无边界，视觉上不像可点元素，
-   也低于 44×44 的触摸标准。这里改成与右侧搜索按钮同款的圆角按钮。 */
-.navbar__toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  margin-right: 6px;
-  border-radius: 12px;
-  background: var(--ifm-color-emphasis-100);
-  color: var(--ifm-color-emphasis-900);
-  transition: background-color 0.15s ease;
+   也低于 44×44 的触摸标准。这里改成与右侧搜索按钮同款的圆角按钮。
+
+   ⚠️ 整块必须包在 (max-width: 996px) 里：主题正是靠 display 在桌面端隐藏这个按钮的，
+   一旦在全局无条件写 display，就会把它显示到桌面导航栏上（曾经踩过这个坑）。 */
+@media (max-width: 996px) {
+  .navbar__toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    margin-right: 6px;
+    border-radius: 12px;
+    background: var(--ifm-color-emphasis-100);
+    color: var(--ifm-color-emphasis-900);
+    transition: background-color 0.15s ease;
+  }
+
+  .navbar__toggle svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .navbar__toggle:active {
+    background: var(--ifm-color-emphasis-300);
+  }
+
+  .navbar__toggle:focus-visible {
+    outline: 2px solid var(--ifm-color-primary);
+    outline-offset: 2px;
+  }
+
+  /* 深色模式下 emphasis-100（#1c1e21）与导航栏底色（#242526）几乎相同，
+     按钮会「消失」，因此单独提亮一档。 */
+  [data-theme='dark'] .navbar__toggle {
+    background: var(--ifm-color-emphasis-200);
+  }
+
+  [data-theme='dark'] .navbar__toggle:active {
+    background: var(--ifm-color-emphasis-300);
+  }
 }
 
-.navbar__toggle svg {
-  width: 24px;
-  height: 24px;
-}
-
-@media (hover: hover) {
+/* hover 相关规则单独放在媒体查询外层的 (hover: hover) 内，
+   避免手机端点击后样式「粘住」 */
+@media (max-width: 996px) and (hover: hover) {
   .navbar__toggle:hover {
     background: var(--ifm-color-emphasis-200);
   }
-}
 
-.navbar__toggle:active {
-  background: var(--ifm-color-emphasis-300);
-}
-
-.navbar__toggle:focus-visible {
-  outline: 2px solid var(--ifm-color-primary);
-  outline-offset: 2px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .navbar__toggle {
-    transition: none;
-  }
-}
-/* 深色模式下 emphasis-100（#1c1e21）与导航栏底色（#242526）几乎相同，
-   按钮会「消失」，因此单独提亮一档。 */
-[data-theme='dark'] .navbar__toggle {
-  background: var(--ifm-color-emphasis-200);
-}
-
-@media (hover: hover) {
   [data-theme='dark'] .navbar__toggle:hover {
     background: var(--ifm-color-emphasis-300);
   }
 }
 
-[data-theme='dark'] .navbar__toggle:active {
-  background: var(--ifm-color-emphasis-300);
+@media (max-width: 996px) and (prefers-reduced-motion: reduce) {
+  .navbar__toggle {
+    transition: none;
+  }
 }
