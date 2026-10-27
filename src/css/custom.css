@@ -1115,3 +1115,242 @@ article header a[class*='tag_'] {
 .blog-post-pager__card {
   height: 100%;
 }
+/* ===== 文章归档页 ===== */
+.archive-page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 3rem 1rem 4rem;
+  min-width: 0;
+}
+
+.archive-header {
+  margin-bottom: 1.75rem;
+}
+
+.archive-title {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.archive-lead {
+  margin: 0;
+  opacity: 0.75;
+  font-variant-numeric: tabular-nums;
+}
+
+.archive-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.archive-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.archive-filter__label {
+  flex: 0 0 auto;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.archive-filter input {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-surface-color);
+  color: var(--ifm-font-color-base);
+  font-size: 0.92rem;
+}
+
+.archive-years {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.archive-year-chip {
+  min-height: 36px;
+  padding: 0 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: transparent;
+  color: var(--ifm-color-emphasis-800);
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+.archive-empty {
+  padding: 2rem 0;
+  text-align: center;
+  opacity: 0.7;
+}
+
+.archive-year {
+  scroll-margin-top: 6rem;
+  margin-bottom: 2.5rem;
+}
+
+.archive-year__head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--ifm-color-emphasis-300);
+}
+
+.archive-year__title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.archive-year__count {
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+.archive-month {
+  margin-top: 1.5rem;
+}
+
+.archive-month__head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.archive-month__title {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+
+.archive-month__count {
+  font-size: 0.75rem;
+  opacity: 0.45;
+  font-variant-numeric: tabular-nums;
+}
+
+.archive-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.archive-item {
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.archive-item:last-child {
+  border-bottom: none;
+}
+
+.archive-item__link {
+  display: grid;
+  grid-template-columns: 2.6rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.7rem 0.4rem;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.archive-item__date {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85rem;
+  opacity: 0.55;
+  font-variant-numeric: tabular-nums;
+}
+
+.archive-item__title {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  min-width: 0;
+}
+
+.archive-item__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.76rem;
+  opacity: 0.55;
+  white-space: nowrap;
+}
+
+.archive-item__tags {
+  letter-spacing: 0.02em;
+}
+
+.archive-item__time {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (hover: hover) {
+  .archive-item__link:hover {
+    background: rgba(46, 133, 85, 0.06);
+    text-decoration: none;
+  }
+
+  .archive-item__link:hover .archive-item__title {
+    color: var(--ifm-color-primary);
+  }
+
+  .archive-year-chip:hover {
+    border-color: var(--ifm-color-primary);
+    color: var(--ifm-color-primary);
+  }
+}
+
+.archive-item__link:focus-visible,
+.archive-year-chip:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+@media (max-width: 767px) {
+  .archive-page {
+    padding: 2rem 1rem 3rem;
+  }
+
+  .archive-item__link {
+    grid-template-columns: 2.2rem minmax(0, 1fr);
+    gap: 0.7rem;
+    padding: 0.75rem 0.3rem;
+  }
+
+  /* 手机上隐藏右侧标签与时长，保证标题完整可读 */
+  .archive-item__meta {
+    display: none;
+  }
+
+  .archive-item__title {
+    font-size: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .archive-item__link,
+  .archive-year-chip {
+    transition: none;
+  }
+}
