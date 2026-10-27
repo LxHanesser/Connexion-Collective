@@ -43,8 +43,6 @@ In one sentence: **static wherever possible**.
 - No backend, no database, no accounts; every "smart" part happens at build time or in your browser
 - The site source is open (MIT), the writing is licensed CC BY-NC-SA 4.0 — see the [terms](/docs/info/terms) for details
 
-This is not about showing off. It is simply that **no server means no server to leak.**
-
 ## What rhythm should you expect?
 
 Honestly, I don't want to set myself a "post every week" KPI. Quality matters more than frequency. But I can promise: **everything published here has been thought through and written carefully.** I would rather be slow than pad the numbers.
