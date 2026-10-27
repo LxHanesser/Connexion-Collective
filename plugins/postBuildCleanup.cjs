@@ -21,21 +21,41 @@ function walk(dir, out = []) {
   return out;
 }
 
-module.exports = function postBuildCleanupPlugin() {
+module.exports = function postBuildCleanupPlugin(context) {
   return {
     name: 'post-build-cleanup',
     async postBuild({outDir}) {
       let pagesTouched = 0;
       let metasRemoved = 0;
 
+      // 站点目录的两种形态：JSON 转义过（Windows 反斜杠会变成 \\）与原始路径
+      const siteDir = context?.siteDir ?? '';
+      const siteDirEscaped = siteDir ? JSON.stringify(siteDir).slice(1, -1) : '';
+
+      let scrubbed = 0;
+
       for (const file of walk(outDir)) {
-        if (!file.endsWith('.html')) continue;
+        if (!/\.(html|js|json)$/.test(file)) continue;
         const before = fs.readFileSync(file, 'utf8');
-        const found = before.match(GENERATOR_META);
-        if (!found) continue;
-        fs.writeFileSync(file, before.replace(GENERATOR_META, ''));
-        pagesTouched += 1;
-        metasRemoved += found.length;
+        let after = before;
+
+        const found = after.match(GENERATOR_META);
+        if (found) {
+          after = after.replace(GENERATOR_META, '');
+          pagesTouched += 1;
+          metasRemoved += found.length;
+        }
+
+        // 本地绝对路径（D:\Desktop\...\my-website）会随 siteConfig 被打进产物，
+        // 属于「最小暴露」不允许的信息，统一替换为中性前缀。
+        if (siteDir) {
+          const beforeLen = after.length;
+          if (siteDirEscaped) after = after.split(siteDirEscaped).join('/site');
+          after = after.split(siteDir).join('/site');
+          if (after.length !== beforeLen) scrubbed += 1;
+        }
+
+        if (after !== before) fs.writeFileSync(file, after);
       }
 
       console.log(

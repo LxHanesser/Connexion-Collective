@@ -2,10 +2,32 @@
 
 > 三条硬约束：**安全第一**、**兼容 Cloudflare Pages**、**移动端优先**。
 
+## 零、公开仓库与私有运维的边界（2026-10-27 起，硬约定，永不撤销）
+
+**网站开发**与**后台数据研究**是两个世界，必须物理隔离。
+
+| | 公开（GitHub / Pages / connexion-media） | 私有（本地 `ops/` / `connexion-analytics`） |
+| --- | --- | --- |
+| 内容 | 站点代码、文章、公开的聚合统计 JSON | token / account / zone ID、含 IP 的原始归档、导出与分析脚本 |
+| 要求 | 可被任何人 clone、可被索引 | 永不进 git、不进构建产物、不绑公网域名 |
+
+- **凭证与原始数据只允许放 `ops/`**（该目录已被 `.git/info/exclude` 排除）与私有 R2 桶。
+- **后台研究类脚本一律放 `ops/`**（导出、清洗、分析、审计）。`scripts/` 只放「网站构建/部署/生成公开数据」相关的脚本，且不得包含凭证。
+- **每次推送前必须**运行 `node ops/audit-leaks.mjs`；`.git/hooks/pre-commit` 已内置同等拦截（凭证真实值、`cfut_` 形态、私钥、本地绝对路径、禁止路径、数据文件中的 IP）。
+- **公开桶 `connexion-media` 只放静态媒体；私有桶 `connexion-analytics` 只放分析归档。** 两者不得混用。
+- 构建产物里出现本机绝对路径视为泄露（Docusaurus 的 `siteConfig` 曾把 `node_modules` 绝对路径打进 JS），由 `plugins/postBuildCleanup.cjs` 在构建后擦除。
+- 违规处理：发现即回滚 + 轮换受影响凭证，不要「先提交再说」。
+
 ## 一、安全第一
 
 - **纯静态**：本站只有构建产物（`build/`）被托管。不得引入服务端代码、Cloudflare Pages Functions、Workers、数据库、KV，也不得有需要常驻进程的功能。所有逻辑只能发生在「构建时」或「访客浏览器里」。
 - **R2 仅限静态媒体**（唯一例外，2026-10-25 起）：允许把大体积媒体（图片、视频、PDF）放 Cloudflare R2 公开桶，经 `cdn.connexioncollective.com` 提供。边界：①只放静态文件，不得用 Worker/Functions 代理或做鉴权；②不得用私有桶或签名 URL（那会引入服务端）；③WASM 编码器**必须**继续自托管在 `static/wasm/`，不得移到 R2；④新增媒体走 `npm run media:upload`，不要手工上传到别的桶；⑤上传前先压缩，单文件尽量 <1 MB。运维细节见本地手册 `ops/r2-media.md`（该目录不入库）。
+- **R2 私有用例：分析数据归档**（2026-10-27 起，与上一条并列的第二个例外）：
+  `connexion-analytics` 桶专用于存放从 Cloudflare 导出的访问统计归档（含 IP 级请求数据的 JSONL.gz）。
+  边界：①**必须保持私有** —— 不绑自定义域名、不开 r2.dev、不对外提供任何签名 URL，站点运行时**完全不读它**；
+  ②只允许本地运维脚本 `node ops/analytics/export.mjs --upload`（走 wrangler OAuth 或只读 API token）写入，凭证一律不进仓库；
+  ③该桶**不是**站点资源，不得被 HTML/CSS/JS 引用，也不改变「站点零外域、零服务端」的现状；
+  ④它是唯一允许包含个人数据（IP）的存储，见 `ops/analytics-archive/`（不入库）与 HANDOFF 的归档章节。
 - **零信任输入**：任何来自 URL、评论、搜索词、第三方接口的数据都当作不可信。当前站内没有表单；将来要加评论投稿、订阅、留言板，必须先过一遍 XSS/滥用评估再动手。
 - **第三方代码要审**：新增依赖必须 ①锁定精确版本（`--save-exact`）②提交 `package-lock.json` ③确认维护活跃 ④看清 `postinstall` 等安装脚本 ⑤优先选无原生编译、无远程脚本的方案。禁止引入来源不明的统计、字体、CDN、A/B 测试脚本。
 - **外部资源白名单**：目前只允许 `giscus.app`（评论）、GitHub 头像，以及 `cdn.connexioncollective.com`（自建 R2 媒体，只放图片/视频/PDF）。新增任何外域请求都要先说明理由。
@@ -67,3 +89,4 @@
 - 将来若加 CSP，图片压缩页需要 `script-src 'wasm-unsafe-eval'`，否则 WASM 会被拦；
   启用 R2 媒体后还需 `img-src 'self' data: https://cdn.connexioncollective.com`、
   `media-src https://cdn.connexioncollective.com`。
+
