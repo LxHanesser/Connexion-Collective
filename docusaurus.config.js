@@ -2,6 +2,8 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import {daysSinceLaunch} from './src/siteMeta.js';
 import {TOOL_GROUPS} from './src/toolsCatalog.js';
+import {securityBadgesHtml} from './src/securityBadges.js';
+import blogPostIndex from './plugins/blogPostIndex.cjs';
 
 // Docusaurus 逐语言构建时会设置这个变量，配置里少数文案需要据此切换
 const currentLocale = process.env.DOCUSAURUS_CURRENT_LOCALE ?? 'zh-Hans';
@@ -107,7 +109,7 @@ const config = {
       ({
         docs: {
           sidebarPath: './sidebars.js',
-          editUrl: 'https://github.com/LxHanesser/Connexion-Collective/edit/main/',
+          // 不配置 editUrl：避免在文档页面向访客展示「编辑此页」（个人站不需要）
         },
         blog: {
           showReadingTime: true,
@@ -123,7 +125,7 @@ const config = {
             type: ['rss', 'atom'],
             xslt: true,
           },
-          editUrl: 'https://github.com/LxHanesser/Connexion-Collective/edit/main/',
+          // 不配置 editUrl：文章底部不显示「编辑文章」
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
@@ -140,6 +142,9 @@ const config = {
       }),
     ],
   ],
+
+  // 构建期注入全站文章索引（标题/日期/链接），供文章页上下篇导航使用
+  plugins: [blogPostIndex],
 
   // 站内搜索：构建时生成离线索引，浏览器端本地检索（无外部服务、无查询接口）
   themes: [
@@ -279,7 +284,7 @@ const config = {
           },
         ],
         // 构建时先写入一个正确值做兜底（禁用 JS 也能读到），浏览器端由 siteUptime 换成访问当天
-        copyright: `© ${new Date().getFullYear()} Connexion Collective · ${uptimeLabel} · Powered by Docusaurus`,
+        copyright: `© ${new Date().getFullYear()} Connexion Collective · ${uptimeLabel} · Powered by Docusaurus${securityBadgesHtml(isEnglish)}`,
       },
       prism: {
         theme: prismThemes.github,
