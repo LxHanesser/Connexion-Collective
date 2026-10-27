@@ -99,12 +99,17 @@ function ensureTopButton() {
   return button;
 }
 
-function computeProgress(article) {
-  const rect = article.getBoundingClientRect();
-  const articleTop = rect.top + window.scrollY;
-  const scrollable = Math.max(rect.height - window.innerHeight, 1);
-  const scrolled = window.scrollY - articleTop;
-  return Math.min(1, Math.max(0, scrolled / scrollable));
+// 按「整页滚动」计算进度。
+//
+// 早期版本按 article 高度算（正文读完即 100%），但这在移动端会提前满格：
+// 手机上网页脚、相关文章、上下篇占的高度比例更大，正文往往在整页 75% 处就结束，
+// 剩下四分之一的滚动里进度条一直停在 100%，看起来像「卡住不动」。
+// 改为以页面可滚动高度为基准，进度条能一直走到页面底部。
+function computeProgress() {
+  const doc = document.documentElement;
+  const max = doc.scrollHeight - window.innerHeight;
+  if (!Number.isFinite(max) || max <= 0) return 0;
+  return Math.min(1, Math.max(0, window.scrollY / max));
 }
 
 // 只在「正文页」显示进度条：
@@ -127,7 +132,7 @@ function update() {
   const article = findContentArticle();
 
   if (article) {
-    const progress = computeProgress(article);
+    const progress = computeProgress();
     bar.hidden = false;
     bar.style.width = `${(progress * 100).toFixed(2)}%`;
     bar.setAttribute('aria-valuenow', String(Math.round(progress * 100)));

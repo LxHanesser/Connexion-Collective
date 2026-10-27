@@ -579,6 +579,15 @@ aside.col--3 a[class*='tag_'] {
   0% { transform: translateX(100%); }
   100% { transform: translateX(-100%); }
 }
+
+/* 手机端「淡入淡出轮播」用：每条停留约 4.5 秒，15 秒一轮 */
+@keyframes marquee-fade {
+  0% { opacity: 0; transform: translateY(4px); }
+  4% { opacity: 1; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(0); }
+  34% { opacity: 0; transform: translateY(-4px); }
+  100% { opacity: 0; transform: translateY(-4px); }
+}
 /* ==========================================
    博客列表：双列网格布局
    ========================================== */
@@ -693,22 +702,52 @@ article header a[class*='tag_'] {
     bottom: 1rem;
   }
 
-  /* 跑马灯在手机上改为静态单行：滚动文字在窄屏既看不清也占空间 */
+  /* 跑马灯在手机上不横向滚动（窄屏看不清），改为三条文案淡入淡出轮播；
+     完全静止会让人以为坏了，轮播既省空间又有「在动」的反馈 */
   .marquee-content {
     animation: none;
     transform: none;
     display: block;
-    white-space: nowrap;
+    position: relative;
+    height: 1.5em;
     overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .marquee-content span {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
     margin-right: 0;
+    opacity: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    animation: marquee-fade 15s ease-in-out infinite;
   }
 
-  .marquee-content span:not(:first-child) {
-    display: none;
+  .marquee-content span:nth-child(1) {
+    animation-delay: 0s;
+  }
+
+  .marquee-content span:nth-child(2) {
+    animation-delay: 5s;
+  }
+
+  .marquee-content span:nth-child(3) {
+    animation-delay: 10s;
+  }
+
+  /* 系统开启「减少动态效果」时退回静态首条 */
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-content span {
+      animation: none;
+      opacity: 0;
+    }
+
+    .marquee-content span:first-child {
+      opacity: 1;
+    }
   }
 
   .marquee-container {
