@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://connexioncollective.com/sitemap.xml
+Sitemap: https://connexioncollective.com/en/sitemap.xml
