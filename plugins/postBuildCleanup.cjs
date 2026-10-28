@@ -46,7 +46,7 @@ module.exports = function postBuildCleanupPlugin(context) {
           metasRemoved += found.length;
         }
 
-        // 本地绝对路径（D:\Desktop\...\my-website）会随 siteConfig 被打进产物，
+        // 本机绝对路径（形如 D:\path\to\site）会随 siteConfig 被打进产物，
         // 属于「最小暴露」不允许的信息，统一替换为中性前缀。
         if (siteDir) {
           const beforeLen = after.length;
