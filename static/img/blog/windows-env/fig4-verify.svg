@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 430" width="1000" height="430" role="img" aria-label="验证环境是否装好的命令与期望输出">
+  <defs>
+    <style>
+      .t { font-family: system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; fill: #1c1e21; }
+      .h { font-size: 15px; font-weight: 600; }
+      .s { font-size: 12.5px; fill: #64748b; }
+      .term { fill: #0f172a; rx: 10; }
+      .tt { font-family: "Cascadia Code", Consolas, monospace; font-size: 13.5px; fill: #e2e8f0; }
+      .p { fill: #4ade80; }
+      .o { fill: #93c5fd; }
+    </style>
+  </defs>
+  <rect width="1000" height="430" fill="#f8fafc"/>
+  <text class="t h" x="24" y="36" font-size="16">验证：三条命令，三行版本号</text>
+  <text class="t s" x="24" y="58">打开 PowerShell（或 Git Bash），逐条输入。能看到版本号，就说明装好了、PATH 也对了。</text>
+
+  <rect class="term" x="24" y="76" width="620" height="300"/>
+  <text class="tt p" x="48" y="112">PS C:\Users\you&gt;</text>
+  <text class="tt" x="228" y="112">node -v</text>
+  <text class="tt o" x="48" y="138">v20.11.1</text>
+
+  <text class="tt p" x="48" y="182">PS C:\Users\you&gt;</text>
+  <text class="tt" x="228" y="182">npm -v</text>
+  <text class="tt o" x="48" y="208">10.2.4</text>
+
+  <text class="tt p" x="48" y="252">PS C:\Users\you&gt;</text>
+  <text class="tt" x="228" y="252">git --version</text>
+  <text class="tt o" x="48" y="278">git version 2.43.0.windows.1</text>
+
+  <text class="tt" x="48" y="330" fill="#64748b"># 版本号不必和这里一模一样，能输出即可</text>
+
+  <!-- right explanations -->
+  <rect x="668" y="76" width="308" height="300" rx="10" fill="#ffffff" stroke="#d7dee7" stroke-width="1.5"/>
+  <text class="t h" x="690" y="108">三条命令分别在验证</text>
+
+  <text class="t s" x="690" y="140" style="font-weight:600; fill:#1c1e21">node -v</text>
+  <text class="t s" x="690" y="160">Node 运行时是否可用</text>
+
+  <text class="t s" x="690" y="196" style="font-weight:600; fill:#1c1e21">npm -v</text>
+  <text class="t s" x="690" y="216">包管理器是否随 Node 装好</text>
+
+  <text class="t s" x="690" y="252" style="font-weight:600; fill:#1c1e21">git --version</text>
+  <text class="t s" x="690" y="272">Git 是否可用</text>
+
+  <text class="t s" x="690" y="312">三条都通过，环境就算齐了，</text>
+  <text class="t s" x="690" y="332">可以开始 clone 项目了。</text>
+
+  <text class="t s" x="24" y="404">提示：如果某条报「不是内部或外部命令」，先重开终端；还不行就回上一篇检查 PATH。</text>
+</svg>

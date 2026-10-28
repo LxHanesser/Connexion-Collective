@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 440" width="1000" height="440" role="img" aria-label="Windows 开发环境需要安装的软件清单：Node.js、Git 必装，VS Code 与 Windows Terminal 可选">
+  <defs>
+    <style>
+      .t { font-family: system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; fill: #1c1e21; }
+      .h { font-size: 16px; font-weight: 600; }
+      .s { font-size: 12.5px; fill: #64748b; }
+      .m { font-family: "Cascadia Code", Consolas, monospace; font-size: 12.5px; fill: #1d4ed8; }
+      .card { fill: #ffffff; stroke: #d7dee7; stroke-width: 1.5; rx: 10; }
+      .must { fill: #f0f9f4; stroke: #2e8555; stroke-width: 1.8; rx: 10; }
+      .opt { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; stroke-dasharray: 6 4; rx: 10; }
+      .badge { font-size: 11px; font-weight: 600; }
+    </style>
+  </defs>
+  <rect width="1000" height="440" fill="#f8fafc"/>
+  <text class="t h" x="24" y="40" font-size="17">需要装的东西：两个必装，两个可选</text>
+
+  <!-- Node -->
+  <rect class="must" x="24" y="60" width="452" height="150"/>
+  <rect x="44" y="80" width="54" height="22" rx="11" fill="#2e8555"/>
+  <text class="t badge" x="71" y="96" text-anchor="middle" fill="#ffffff">必装</text>
+  <text class="t h" x="112" y="98">Node.js（自带 npm）</text>
+  <text class="t s" x="44" y="128">跑项目要用的运行时；npm 是它的包管理器，装 Node 时一起装好。</text>
+  <text class="t s" x="44" y="150">选 LTS 版本，不要选 Current。</text>
+  <text class="m" x="44" y="180">nodejs.org/zh-cn/download</text>
+  <text class="t s" x="44" y="200">验证：node -v 与 npm -v</text>
+
+  <!-- Git -->
+  <rect class="must" x="500" y="60" width="476" height="150"/>
+  <rect x="520" y="80" width="54" height="22" rx="11" fill="#2e8555"/>
+  <text class="t badge" x="547" y="96" text-anchor="middle" fill="#ffffff">必装</text>
+  <text class="t h" x="588" y="98">Git for Windows</text>
+  <text class="t s" x="520" y="128">下载代码、提交改动都靠它。安装包自带 Git Bash 终端。</text>
+  <text class="t s" x="520" y="150">装完还要配一次用户名和邮箱。</text>
+  <text class="m" x="520" y="180">git-scm.com/download/win</text>
+  <text class="t s" x="520" y="200">验证：git --version</text>
+
+  <!-- optional -->
+  <rect class="opt" x="24" y="234" width="452" height="126"/>
+  <text class="t h" x="44" y="264">可选：VS Code</text>
+  <text class="t s" x="44" y="288">写代码的编辑器，自带终端，能直接在里面跑 npm 命令。</text>
+  <text class="m" x="44" y="314">code.visualstudio.com/Download</text>
+  <text class="t s" x="44" y="338">不装也能玩，用记事本 + 命令行也行。</text>
+
+  <rect class="opt" x="500" y="234" width="476" height="126"/>
+  <text class="t h" x="520" y="264">可选：Windows Terminal</text>
+  <text class="t s" x="520" y="288">比系统自带的黑框好用：多标签、可复制粘贴、支持中文。</text>
+  <text class="m" x="520" y="314">aka.ms/terminal（微软商店）</text>
+  <text class="t s" x="520" y="338">Win11 一般已预装，Win10 可能要自己装。</text>
+
+  <!-- warning -->
+  <rect x="24" y="382" width="952" height="40" rx="8" fill="#fef2f2" stroke="#fecaca" stroke-width="1.5"/>
+  <text class="t s" x="44" y="408" fill="#991b1b">⚠ 只从上面的官方地址下载。第三方「绿色版」「加速版」可能被改过，别用来跑需要登录的命令。</text>
+</svg>
