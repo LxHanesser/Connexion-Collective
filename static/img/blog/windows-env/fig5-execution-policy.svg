@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 450" width="1000" height="450" role="img" aria-label="PowerShell 执行策略导致 npm.ps1 无法运行，以及一行命令修复">
+  <defs>
+    <style>
+      .t { font-family: system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; fill: #1c1e21; }
+      .h { font-size: 15px; font-weight: 600; }
+      .s { font-size: 12.5px; fill: #64748b; }
+      .term { fill: #0f172a; rx: 10; }
+      .tt { font-family: "Cascadia Code", Consolas, monospace; font-size: 12.5px; fill: #e2e8f0; }
+      .p { fill: #4ade80; }
+      .r { fill: #fca5a5; }
+      .o { fill: #93c5fd; }
+    </style>
+  </defs>
+  <rect width="1000" height="450" fill="#f8fafc"/>
+  <text class="t h" x="24" y="36" font-size="16">最常见的第二个报错：npm.ps1 无法加载</text>
+  <text class="t s" x="24" y="58">装好 Node 之后，node -v 正常，但 npm 一敲就一大段红字 —— 这是 Windows 的脚本执行策略，不是没装好。</text>
+
+  <rect class="term" x="24" y="76" width="620" height="170"/>
+  <text class="tt p" x="48" y="108">PS C:\Users\you&gt;</text>
+  <text class="tt" x="228" y="108">npm -v</text>
+  <text class="tt r" x="48" y="134">npm : 无法加载文件 C:\Program Files\nodejs\npm.ps1，</text>
+  <text class="tt r" x="48" y="158">因为在此系统上禁止运行脚本。</text>
+  <text class="tt" x="48" y="184" fill="#94a3b8">+ CategoryInfo          : SecurityError: (:) [], PSSecurityException</text>
+  <text class="tt" x="48" y="208" fill="#94a3b8">+ FullyQualifiedErrorId : UnauthorizedAccess</text>
+  <text class="tt" x="48" y="232" fill="#64748b"># 但你用 node -v 是好的，说明 Node 本身没装坏</text>
+
+  <!-- fix -->
+  <rect x="668" y="76" width="308" height="170" rx="10" fill="#ffffff" stroke="#d7dee7" stroke-width="1.5"/>
+  <text class="t h" x="690" y="108">一行修复</text>
+  <rect x="688" y="122" width="268" height="52" rx="6" fill="#0f172a"/>
+  <text class="tt o" x="702" y="144">Set-ExecutionPolicy -Scope</text>
+  <text class="tt o" x="702" y="164">CurrentUser RemoteSigned</text>
+  <text class="t s" x="690" y="198">只影响当前用户，需要管理员权限。</text>
+  <text class="t s" x="690" y="220">执行后按 Y 确认，重开终端即可。</text>
+
+  <!-- explanation -->
+  <rect x="24" y="276" width="952" height="150" rx="10" fill="#f0f9f4" stroke="#2e8555" stroke-width="1.5"/>
+  <text class="t h" x="48" y="308" fill="#14532d">为什么会这样</text>
+  <text class="t s" x="48" y="336" fill="#166534">Windows 默认不允许运行本地 .ps1 脚本，而 npm 在 PowerShell 里就是通过 npm.ps1 启动的。</text>
+  <text class="t s" x="48" y="360" fill="#166534">RemoteSigned 的含义：本地写的脚本可以跑，从网上下载的脚本必须有签名 —— 比直接设成 Unrestricted 安全。</text>
+  <text class="t s" x="48" y="384" fill="#166534">如果不想改策略：改用 Git Bash（安装 Git 时自带），它不受 PowerShell 执行策略影响。</text>
+  <text class="t s" x="48" y="408" fill="#166534">验证：npm -v，这次应直接输出版本号。</text>
+</svg>

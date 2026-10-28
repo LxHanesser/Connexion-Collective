@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="1000" height="520" role="img" aria-label="Docusaurus 构建产物 build 目录结构">
+  <defs>
+    <style>
+      .t { font-family: "Cascadia Code", Consolas, "Microsoft YaHei", monospace; font-size: 14px; fill: #0f172a; }
+      .c { font-size: 13px; fill: #64748b; font-family: system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; }
+      .dir { fill: #2e8555; font-weight: 600; }
+      .hi { fill: #b45309; font-weight: 600; }
+    </style>
+  </defs>
+  <rect width="1000" height="520" fill="#f8fafc"/>
+  <rect x="24" y="24" width="640" height="472" rx="12" fill="#ffffff" stroke="#d7dee7" stroke-width="1.5"/>
+
+  <text class="t dir" x="52" y="66">build/</text>
+  <text class="t" x="72" y="100">├── index.html</text>
+  <text class="c" x="330" y="100">首页（已预渲染成静态 HTML）</text>
+
+  <text class="t" x="72" y="130">├── 404.html</text>
+  <text class="c" x="330" y="130">未知路径返回它，状态码仍是 404</text>
+
+  <text class="t" x="72" y="160">├── assets/</text>
+  <text class="c" x="330" y="160">带内容哈希的 JS / CSS</text>
+  <text class="t" x="108" y="186">├── js/*.js</text>
+  <text class="t" x="108" y="212">└── css/*.css</text>
+  <text class="c" x="330" y="212">文件名变了 = 缓存自动失效</text>
+
+  <text class="t" x="72" y="244">├── sitemap.xml</text>
+  <text class="c" x="330" y="244">给搜索引擎的页面清单</text>
+
+  <text class="t hi" x="72" y="276">├── _headers</text>
+  <text class="c" x="330" y="276">Pages 专有：缓存与安全响应头</text>
+
+  <text class="t hi" x="72" y="306">├── _redirects</text>
+  <text class="c" x="330" y="306">可选：重定向 / 尾斜杠规则</text>
+
+  <text class="t" x="72" y="336">├── en/</text>
+  <text class="c" x="330" y="336">英文版（与中文同一套构建产物）</text>
+
+  <text class="t" x="72" y="366">├── blog/</text>
+  <text class="c" x="330" y="366">每篇文章一个目录 + index.html</text>
+
+  <text class="t" x="72" y="396">├── img/</text>
+  <text class="c" x="330" y="396">站内图片（含本站自己画的示意图）</text>
+
+  <text class="t" x="72" y="426">└── search-index.json</text>
+  <text class="c" x="330" y="426">构建期生成的站内搜索索引</text>
+
+  <text class="c" x="52" y="466">整目录就是最终产物：没有任何服务端代码。</text>
+
+  <!-- note panel -->
+  <rect x="688" y="24" width="288" height="472" rx="12" fill="#f0f9f4" stroke="#2e8555" stroke-width="1.5"/>
+  <text class="c" x="712" y="62" style="font-size:15px; fill:#14532d; font-weight:600">两个必须记住的点</text>
+
+  <text class="c" x="712" y="100" style="fill:#14532d; font-weight:600">1. 输出目录填 build</text>
+  <text class="c" x="712" y="122">Pages 的「构建输出目录」</text>
+  <text class="c" x="712" y="142">必须是 build，不是 public。</text>
+
+  <text class="c" x="712" y="186" style="fill:#14532d; font-weight:600">2. _headers 要放在根目录</text>
+  <text class="c" x="712" y="208">把文件放 static/_headers，</text>
+  <text class="c" x="712" y="228">构建时会复制到 build 根目录。</text>
+  <text class="c" x="712" y="248">放错位置 = 整份规则静默失效。</text>
+
+  <text class="c" x="712" y="292" style="fill:#14532d; font-weight:600">验证方法</text>
+  <text class="c" x="712" y="314">本地 npm run build 后，</text>
+  <text class="c" x="712" y="334">直接看 build/ 里有没有这些文件。</text>
+  <text class="c" x="712" y="354">有，就说明线上也会有。</text>
+
+  <text class="c" x="712" y="398" style="fill:#14532d; font-weight:600">小提示</text>
+  <text class="c" x="712" y="420">build/ 不要提交进仓库，</text>
+  <text class="c" x="712" y="440">每次都由 CI 重新生成。</text>
+</svg>

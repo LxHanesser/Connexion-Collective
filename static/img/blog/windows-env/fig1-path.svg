@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" width="1000" height="500" role="img" aria-label="为什么新电脑上输入 npm 会提示不是内部或外部命令：命令查找依赖 PATH">
+  <defs>
+    <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/>
+    </marker>
+    <style>
+      .t { font-family: system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; fill: #1c1e21; }
+      .h { font-size: 16px; font-weight: 600; }
+      .s { font-size: 13px; fill: #64748b; }
+      .m { font-family: "Cascadia Code", Consolas, monospace; font-size: 13px; fill: #0f172a; }
+      .card { fill: #ffffff; stroke: #d7dee7; stroke-width: 1.5; rx: 10; }
+      .ar { stroke: #94a3b8; stroke-width: 1.7; fill: none; marker-end: url(#a1); }
+      .term { fill: #0f172a; rx: 10; }
+      .tt { font-family: "Cascadia Code", Consolas, monospace; font-size: 13px; fill: #e2e8f0; }
+      .tg { fill: #4ade80; }
+      .tr { fill: #f87171; }
+    </style>
+  </defs>
+  <rect width="1000" height="500" fill="#f8fafc"/>
+
+  <!-- step 1 -->
+  <rect class="card" x="24" y="24" width="300" height="132"/>
+  <text class="t h" x="44" y="54">① 你在终端输入命令</text>
+  <rect class="term" x="44" y="70" width="260" height="66"/>
+  <text class="tt tg" x="58" y="96">C:\Users\you&gt;</text>
+  <text class="tt" x="182" y="96">npm install</text>
+  <text class="tt" x="58" y="120" fill="#94a3b8">按下回车……</text>
+
+  <path class="ar" d="M324 90 H384"/>
+
+  <!-- step 2 -->
+  <rect class="card" x="384" y="24" width="292" height="132"/>
+  <text class="t h" x="404" y="54">② Windows 去 PATH 里找</text>
+  <text class="t s" x="404" y="80">PATH 是一串目录，按顺序逐个查找：</text>
+  <text class="m" x="404" y="104">C:\Windows\System32</text>
+  <text class="m" x="404" y="126">C:\Program Files\nodejs</text>
+  <text class="m" x="404" y="148" fill="#94a3b8">C:\Program Files\Git\cmd</text>
+
+
+
+  <!-- outcomes -->
+  <rect class="card" x="24" y="196" width="452" height="150"/>
+  <text class="t h" x="44" y="226" fill="#15803d">③ 找到了 → 正常运行</text>
+  <text class="t s" x="44" y="250">PATH 里某个目录存在 npm.cmd，Windows 就执行它：</text>
+  <rect class="term" x="44" y="264" width="412" height="62"/>
+  <text class="tt tg" x="58" y="290">C:\Users\you&gt;</text>
+  <text class="tt" x="182" y="290">node -v</text>
+  <text class="tt" x="58" y="312">v20.11.1</text>
+
+  <rect class="card" x="504" y="196" width="472" height="150"/>
+  <text class="t h" x="524" y="226" fill="#b91c1c">④ 没找到 → 报错</text>
+  <text class="t s" x="524" y="250">这就是新手最常遇到的那句提示：</text>
+  <rect class="term" x="524" y="264" width="432" height="62"/>
+  <text class="tt tr" x="538" y="290">'npm' 不是内部或外部命令，</text>
+  <text class="tt tr" x="538" y="312">也不是可运行的程序或批处理文件。</text>
+
+  <!-- conclusion -->
+  <rect x="24" y="376" width="952" height="96" rx="10" fill="#f0f9f4" stroke="#2e8555" stroke-width="1.5"/>
+  <text class="t h" x="48" y="408" fill="#14532d">结论：这句报错不是命令写错了，而是「这个程序还没装」或「装了但没进 PATH」。</text>
+  <text class="t s" x="48" y="436" fill="#166534">装 Node.js 会顺带装 npm；装 Git for Windows 会提供 git 命令。装完必须重开终端才会生效。</text>
+</svg>
