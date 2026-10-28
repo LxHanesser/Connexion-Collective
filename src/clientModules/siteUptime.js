@@ -3,6 +3,10 @@
 // 静态站的天数只能在构建那一刻算出来，站点不重建就会一直停在旧值。
 // 这里在每次页面渲染完成后（含首次加载和 SPA 内部跳转）重算一次，
 // 于是 Cloudflare Pages 上不重新构建也能保持准确。
+//
+// ⚠️ 只能改「文本节点」，不能给容器赋值 textContent —— 页脚版权区里还嵌着
+//    安全徽章（<div class="footer-badges"> 及其子元素）。整段覆盖会把它们
+//    连同链接、样式一起销毁，只剩被拍平的纯文字。
 
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import {daysSinceLaunch} from '../siteMeta';
@@ -14,6 +18,18 @@ const UPTIME_PATTERNS = [
   /(Running\s+)\d+(\s+days?)/i,
 ];
 
+function findUptimeTextNode(root) {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  let node = walker.nextNode();
+  while (node) {
+    if (UPTIME_PATTERNS.some((pattern) => pattern.test(node.nodeValue ?? ''))) {
+      return node;
+    }
+    node = walker.nextNode();
+  }
+  return null;
+}
+
 function syncFooterUptime() {
   if (!ExecutionEnvironment.canUseDOM) {
     return;
@@ -24,7 +40,12 @@ function syncFooterUptime() {
     return;
   }
 
-  const current = el.textContent ?? '';
+  const node = findUptimeTextNode(el);
+  if (!node) {
+    return;
+  }
+
+  const current = node.nodeValue ?? '';
   const pattern = UPTIME_PATTERNS.find((item) => item.test(current));
   if (!pattern) {
     return;
@@ -32,8 +53,8 @@ function syncFooterUptime() {
 
   const next = current.replace(pattern, `$1${daysSinceLaunch()}$2`);
   if (next !== current) {
-    // 页脚版权文本是纯字符串，没有子元素，整段替换是安全的
-    el.textContent = next;
+    // 只替换这一个小小的文本节点，版权区里的徽章等子元素原样保留
+    node.nodeValue = next;
   }
 }
 
