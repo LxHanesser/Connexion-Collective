@@ -9,7 +9,7 @@ import styles from './stats.module.css';
 
 // 站点统计页。数据来自 Cloudflare Web Analytics（RUM）的定期导出，
 // 存档在 src/data/analytics.json，页面只读预聚合的 analytics-summary.json。
-// 抓取脚本：npm run stats:fetch
+// 数据文件在 src/data/，由构建前的本地流程生成并提交
 
 const STATIC_TITLES = {
   '/': {zh: '首页', en: 'Home'},

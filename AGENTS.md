@@ -2,47 +2,30 @@
 
 > 三条硬约束：**安全第一**、**兼容 Cloudflare Pages**、**移动端优先**。
 
-## 零、公开仓库与私有运维的边界（2026-10-27 起，硬约定，永不撤销）
-
-**网站开发**与**后台数据研究**是两个世界，必须物理隔离。
-
-| | 公开（GitHub / Pages / connexion-media） | 私有（本地 `ops/` / `connexion-analytics`） |
-| --- | --- | --- |
-| 内容 | 站点代码、文章、公开的聚合统计 JSON | token / account / zone ID、含 IP 的原始归档、导出与分析脚本 |
-| 要求 | 可被任何人 clone、可被索引 | 永不进 git、不进构建产物、不绑公网域名 |
-
-- **凭证与原始数据只允许放 `ops/`**（该目录已被 `.git/info/exclude` 排除）与私有 R2 桶。
-- **后台研究类脚本一律放 `ops/`**（导出、清洗、分析、审计）。`scripts/` 只放「网站构建/部署/生成公开数据」相关的脚本，且不得包含凭证。
-- **每次推送前必须**运行 `node ops/audit-leaks.mjs`；`.git/hooks/pre-commit` 已内置同等拦截（凭证真实值、`cfut_` 形态、私钥、本地绝对路径、禁止路径、数据文件中的 IP）。
-- **公开桶 `connexion-media` 只放静态媒体；私有桶 `connexion-analytics` 只放分析归档。** 两者不得混用。
-- 构建产物里出现本机绝对路径视为泄露（Docusaurus 的 `siteConfig` 曾把 `node_modules` 绝对路径打进 JS），由 `plugins/postBuildCleanup.cjs` 在构建后擦除。
-- 违规处理：发现即回滚 + 轮换受影响凭证，不要「先提交再说」。
+> **最小披露原则**：本文件属于公开仓库，只写原则与边界。
+> **不写**具体服务名、存储桶名、目录结构、脚本名、凭证位置、防御实现细节。
+> 这些内容只存在于本机的私有文档中，永不入库、永不进入构建产物。
 
 ## 一、安全第一
 
-- **纯静态**：本站只有构建产物（`build/`）被托管。不得引入服务端代码、Cloudflare Pages Functions、Workers、数据库、KV，也不得有需要常驻进程的功能。所有逻辑只能发生在「构建时」或「访客浏览器里」。
-- **R2 仅限静态媒体**（唯一例外，2026-10-25 起）：允许把大体积媒体（图片、视频、PDF）放 Cloudflare R2 公开桶，经 `cdn.connexioncollective.com` 提供。边界：①只放静态文件，不得用 Worker/Functions 代理或做鉴权；②不得用私有桶或签名 URL（那会引入服务端）；③WASM 编码器**必须**继续自托管在 `static/wasm/`，不得移到 R2；④新增媒体走 `npm run media:upload`，不要手工上传到别的桶；⑤上传前先压缩，单文件尽量 <1 MB。运维细节见本地手册 `ops/r2-media.md`（该目录不入库）。
-- **R2 私有用例：分析数据归档**（2026-10-27 起，与上一条并列的第二个例外）：
-  `connexion-analytics` 桶专用于存放从 Cloudflare 导出的访问统计归档（含 IP 级请求数据的 JSONL.gz）。
-  边界：①**必须保持私有** —— 不绑自定义域名、不开 r2.dev、不对外提供任何签名 URL，站点运行时**完全不读它**；
-  ②只允许本地运维脚本 `node ops/analytics/export.mjs --upload`（走 wrangler OAuth 或只读 API token）写入，凭证一律不进仓库；
-  ③该桶**不是**站点资源，不得被 HTML/CSS/JS 引用，也不改变「站点零外域、零服务端」的现状；
-  ④它是唯一允许包含个人数据（IP）的存储，见 `ops/analytics-archive/`（不入库）与 HANDOFF 的归档章节。
+- **纯静态**：站点只有构建产物被托管。不得引入服务端代码、Pages Functions、Workers、数据库、KV，也不得有需要常驻进程的功能。所有逻辑只能发生在「构建时」或「访客浏览器里」。
+- **媒体存储**：公开 CDN 只放静态文件（图片、视频、PDF），不得用 Worker 代理或做鉴权；新增媒体统一走本地上传脚本，不要手工传到别的桶；上传前先压缩，单文件尽量 < 1 MB。
+- **私有存储**：访问统计归档放在独立的私有存储中，必须保持私有 —— 不绑自定义域名、不开公开访问、不提供签名 URL，站点运行时**完全不读它**。它是唯一允许存放访客数据的位置。
 - **零信任输入**：任何来自 URL、评论、搜索词、第三方接口的数据都当作不可信。当前站内没有表单；将来要加评论投稿、订阅、留言板，必须先过一遍 XSS/滥用评估再动手。
 - **第三方代码要审**：新增依赖必须 ①锁定精确版本（`--save-exact`）②提交 `package-lock.json` ③确认维护活跃 ④看清 `postinstall` 等安装脚本 ⑤优先选无原生编译、无远程脚本的方案。禁止引入来源不明的统计、字体、CDN、A/B 测试脚本。
-- **外部资源白名单**：目前只允许 `giscus.app`（评论）、GitHub 头像，以及 `cdn.connexioncollective.com`（自建 R2 媒体，只放图片/视频/PDF）。新增任何外域请求都要先说明理由。
-  白名单只是允许主动引用；`cdn.` 域必须配防盗链规则（见本地手册 `ops/r2-media.md`，不入库），且它**不**参与站内工具的数据通路——工具页仍需零上传、零外域。
-- **密钥不入库**：Cloudflare API Token、GitHub Token 等一律不写进仓库、不写进 `docusaurus.config.js`。
-- **安全头**：`static/_headers` 里的 `X-Frame-Options`、`X-Content-Type-Options`、`Referrer-Policy`、`Permissions-Policy` 不得削弱。改动 CSP 属于高风险操作，必须实测搜索与评论后再提交。
-- **最小暴露**：构建产物里不应出现草稿、内部备注、本地路径、个人隐私信息。
+- **外部资源白名单**：目前只允许 `giscus.app`（评论）、GitHub 头像，以及站点自建的媒体 CDN 域。新增任何外域请求都要先说明理由。白名单只是允许主动引用；媒体 CDN 域必须配防盗链，且它**不**参与站内工具的数据通路 —— 工具页仍需零上传、零外域。
+- **密钥不入库**：任何 API Token、访问密钥一律不写进仓库、不写进 `docusaurus.config.js`，也不进构建环境变量。
+- **安全响应头**：`static/_headers` 里的 CSP、`X-Frame-Options`、`X-Content-Type-Options`、`Referrer-Policy`、`Permissions-Policy` 不得削弱。改动 CSP 属于高风险操作，必须实测搜索与评论后再提交。
+- **最小暴露**：构建产物里不应出现草稿、内部备注、本地绝对路径、个人隐私信息。
+- **推送前审计**：本地有一份泄露审计脚本（仓库与产物双扫），每次推送前必须运行并通过。
 
 ## 二、兼容 Cloudflare Pages
 
 - 构建只依赖：`npm ci` + Node 20 以上 + 纯静态输出。不得依赖 Pages 之外的服务。
-- 新依赖必须能在 Pages 的 Linux x64 构建机上**免编译安装**（例如中文分词选 `@node-rs/jieba` 这类预编译二进制，而不是要 node-gyp 编译的 `nodejieba`）。
+- 新依赖必须能在 Pages 的 Linux x64 构建机上**免编译安装**（优先预编译二进制，避免 node-gyp）。
 - 不使用需要长连接的服务端能力（SSE、WebSocket、定时任务）。想要「动态」效果时，优先浏览器端计算或构建时生成。
 - 缓存与缓存失效通过 `_headers` 与内容哈希文件名控制，不依赖手动 purge。
-- 不要频繁触发构建：避免无意义的 commit，避免把大文件（视频、超大图片）塞进仓库拖慢构建。
+- 不要频繁触发构建：避免无意义的 commit，避免把大文件塞进仓库拖慢构建。
 
 ## 三、移动端优先
 
@@ -59,8 +42,7 @@
 ## 四、协作流程
 
 - 提交前必须本地跑 `npm run build`，要求 **0 报错**（`onBrokenLinks: 'throw'` 会拦住坏链）。新增依赖后同样要跑一次。
-- **推送前必须先问用户**：任何改动先在本地改好、构建验证，向用户说明「改了什么、验了什么」，得到明确同意后才 `git push`。
-  不要因为一个小改动就自动上线；连续开发期间可以把多个改动攒成一批再一起问。
+- **推送前必须先问用户**：任何改动先在本地改好、构建验证，向用户说明「改了什么、验了什么」，得到明确同意后才 `git push`。不要因为一个小改动就自动上线；连续开发期间可以把多个改动攒成一批再一起问。
 - **不要自动验证线上版本**。推送后给出人工验证清单（打开哪个页面、看什么、判断标准），由用户自己确认。
 - 改动保持小步、可回滚；一个提交只做一件事，提交信息写清动机。
 - 涉及视觉改动时，说明改了哪个页面/组件，方便用户对照检查。
@@ -69,24 +51,17 @@
 
 - Docusaurus 3.10.2（`@docusaurus/faster`）+ React 19，部署在 Cloudflare Pages。
 - 搜索：`@easyops-cn/docusaurus-search-local@0.55.3`（构建期索引，浏览器端检索）。
-- 评论：Giscus（`LxHanesser/Connexion-Collective` 仓库的 Discussions）。
+- 评论：Giscus（基于仓库 Discussions）。
 - 页脚运行天数：`src/siteMeta.js` + `src/clientModules/siteUptime.js`，浏览器端计算。
-- 在线工具：`/tools`（列表）与 `/tools/image-compress`（图片压缩），全部浏览器端运行。
-  编码器为 `@jsquash/webp@1.5.0`、`@jsquash/jpeg@1.6.0`、`@jsquash/oxipng@2.3.0`，
-  WASM 二进制**自托管**在 `static/wasm/`（禁止改成 CDN），页面零上传、零外域请求。
-  另有格式转换、裁剪旋转、加水印、二维码（`qrcode-generator@2.0.4`，零依赖）、
-  开发工具（JSON/Base64/哈希/时间戳/UUID，全部原生 API）五个页面，同样零上传。
+- 在线工具：`/tools` 列表与多个工具页，全部浏览器端运行。
+  图片编码器用 `@jsquash/*`，WASM 二进制**自托管**在 `static/wasm/`（禁止改成 CDN），页面零上传、零外域请求。
+  另有格式转换、裁剪旋转、加水印、二维码、开发工具等页面，同样零上传。
   新增工具必须：独立路由（自动代码分割）、重逻辑动态 import、刷新后不留数据。
 - 多语言：默认 `zh-Hans`，`en` 为第二语言。界面/导航/页脚等主题文案在 `i18n/en/**`；
   文章与文档的英文版放在 `i18n/en/docusaurus-plugin-content-{blog,docs}/`；
   少量配置文案（页脚 HTML、版权、JSON-LD）用 `process.env.DOCUSAURUS_CURRENT_LOCALE` 判断；
   自定义页面组件用 `t(zh, en)` 双语对象模式。
   新增或修改中文内容后必须同步英文版，否则 `/en` 会回落显示中文。
-- 静态媒体：Cloudflare R2 桶 `connexion-media` → 自定义域 `cdn.connexioncollective.com`。
-  已启用：博客配图托管在此（文章用 `<img>` 直链，须带 `width`/`height`，首屏以下加 `loading="lazy"`）。
-  防盗链与缓存规则已在控制台配好。媒体源文件放 `media-src/`，该目录不入库；
-  运维细节见本地手册 `ops/r2-media.md`（不入库）。
+- 静态媒体：公开 CDN 存放博客配图（文章用 `<img>` 直链，须带 `width`/`height`，首屏以下加 `loading="lazy"`）。媒体源文件不入库。
 - 将来若加 CSP，图片压缩页需要 `script-src 'wasm-unsafe-eval'`，否则 WASM 会被拦；
-  启用 R2 媒体后还需 `img-src 'self' data: https://cdn.connexioncollective.com`、
-  `media-src https://cdn.connexioncollective.com`。
-
+  启用媒体 CDN 后还需把该域加进 `img-src` 与 `media-src`。

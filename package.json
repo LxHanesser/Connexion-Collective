@@ -13,8 +13,7 @@
                     "media:dry":  "node scripts/upload-media.mjs --dry-run",
                     "media:upload":  "node scripts/upload-media.mjs",
                     "write-translations":  "docusaurus write-translations",
-                    "write-heading-ids":  "docusaurus write-heading-ids",
-                    "stats:fetch":  "node scripts/fetch-analytics.mjs"
+                    "write-heading-ids":  "docusaurus write-heading-ids"
                 },
     "dependencies":  {
                          "@docusaurus/core":  "3.10.2",
