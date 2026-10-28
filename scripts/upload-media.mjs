@@ -40,7 +40,7 @@ const HELP = `
 把 media-src/ 下的媒体上传到 R2（内容寻址 + 一年缓存）
 
   --src <dir>        媒体源目录（默认 media-src）
-  --bucket <name>    R2 桶名（默认 connexion-media）
+  --bucket <name>    R2 桶名（默认读环境变量 R2_BUCKET）
   --base-url <url>   公开访问前缀（默认 https://cdn.connexioncollective.com/）
   --prefix <path>    R2 key 前缀（默认 media）
   --dry-run          只打印计划，不联网
