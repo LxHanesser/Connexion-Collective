@@ -10,7 +10,7 @@
  * 用法：
  *   node scripts/upload-media.mjs --dry-run
  *   node scripts/upload-media.mjs
- *   node scripts/upload-media.mjs --src media-src --bucket connexion-media --no-remote
+ *   node scripts/upload-media.mjs --src media-src --no-remote   # 桶名取自 R2_BUCKET
  */
 
 import {createHash} from 'node:crypto';
@@ -54,7 +54,7 @@ const HELP = `
 function parseArgs(argv) {
   const opts = {
     src: 'media-src',
-    bucket: 'connexion-media',
+    bucket: process.env.R2_BUCKET || '',
     baseUrl: 'https://cdn.connexioncollective.com/',
     prefix: 'media',
     dryRun: false,
@@ -123,7 +123,7 @@ function wranglerRunner() {
     process.platform === 'win32' ? 'wrangler.cmd' : 'wrangler',
   );
   if (existsSync(bin)) return quote(bin);
-  return 'npm exec --yes -- wrangler@latest';
+  return 'npm exec --yes -- wrangler@4.153.0';
 }
 
 async function main() {
@@ -150,6 +150,11 @@ async function main() {
   const media = allFiles.filter((file) => CONTENT_TYPES[extname(file).toLowerCase()]);
 
   console.log(`源目录: ${toPosix(relative(process.cwd(), srcDir)) || '.'}`);
+  if (!opts.bucket) {
+    console.error('✗ 没有指定桶名：设置环境变量 R2_BUCKET，或传 --bucket <name>');
+    process.exit(1);
+  }
+
   console.log(`桶: ${opts.bucket}   前缀: ${opts.prefix}/   ${opts.dryRun ? '模式: DRY-RUN' : '模式: 上传'}`);
 
   if (media.length === 0) {
