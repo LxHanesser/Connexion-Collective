@@ -1485,3 +1485,41 @@ article header a[class*='tag_'] {
     padding-right: 0.4rem;
   }
 }
+
+/* ==========================================
+   文章内的宽示意图
+   直接把 1000px 宽的图缩到手机宽度，图里的字会小到看不清，
+   所以给一个最小宽度 + 容器横向滚动（与正文表格同一套思路）。
+   ========================================== */
+.blog-diagram {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1.25rem 0 0.5rem;
+}
+
+.blog-diagram img {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+}
+
+.blog-diagram__hint {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  /* 手机上不再缩放：给一个最小宽度，让容器横向滚动，图里的字才看得清 */
+  .blog-diagram img {
+    width: auto;
+    min-width: 680px;
+  }
+
+  .blog-diagram__hint {
+    display: block;
+    margin: 0.35rem 0 0;
+    font-size: 0.75rem;
+    color: var(--ifm-color-emphasis-600);
+    text-align: center;
+  }
+}
