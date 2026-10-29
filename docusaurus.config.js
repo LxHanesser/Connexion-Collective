@@ -141,7 +141,7 @@ const config = {
           changefreq: null,
           priority: null,
           // 404 页不应提交给搜索引擎（Docusaurus 默认会把它算进去）
-          ignorePatterns: ['/404', '/en/404'],
+          ignorePatterns: ['/404', '/en/404', '/restricted', '/en/restricted'],
         },
       }),
     ],
@@ -235,6 +235,11 @@ const config = {
           {
             to: '/docs/info/terms',
             label: '条款',
+            position: 'left',
+          },
+          {
+            to: '/restricted',
+            label: '受限',
             position: 'left',
           },
           {
