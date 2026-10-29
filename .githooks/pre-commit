@@ -1,0 +1,13 @@
+#!/bin/sh
+# 版本化的提交前钩子。
+# 真正的检查逻辑在私有目录 ops/ 里（不入库）；这里只做一层转发，
+# 这样换机器 / 重新 clone 后，只要有 ops/ 就能自动获得同样的拦截能力。
+#
+# 启用：git config core.hooksPath .githooks
+ROOT="$(git rev-parse --show-toplevel)"
+CHECK="$ROOT/ops/hooks/pre-commit.mjs"
+if [ -f "$CHECK" ]; then
+  exec node "$CHECK"
+fi
+# 没有私有脚本时静默放行，避免在别人的 clone 里挡住正常提交
+exit 0
