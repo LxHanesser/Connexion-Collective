@@ -1,0 +1,185 @@
+/* 受限区域入口页：整屏深色，无卡片 */
+
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - var(--ifm-navbar-height));
+  padding: 5rem 1.25rem 6rem;
+  background:
+    radial-gradient(
+      58rem 32rem at 50% 12%,
+      rgba(46, 133, 85, 0.28),
+      transparent 70%
+    ),
+    #0b1220;
+  color: #e2e8f0;
+}
+
+.inner {
+  width: 100%;
+  max-width: 34rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.kicker {
+  font-size: 0.7rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #8ea2bd;
+}
+
+.icon {
+  display: block;
+  margin: 1.5rem 0 1.35rem;
+  color: #7fd3a3;
+}
+
+.heading {
+  margin: 0 0 0.9rem;
+  font-size: clamp(1.9rem, 5vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  color: #f8fafc;
+}
+
+.body {
+  margin: 0 0 1.5rem;
+  max-width: 26rem;
+  font-size: clamp(0.98rem, 2.4vw, 1.06rem);
+  line-height: 1.75;
+  color: #9fb2c8;
+}
+
+.hint {
+  margin: 0 0 0.85rem;
+  font-size: 0.86rem;
+  letter-spacing: 0.02em;
+  color: #7c8ea6;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.8rem 2.2rem;
+  border-radius: 999px;
+  background: #2e8555;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 10px 26px rgba(46, 133, 85, 0.32);
+  transition: background-color 150ms ease, transform 150ms ease;
+}
+
+.button:hover {
+  background: #256b45;
+  color: #ffffff;
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.button:focus-visible {
+  outline: 2px solid #7fd3a3;
+  outline-offset: 3px;
+}
+
+/* 访问须知：按钮下方的小字说明 */
+.terms {
+  width: 100%;
+  max-width: 34rem;
+  margin-top: 2.75rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid rgba(226, 232, 240, 0.12);
+  text-align: left;
+}
+
+.termsLabel {
+  margin: 0 0 1.1rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #7c8ea6;
+}
+
+.termList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.term {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.termLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.75;
+  color: #b6c6d8;
+}
+
+.termText {
+  font-size: 0.84rem;
+  line-height: 1.75;
+  color: #8698ae;
+}
+
+.contactLink {
+  color: #7fd3a3;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.contactLink:hover {
+  color: #a5e6c2;
+}
+
+.termsFoot {
+  margin: 1.35rem 0 0;
+  font-size: 0.76rem;
+  color: #65788e;
+}
+
+@media (max-width: 767px) {
+  .page {
+    min-height: calc(100vh - var(--ifm-navbar-height));
+    padding: 4rem 1rem 4.5rem;
+  }
+
+  .button {
+    width: 100%;
+    max-width: 20rem;
+  }
+
+  .terms {
+    margin-top: 2.25rem;
+    padding-top: 1.5rem;
+  }
+
+  .term {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
+
+  .termText {
+    font-size: 0.82rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+}
