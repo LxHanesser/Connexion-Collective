@@ -24,3 +24,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# 私有运维目录：凭证、归档、审计脚本、私有手册 —— 永不入库
+/ops/
+# 交接文档：含内部细节，只存本地
+/HANDOFF.md
