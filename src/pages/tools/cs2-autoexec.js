@@ -53,7 +53,7 @@ const COPY = {
     hudScaling: 'HUD scaling',
     volume: 'Master volume',
     optionalTitle: 'Optional',
-    optRadarCentered: 'Radar always centred',
+    optRadarCentered: 'Radar always centered',
     optRadarScale: 'Radar scale',
     optTeamId: 'Always show teammate IDs',
     optShowFps: 'Show FPS',

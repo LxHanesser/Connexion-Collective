@@ -23,7 +23,7 @@ I used three encoders packaged by jSquash:
 
 - **mozjpeg** for JPEG, with quality and progressive options;
 - **libwebp** for WebP, auto-detecting CPU SIMD support for a faster build;
-- **oxipng** for lossless PNG optimisation — it does not touch pixels, it re-packs compression blocks.
+- **oxipng** for lossless PNG optimization — it does not touch pixels, it re-packs compression blocks.
 
 With all three paths working, measurements on synthetic images (magnitude only):
 
@@ -35,7 +35,7 @@ With all three paths working, measurements on synthetic images (magnitude only):
 
 ## One easily missed detail
 
-When PNG goes down the "lossless optimisation" path, not a single pixel changes — only the compression gets smarter. This is especially effective for screenshots, icons, and flat colour blocks, and there is no psychological burden of quality loss. So it is the default in the tool: PNG in, PNG out, no resizing means straight to oxipng, skipping canvas.
+When PNG goes down the "lossless optimization" path, not a single pixel changes — only the compression gets smarter. This is especially effective for screenshots, icons, and flat color blocks, and there is no psychological burden of quality loss. So it is the default in the tool: PNG in, PNG out, no resizing means straight to oxipng, skipping canvas.
 
 The cost is WASM size: about 1 MB across four binaries. But they load **on demand** — if you never press compress, not a byte is downloaded.
 

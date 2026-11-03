@@ -31,9 +31,9 @@ Every change this site goes through.
 
 **Terms and docs**
 
-- Rewrote the terms of use: explicit open licences (articles **CC BY-NC-SA 4.0**, code and source **MIT**), a privacy and data section, the third-party services involved, and a structure following common international practice. A proper `LICENSE` file now sits in the repository.
-- “Start here” gained a “Code and tools” section covering the online tools, the source licence, and the site’s static-first approach.
-- Privacy section corrected: traffic statistics come from **Cloudflare Web Analytics** (no cookies, no cross-site tracking, no device fingerprinting). The earlier wording claiming no behavioural analytics was no longer accurate.
+- Rewrote the terms of use: explicit open licenses (articles **CC BY-NC-SA 4.0**, code and source **MIT**), a privacy and data section, the third-party services involved, and a structure following common international practice. A proper `LICENSE` file now sits in the repository.
+- “Start here” gained a “Code and tools” section covering the online tools, the source license, and the site’s static-first approach.
+- Privacy section corrected: traffic statistics come from **Cloudflare Web Analytics** (no cookies, no cross-site tracking, no device fingerprinting). The earlier wording claiming no behavioral analytics was no longer accurate.
 
 ## 2026-10-26
 
@@ -52,17 +52,17 @@ Every change this site goes through.
 **Tools**
 
 - The tools section is split into **Everyday tools** (images, PDF, SVG, EXIF, developer utilities) and **Game tools** (the Minecraft coordinate converter and datapack generator).
-- Eight new tools: image to ICO, image to Base64, pixel-art converter, SVG optimiser, EXIF viewer/remover, PDF merge/split, Minecraft coordinate converter, and a datapack generator. All run locally; nothing is uploaded.
+- Eight new tools: image to ICO, image to Base64, pixel-art converter, SVG optimizer, EXIF viewer/remover, PDF merge/split, Minecraft coordinate converter, and a datapack generator. All run locally; nothing is uploaded.
 - Four new CS2 tools: crosshair command generator with a live preview, sensitivity converter (cm/360 across four games), viewmodel generator, and an autoexec.cfg generator.
 - Every tool page now has a switcher at the top for jumping between tools. On phones it becomes the system's own dropdown, so nothing scrolls sideways.
 - The tools list has a search box — type "PDF" or "coordinates" to filter.
 - The navbar tools menu now goes by category, so it no longer grows with every new tool.
-- Fixed a visual glitch where tool buttons kept their hover colour after being tapped on touch devices.
+- Fixed a visual glitch where tool buttons kept their hover color after being tapped on touch devices.
 - Fixed the tools menu in the navbar: all three entries were previously marked as the current page at the same time.
 
 **Writing**
 
-- Five new posts cover this batch: hand-written ICO and ZIP encoders, the boundaries of SVG optimisation, pixel-art palettes, PDFs in the browser, and a mobile overflow hunt. English editions ship alongside.
+- Five new posts cover this batch: hand-written ICO and ZIP encoders, the boundaries of SVG optimization, pixel-art palettes, PDFs in the browser, and a mobile overflow hunt. English editions ship alongside.
 
 ## 2026-10-25
 

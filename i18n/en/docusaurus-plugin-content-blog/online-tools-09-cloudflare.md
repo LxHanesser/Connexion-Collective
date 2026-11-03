@@ -30,7 +30,7 @@ There are only two cache rules in `_headers`:
 - `/assets/*`: one year, `immutable`, because those filenames contain a content hash;
 - `/img/*`: one week, since images rarely change.
 
-HTML gets no long cache — Pages' default behaviour ensures a new deploy is visible immediately.
+HTML gets no long cache — Pages' default behavior ensures a new deploy is visible immediately.
 
 The security headers `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, and `Permissions-Policy` stay in place.
 

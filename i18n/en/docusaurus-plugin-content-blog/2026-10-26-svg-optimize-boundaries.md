@@ -1,6 +1,6 @@
 ---
 slug: svg-optimize-boundaries
-title: "The boundaries of SVG optimisation: what to delete, what breaks if you touch it"
+title: "The boundaries of SVG optimization: what to delete, what breaks if you touch it"
 authors: [lxhanesser]
 tags: [Frontend, Web tools]
 date: 2026-10-26T11:40:00+08:00
@@ -35,7 +35,7 @@ Remove those and the rendered pixels do not change at all.
 - **Anything inside `<defs>`**: nothing renders directly, everything is a resource.
 - **The semantics of `viewBox`**: precision can drop, proportions cannot change.
 
-So the tool only removes things provably unrelated to rendering. It never rewrites path data — that is a different class of optimisation (curve fitting) with much higher risk.
+So the tool only removes things provably unrelated to rendering. It never rewrites path data — that is a different class of optimization (curve fitting) with much higher risk.
 
 ## A real bug: deleting attributes is not enough
 

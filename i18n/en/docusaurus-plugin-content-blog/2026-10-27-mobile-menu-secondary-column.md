@@ -4,7 +4,7 @@ title: "Why the mobile menu hid “Blog” and “Tools”"
 authors: [lxhanesser]
 tags: [Frontend, Engineering]
 date: 2026-10-27T11:10:00+08:00
-description: On a phone, opening the hamburger inside the docs section showed only the docs navigation. It turned out not to be a bug but deliberate framework behaviour — and a 36-line fix.
+description: On a phone, opening the hamburger inside the docs section showed only the docs navigation. It turned out not to be a bug but deliberate framework behavior — and a 36-line fix.
 ---
 
 The symptom: on a phone, open “Start here” from the homepage, then tap the hamburger — the menu shows only the docs navigation. **Blog and Tools are gone.**
@@ -38,7 +38,7 @@ In other words: **whenever the current page has secondary content, the next open
 |---|---|
 | Force column one first | The docs sidebar has no other entry point on mobile, so sub-navigation disappears |
 | A fixed bottom tab bar | Best feel, but it is a navigation redesign and permanently occupies screen space |
-| **Add section links to the top of column two** | Smallest change, keeps the native behaviour intact |
+| **Add section links to the top of column two** | Smallest change, keeps the native behavior intact |
 
 I took the third.
 
@@ -74,4 +74,4 @@ One nice detail: `Link` is locale-aware, so the English site goes to `/en/blog` 
 
 ## Takeaway
 
-When framework behaviour looks like a bug, fighting it is usually the expensive option. Adding a thin layer on top of its structure is cheap, survives upgrades, and does not damage accessibility.
+When framework behavior looks like a bug, fighting it is usually the expensive option. Adding a thin layer on top of its structure is cheap, survives upgrades, and does not damage accessibility.
