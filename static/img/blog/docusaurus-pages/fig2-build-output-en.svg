@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="1000" height="520" role="img" aria-label="Docusaurus 构建产物 build 目录结构">
+  <defs>
+    <style>
+      .t { font-family: "Cascadia Code", Consolas, "Microsoft YaHei", monospace; font-size: 12.60px; fill: #0f172a; }
+      .c { font-size: 11.70px; fill: #64748b; font-family: system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; }
+      .dir { fill: #2e8555; font-weight: 600; }
+      .hi { fill: #b45309; font-weight: 600; }
+    </style>
+  </defs>
+  <rect width="1000" height="520" fill="#f8fafc"/>
+  <rect x="24" y="24" width="640" height="472" rx="12" fill="#ffffff" stroke="#d7dee7" stroke-width="1.5"/>
+
+  <text class="t dir" x="52" y="66">build/</text>
+  <text class="t" x="72" y="100">├── index.html</text>
+  <text class="c" x="330" y="100">home page (pre-rendered HTML)</text>
+
+  <text class="t" x="72" y="130">├── 404.html</text>
+  <text class="c" x="330" y="130">returned for unknown paths, still status 404</text>
+
+  <text class="t" x="72" y="160">├── assets/</text>
+  <text class="c" x="330" y="160">JS / CSS with content hashes</text>
+  <text class="t" x="108" y="186">├── js/*.js</text>
+  <text class="t" x="108" y="212">└── css/*.css</text>
+  <text class="c" x="330" y="212">name changes = cache invalidated automatically</text>
+
+  <text class="t" x="72" y="244">├── sitemap.xml</text>
+  <text class="c" x="330" y="244">page list for search engines</text>
+
+  <text class="t hi" x="72" y="276">├── _headers</text>
+  <text class="c" x="330" y="276">Pages-specific: cache and security headers</text>
+
+  <text class="t hi" x="72" y="306">├── _redirects</text>
+  <text class="c" x="330" y="306">optional: redirect / trailing-slash rules</text>
+
+  <text class="t" x="72" y="336">├── en/</text>
+  <text class="c" x="330" y="336">English edition (same build output)</text>
+
+  <text class="t" x="72" y="366">├── blog/</text>
+  <text class="c" x="330" y="366">one folder per post + index.html</text>
+
+  <text class="t" x="72" y="396">├── img/</text>
+  <text class="c" x="330" y="396">site images (including hand-drawn diagrams)</text>
+
+  <text class="t" x="72" y="426">└── search-index.json</text>
+  <text class="c" x="330" y="426">search index generated at build time</text>
+
+  <text class="c" x="52" y="466">The directory is the final artefact: no server-side code.</text>
+
+  <!-- note panel -->
+  <rect x="688" y="24" width="288" height="472" rx="12" fill="#f0f9f4" stroke="#2e8555" stroke-width="1.5"/>
+  <text class="c" x="712" y="62" style="font-size: 13.50px; fill:#14532d; font-weight:600">Two things to remember</text>
+
+  <text class="c" x="712" y="100" style="fill:#14532d; font-weight:600">1. Set the output directory to build</text>
+  <text class="c" x="712" y="122">Pages' “build output directory”</text>
+  <text class="c" x="712" y="142">must be build, not public.</text>
+
+  <text class="c" x="712" y="186" style="fill:#14532d; font-weight:600">2. _headers belongs at the root</text>
+  <text class="c" x="712" y="208">Put the file in static/_headers,</text>
+  <text class="c" x="712" y="228">and the build copies it to build/.</text>
+  <text class="c" x="712" y="248">Wrong location = rules silently ignored.</text>
+
+  <text class="c" x="712" y="292" style="fill:#14532d; font-weight:600">How to verify</text>
+  <text class="c" x="712" y="314">After a local npm run build,</text>
+  <text class="c" x="712" y="334">check whether these files exist in build/.</text>
+  <text class="c" x="712" y="354">If they do, they will exist online too.</text>
+
+  <text class="c" x="712" y="398" style="fill:#14532d; font-weight:600">Tip</text>
+  <text class="c" x="712" y="420">Never commit build/,</text>
+  <text class="c" x="712" y="440">CI regenerates it every time.</text>
+</svg>
