@@ -4,13 +4,17 @@ const path = require('node:path');
 /**
  * 构建后处理：
  * 1) 每个页面注入「记住语言选择」的点击监听（内联，先于水合，最快生效）
- * 2) 首页额外注入「按浏览器语言跳转」脚本
+ * 2) 仅中文首页额外注入「按浏览器语言跳转」脚本
  *
  * 为什么不用 IP 地理位置：国内用户常走代理，出口 IP 在境外，
  * 按国家判断会把最需要中文的人送去英文站。浏览器语言更可靠。
  *
  * 为什么用内联脚本而不是客户端模块：模块要等 bundle 加载与执行，
  * 慢网络下用户可能先点击语言切换，导致偏好没被记住。
+ *
+ * 跳转脚本必须放在 <head> 最前面：放在末尾时样式与 JS 已经开始下载，
+ * location.replace 会取消这些在途请求，控制台出现 1–2 条
+ * "net::ERR_ABORTED"（只在首次访问、网络较慢时出现）。
  *
  * 安全说明：
  * - 只读取 localStorage 与 navigator.languages，不拼接 URL 参数
@@ -56,25 +60,36 @@ module.exports = function languageRedirectPlugin() {
   return {
     name: 'language-redirect',
     async postBuild({outDir}) {
-      let injected = 0;
       const rootIndex = path.join(outDir, 'index.html');
+      let pages = 0;
+      let redirects = 0;
 
       for (const file of walk(outDir)) {
         let html = fs.readFileSync(file, 'utf8');
+
         if (!html.includes(PREF_MARK)) {
           html = html.replace('</head>', `${PREF_SCRIPT}</head>`);
         }
-        // 只在中文首页注入跳转：英文首页若也注入，p==="en" 会自我重定向成死循环
-        // 注意不能判断 html.includes('lang=zh-Hans')：英文页里的语言切换链接也带这个属性
+
+        // 只在中文首页注入：英文首页若也注入，p === "en" 会自我重定向成死循环。
+        // 判断用 <html lang>，不能搜 "lang=zh-Hans"（英文页的语言切换链接也带这个属性）。
         const isZhDocument = /<html[^>]*lang=["']?zh-Hans/i.test(html);
         if (file === rootIndex && isZhDocument && !html.includes(REDIRECT_MARK)) {
-          html = html.replace('</head>', `${REDIRECT_SCRIPT}</head>`);
+          // 紧跟 charset 之后注入，早于任何样式/脚本标签
+          const charsetMeta = html.match(/<meta[^>]*charset[^>]*>/i);
+          if (charsetMeta) {
+            html = html.replace(charsetMeta[0], `${charsetMeta[0]}${REDIRECT_SCRIPT}`);
+          } else {
+            html = html.replace(/<head[^>]*>/i, (tag) => `${tag}${REDIRECT_SCRIPT}`);
+          }
+          redirects++;
         }
+
         fs.writeFileSync(file, html, 'utf8');
-        injected++;
+        pages++;
       }
 
-      console.log(`[language-redirect] 已注入语言偏好脚本: ${injected} 个页面`);
+      console.log(`[language-redirect] 页面 ${pages} 个，首页跳转 ${redirects} 处`);
     },
   };
 };
