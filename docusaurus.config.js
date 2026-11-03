@@ -6,6 +6,7 @@ import {securityBadgesHtml} from './src/securityBadges.js';
 import blogPostIndex from './plugins/blogPostIndex.cjs';
 import postBuildCleanup from './plugins/postBuildCleanup.cjs';
 import toolStructuredData from './plugins/toolStructuredData.cjs';
+import languageRedirect from './plugins/languageRedirect.cjs';
 
 // Docusaurus 逐语言构建时会设置这个变量，配置里少数文案需要据此切换
 const currentLocale = process.env.DOCUSAURUS_CURRENT_LOCALE ?? 'zh-Hans';
@@ -156,7 +157,7 @@ const config = {
   ],
 
   // 构建期注入全站文章索引（标题/日期/链接），供文章页上下篇导航使用
-  plugins: [blogPostIndex, postBuildCleanup, toolStructuredData],
+  plugins: [blogPostIndex, postBuildCleanup, toolStructuredData, languageRedirect],
 
   // 站内搜索：构建时生成离线索引，浏览器端本地检索（无外部服务、无查询接口）
   themes: [
