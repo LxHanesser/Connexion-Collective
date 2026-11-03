@@ -15,6 +15,11 @@
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
+# 英文站的资源在 /en/assets/ 下，前缀不同必须单独声明，
+# 否则会落回 max-age=0，每次请求都要回源校验。
+/en/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
 # 文件名固定、内容可能变的资源：一小时缓存 + 到期回源校验。
 /img/*
   Cache-Control: public, max-age=3600, must-revalidate
