@@ -1,0 +1,35 @@
+# Connexion Collective
+
+> A personal site by one author: engineering notes, browser-based tools, and occasional writing on games and everyday things. Chinese is the default language; an English edition lives under /en.
+
+## Start here
+
+- [About this site](https://connexioncollective.com/docs/info/about): what the site is, who writes it, and how it is built
+- [Changelog](https://connexioncollective.com/docs/info/changelog): every user-visible change
+- [Stats](https://connexioncollective.com/stats): aggregate traffic numbers (no personal data)
+
+## Tools (all run locally in the browser)
+
+- [Tool index](https://connexioncollective.com/tools): image compression, format conversion, crop and rotate, watermark, ICO/Base64, pixel art, SVG optimisation, EXIF inspection, PDF merge/split, QR codes, developer utilities, Minecraft coordinates and datapacks, CS2 crosshair/sensitivity/viewmodel/autoexec
+- Nothing is uploaded: files are processed in the browser and never leave the device
+
+## Tutorials
+
+- [Compressing images in the browser with Canvas](https://connexioncollective.com/blog/browser-image-compression): decode, resize, encode, and the EXIF/PNG pitfalls
+- [Building a QR code generator from scratch](https://connexioncollective.com/blog/qr-code-from-scratch): byte mode, Reed–Solomon, matrix layout, masking
+- [Merging and splitting PDFs in the browser](https://connexioncollective.com/blog/pdf-merge-split-in-browser): pdf-lib in practice, and the traps
+- [Setting up Windows for Node.js and Git](https://connexioncollective.com/blog/windows-dev-environment): PATH, installers, and the errors beginners hit
+- [Deploying Docusaurus to Cloudflare Pages](https://connexioncollective.com/blog/docusaurus-cloudflare-pages): build settings, headers, caching, and eight pitfalls
+
+## Licensing
+
+- Articles and text: CC BY-NC-SA 4.0
+- Site source code and code samples: MIT
+- Diagrams and images: all rights reserved
+
+Bulk collection for commercial model training is not permitted; see the [Terms of Use](https://connexioncollective.com/docs/info/terms).
+
+## Contact
+
+- GitHub: https://github.com/LxHanesser
+- Discussions: https://github.com/LxHanesser/Connexion-Collective/discussions
