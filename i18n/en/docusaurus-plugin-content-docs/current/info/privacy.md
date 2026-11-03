@@ -50,7 +50,7 @@ The comment section is provided by a third-party comment service, and comments a
 
 ## 5. Cookies and local storage
 
-- The Site **sets no cookies of its own** and writes nothing to `localStorage`
+- The Site **sets no cookies of its own**; only if the advertising consent feature is enabled may a consent record be stored in your browser (`localStorage`) to remember your choice — that record is never uploaded
 - Intermediate results in the tools exist only in memory and disappear on refresh
 - Our hosting and security providers may set **strictly necessary security cookies** to keep the service available and prevent abuse; these are not used for advertising or cross-site tracking
 
