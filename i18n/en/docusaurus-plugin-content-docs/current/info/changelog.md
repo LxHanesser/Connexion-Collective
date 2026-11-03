@@ -7,6 +7,59 @@ title: Changelog
 
 Every change this site goes through.
 
+## 2026-11-03
+
+**Legal and privacy**
+
+- Added a Privacy Policy: what is processed, why, on what legal basis, categories of recipients, international transfers, retention, and your rights under China's PIPL, the EU/UK GDPR, and California's CCPA/CPRA — plus Brazil, Canada, Australia, Japan, South Korea, India, Singapore, and Switzerland.
+- Rewrote the Terms of Use: operator and eligibility, consumer rights (including mandatory protections in the EU/UK, California, and China), limitation of liability, indemnity, and a copyright takedown process. The old privacy section now points to the standalone policy.
+- Added an Advertising and Affiliate Disclosure: no ads today; if introduced, they will be labeled, editorially independent, consented to in advance in the EEA/UK, with an opt-out for California, and disclosed under Article 26 of the DSA.
+- Footer gained Privacy Policy and Ads & affiliates entries.
+- Reserved a consent banner for future advertising: off by default, so nothing is shown and nothing is written to browser storage today.
+
+**Internationalisation**
+
+- "Surprise me" on the English site no longer opens a Chinese article, and English 404 pages now render in English.
+- The language switcher label "中文" became "简体中文"; the hero tagline is now localised (Connection starts here. / 连接，从这里开始。).
+- English copy standardised on US spelling, with several literal sentences in Start Here rewritten.
+
+**Performance**
+
+- English JS/CSS were missing the long-cache rule; they now match the Chinese build, so repeat visits no longer revalidate on every request.
+
+**Tutorials**
+
+- Published three tutorials: search for a static site, mouse sensitivity maths, and pixel art downsampling with median-cut palettes.
+
+## 2026-11-02
+
+**Tutorials**
+
+- Published three tutorials: writing an SVG optimizer, cropping/rotating with EXIF orientation, and watermarking images with batch export.
+
+**Stats**
+
+- Stats page updated through 11-02: 10 days, 1,463 views / 471 visits.
+
+## 2026-11-01
+
+**Tutorials**
+
+- Published three tutorials: image compression in the browser, building a QR code generator from scratch, and merging/splitting PDFs in the browser. Each one ships runnable code and a troubleshooting table.
+- Added six hand-drawn diagrams (one set per language), so English articles use English figures.
+
+## 2026-10-29
+
+**New page**
+
+- Added a Restricted Area landing page: it explains that access requires authorization and links to the protected site. It sits after Terms in the navigation.
+
+## 2026-10-28
+
+**Tutorials**
+
+- Published two tutorials: setting up a Windows development environment, and deploying Docusaurus to Cloudflare Pages. They link to each other and ship with eight hand-drawn diagrams.
+
 ## 2026-10-27
 
 **Footer**

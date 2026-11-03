@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" width="1000" height="300" role="img" aria-label="EXIF 方向的四种常见取值与坐标系换算：显示坐标、源图坐标">
+  <defs>
+    <marker id="a5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/>
+    </marker>
+    <style>
+      .b { fill:#fff; stroke:#d7dee7; stroke-width:1.5; rx:10; }
+      .img { fill:#e2e8f0; stroke:#94a3b8; stroke-width:1.2; rx:4; }
+      .t { font-family: system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; fill:#1c1e21; }
+      .h { font-size:14px; font-weight:600; }
+      .s { font-size:11.5px; fill:#64748b; }
+      .ar { stroke:#94a3b8; stroke-width:1.8; fill:none; marker-end:url(#a5); }
+      .note { font-size:12.5px; fill:#475569; }
+    </style>
+  </defs>
+  <rect width="1000" height="300" fill="#f8fafc"/>
+  <text class="t h" x="30" y="36">EXIF 方向：像素没变，只是多了一个标记</text>
+
+  <rect class="img" x="40" y="64" width="120" height="80"/>
+  <text class="t s" x="100" y="160" text-anchor="middle">1 正常</text>
+
+  <rect class="img" x="200" y="64" width="120" height="80"/>
+  <text class="t s" x="260" y="160" text-anchor="middle">3 旋转 180°</text>
+
+  <rect class="img" x="370" y="64" width="80" height="120"/>
+  <text class="t s" x="410" y="204" text-anchor="middle">6 顺时针 90°</text>
+
+  <rect class="img" x="520" y="64" width="80" height="120"/>
+  <text class="t s" x="560" y="204" text-anchor="middle">8 逆时针 90°</text>
+
+  <path class="ar" d="M650 124 H710"/>
+  <rect class="b" x="710" y="84" width="260" height="80"/>
+  <text class="t h" x="840" y="114" text-anchor="middle">解码时摆正</text>
+  <text class="t s" x="840" y="138" text-anchor="middle">createImageBitmap + from-image</text>
+
+  <text class="t note" x="30" y="248">之后所有裁剪与旋转都在「用户看到的坐标系」里做，不再读 EXIF。</text>
+  <text class="t note" x="30" y="274">方向只应用一次 —— 解码应用了，就别再手动转。</text>
+</svg>

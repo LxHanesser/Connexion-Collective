@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 280" width="1000" height="280" role="img" aria-label="像素画流程：降采样、中位切分取调色板、最近色映射、整数倍放大">
+  <defs>
+    <marker id="a9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/>
+    </marker>
+    <style>
+      .b { fill:#fff; stroke:#d7dee7; stroke-width:1.5; rx:12; }
+      .acc { fill:#fef3c7; stroke:#d97706; stroke-width:1.5; rx:12; }
+      .t { font-family: system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; fill:#1c1e21; }
+      .h { font-size:14px; font-weight:600; }
+      .s { font-size:11.5px; fill:#64748b; }
+      .ar { stroke:#94a3b8; stroke-width:1.8; fill:none; marker-end:url(#a9); }
+      .note { font-size:12.5px; fill:#475569; }
+    </style>
+  </defs>
+  <rect width="1000" height="280" fill="#f8fafc"/>
+  <text class="t h" x="30" y="32">两张图决定效果：降采样与量化</text>
+
+  <rect class="b" x="30" y="54" width="180" height="70"/>
+  <text class="t h" x="120" y="82" text-anchor="middle">原图</text>
+  <text class="t s" x="120" y="104" text-anchor="middle">上百万种颜色</text>
+
+  <path class="ar" d="M210 89 H250"/>
+  <rect class="b" x="250" y="54" width="180" height="70"/>
+  <text class="t h" x="340" y="82" text-anchor="middle">降采样</text>
+  <text class="t s" x="340" y="104" text-anchor="middle">平均采样到 64×48</text>
+
+  <path class="ar" d="M430 89 H470"/>
+  <rect class="acc" x="470" y="54" width="200" height="70"/>
+  <text class="t h" x="570" y="82" text-anchor="middle">中位切分</text>
+  <text class="t s" x="570" y="104" text-anchor="middle">取出 16 色调色板</text>
+
+  <path class="ar" d="M670 89 H710"/>
+  <rect class="b" x="710" y="54" width="180" height="70"/>
+  <text class="t h" x="800" y="82" text-anchor="middle">最近色映射</text>
+  <text class="t s" x="800" y="104" text-anchor="middle">加颜色缓存</text>
+
+  <path class="ar" d="M890 89 H918"/>
+  <text class="t s" x="904" y="76" text-anchor="middle">×8</text>
+
+  <text class="t note" x="30" y="176">降采样要「平均」，不要「最近邻」；放大反过来，必须关掉插值。</text>
+  <text class="t note" x="30" y="202">中位切分：找跨度最大的通道，按中位数切开，重复到目标色数。</text>
+  <text class="t note" x="30" y="228">最近色距离用加权（人眼对绿色更敏感），效果比纯欧氏更好。</text>
+  <text class="t note" x="30" y="254">抖动只在照片类素材上有意义；像素画原作不要加。</text>
+</svg>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 280" width="1000" height="280" role="img" aria-label="静态搜索架构：构建期生成倒排索引，浏览器端加载索引并打分排序">
+  <defs>
+    <marker id="a7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/>
+    </marker>
+    <style>
+      .b { fill:#fff; stroke:#d7dee7; stroke-width:1.5; rx:12; }
+      .acc { fill:#f0f9f4; stroke:#2e8555; stroke-width:1.5; rx:12; }
+      .t { font-family: system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; fill:#1c1e21; }
+      .h { font-size:14px; font-weight:600; }
+      .s { font-size:11.5px; fill:#64748b; }
+      .ar { stroke:#94a3b8; stroke-width:1.8; fill:none; marker-end:url(#a7); }
+      .note { font-size:12.5px; fill:#475569; }
+      .line { stroke:#cbd5e1; stroke-width:1; stroke-dasharray:4 4; }
+    </style>
+  </defs>
+  <rect width="1000" height="280" fill="#f8fafc"/>
+  <text class="t h" x="30" y="32">构建期建索引，运行期只查表</text>
+
+  <rect class="b" x="30" y="52" width="200" height="60"/>
+  <text class="t h" x="130" y="78" text-anchor="middle">扫描所有页面</text>
+  <text class="t s" x="130" y="98" text-anchor="middle">标题 + 正文</text>
+
+  <path class="ar" d="M230 82 H280"/>
+  <rect class="b" x="280" y="52" width="200" height="60"/>
+  <text class="t h" x="380" y="78" text-anchor="middle">分词</text>
+  <text class="t s" x="380" y="98" text-anchor="middle">bigram / 空格切分</text>
+
+  <path class="ar" d="M480 82 H530"/>
+  <rect class="acc" x="530" y="52" width="220" height="60"/>
+  <text class="t h" x="640" y="78" text-anchor="middle">search-index.json</text>
+  <text class="t s" x="640" y="98" text-anchor="middle">构建产物，随站点发布</text>
+
+  <path class="ar" d="M750 82 H800"/>
+  <rect class="b" x="800" y="52" width="170" height="60"/>
+  <text class="t h" x="885" y="78" text-anchor="middle">浏览器</text>
+  <text class="t s" x="885" y="98" text-anchor="middle">加载 + 打分</text>
+
+  <path class="line" d="M30 130 H970"/>
+
+  <text class="t h" x="30" y="168">运行期</text>
+  <rect class="b" x="140" y="144" width="170" height="56"/>
+  <text class="t s" x="225" y="168" text-anchor="middle">用户输入</text>
+  <text class="t s" x="225" y="186" text-anchor="middle">实时分词</text>
+
+  <path class="ar" d="M310 172 H360"/>
+  <rect class="b" x="360" y="144" width="170" height="56"/>
+  <text class="t s" x="445" y="168" text-anchor="middle">查倒排表</text>
+  <text class="t s" x="445" y="186" text-anchor="middle">累加词频</text>
+
+  <path class="ar" d="M530 172 H580"/>
+  <rect class="b" x="580" y="144" width="170" height="56"/>
+  <text class="t s" x="665" y="168" text-anchor="middle">标题加权</text>
+  <text class="t s" x="665" y="186" text-anchor="middle">排序取前 N</text>
+
+  <path class="ar" d="M750 172 H800"/>
+  <rect class="b" x="800" y="144" width="170" height="56"/>
+  <text class="t s" x="885" y="168" text-anchor="middle">渲染 + 高亮</text>
+  <text class="t s" x="885" y="186" text-anchor="middle">文本分片，不用 HTML</text>
+
+  <text class="t note" x="30" y="240">索引是构建产物，不手写、不手工维护；每次发布自动重建。</text>
+  <text class="t note" x="30" y="264">中文用 bigram，英文按空格切分并去停用词。</text>
+</svg>
