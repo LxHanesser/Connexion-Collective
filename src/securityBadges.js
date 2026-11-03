@@ -22,7 +22,7 @@ const COPY = {
     ssllabs: 'TLS grade from Qualys SSL Labs — open the live report',
     headers: 'Response-header grade from securityheaders.com — open the live report',
     hsts: 'HSTS is enabled — check whether it is on the browser preload list',
-    dnssec: 'DNSSEC is enabled — verify the chain at Verisign’s analyser',
+    dnssec: 'DNSSEC is enabled — verify the chain at Verisign’s analyzer',
     host: 'This site is hosted on Cloudflare Pages',
   },
 };

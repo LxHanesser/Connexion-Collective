@@ -22,8 +22,16 @@ const CF_WEB_ANALYTICS_TOKEN = '';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Connexion Collective',
-  tagline: 'Some Random Stuff',
+  // 标语按语言切换：与页脚、关于页首句保持一致
+
+  tagline: isEnglish ? 'Connection starts here.' : '连接，从这里开始。',
   favicon: 'img/favicon.ico',
+  
+  // 广告 / 联盟推广总开关：false 时不加载任何广告脚本，也不显示同意横幅。
+  // 接入广告前需要同时更新隐私政策与《广告与联盟推广说明》。
+  customFields: {
+    adsEnabled: false,
+  },
 
   future: {
     v4: true,
@@ -41,7 +49,7 @@ const config = {
     defaultLocale: 'zh-Hans',
     locales: ['zh-Hans', 'en'],
     localeConfigs: {
-      'zh-Hans': {label: '中文', htmlLang: 'zh-Hans'},
+      'zh-Hans': {label: '简体中文', htmlLang: 'zh-Hans'},
       en: {label: 'English', htmlLang: 'en'},
     },
   },
@@ -294,6 +302,8 @@ const config = {
               {label: '在线工具', to: '/tools'},
               {label: '网站更新日志', to: '/docs/info/changelog'},
               {label: '服务条款', to: '/docs/info/terms'},
+              {label: '隐私政策', to: '/docs/info/privacy'},
+              {label: '广告与联盟', to: '/docs/info/advertising'},
             ],
           },
         ],

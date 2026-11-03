@@ -133,7 +133,7 @@ export default function WatermarkPage() {
       title={t('图片加水印', 'Image watermark')}
       description={t(
         '给图片加文字水印：位置、大小、透明度、颜色可调，浏览器本地处理。',
-        'Add a text watermark with adjustable position, size, opacity, and colour — processed locally in your browser.',
+        'Add a text watermark with adjustable position, size, opacity, and color — processed locally in your browser.',
       )}>
       <main className={styles.page}>
         <header className={styles.header}>
@@ -202,7 +202,7 @@ export default function WatermarkPage() {
           </label>
 
           <label className={styles.field}>
-            <span className={styles.fieldLabel}>{t('颜色', 'Colour')}</span>
+            <span className={styles.fieldLabel}>{t('颜色', 'Color')}</span>
             <input className={styles.textInput} type="color" value={color} onChange={(event) => setColor(event.target.value)} style={{padding: '0.25rem'}} />
           </label>
 

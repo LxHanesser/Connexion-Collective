@@ -5,8 +5,17 @@ import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import {pickRandomBlogPost} from '../lib/randomPost';
 
 const SELECTOR = '[data-random-post]';
-const FALLBACK_URL = '/blog/archive';
 let bound = false;
+
+/** 当前语言前缀：英文站为 '/en'，中文站为空 */
+function localePrefix() {
+  const {pathname} = window.location;
+  return pathname === '/en' || pathname.startsWith('/en/') ? '/en' : '';
+}
+
+function fallbackUrl() {
+  return `${localePrefix()}/blog/archive`;
+}
 
 function handleClick(event) {
   const target = event.target;
@@ -22,7 +31,7 @@ function handleClick(event) {
   event.preventDefault();
   link.dataset.busy = 'true';
   const originalLabel = link.textContent;
-  link.textContent = '挑选中…';
+  link.textContent = localePrefix() === '/en' ? 'Picking…' : '挑选中…';
 
   const restore = () => {
     link.dataset.busy = 'false';
@@ -35,11 +44,11 @@ function handleClick(event) {
         window.location.assign(post);
       } else {
         // 读不到文章列表时退到归档页，保证点击一定有反馈
-        window.location.assign(FALLBACK_URL);
+        window.location.assign(fallbackUrl());
       }
     })
     .catch(() => {
-      window.location.assign(FALLBACK_URL);
+      window.location.assign(fallbackUrl());
       restore();
     });
 }

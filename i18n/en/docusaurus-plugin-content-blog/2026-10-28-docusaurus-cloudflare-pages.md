@@ -209,7 +209,7 @@ Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' '
 
 ### 6.3 404 and sitemap
 
-Docusaurus emits `build/404.html`, and Pages serves it for unknown paths while keeping status 404. That is correct behaviour.
+Docusaurus emits `build/404.html`, and Pages serves it for unknown paths while keeping status 404. That is correct behavior.
 
 But the sitemap may include `/404` unless you exclude it:
 

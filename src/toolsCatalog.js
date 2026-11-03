@@ -19,7 +19,7 @@ export const TOOL_GROUPS = [
         zh: {name: '图片压缩', desc: '批量压缩 JPG / PNG / WebP，可调质量与尺寸，支持 WebP 输出与 PNG 无损优化。'},
         en: {
           name: 'Image compression',
-          desc: 'Batch compress JPG / PNG / WebP with adjustable quality and size. WebP output and lossless PNG optimisation included.',
+          desc: 'Batch compress JPG / PNG / WebP with adjustable quality and size. WebP output and lossless PNG optimization included.',
         },
       },
       {
@@ -67,14 +67,14 @@ export const TOOL_GROUPS = [
         zh: {name: '像素画', desc: '降采样加有限调色板，生成像素画风格，支持 PICO-8 / Game Boy 配色。'},
         en: {
           name: 'Pixel art',
-          desc: 'Downsample with a limited palette for a pixel-art look, including PICO-8 and Game Boy colours.',
+          desc: 'Downsample with a limited palette for a pixel-art look, including PICO-8 and Game Boy colors.',
         },
       },
       {
         slug: 'svg-optimize',
         icon: '🧬',
         zh: {name: 'SVG 优化', desc: '清理编辑器元数据、注释与多余精度，减小体积，保留 id 与引用关系。'},
-        en: {name: 'SVG optimiser', desc: 'Strip editor metadata, comments and excess precision while keeping ids intact.'},
+        en: {name: 'SVG optimizer', desc: 'Strip editor metadata, comments and excess precision while keeping ids intact.'},
       },
       {
         slug: 'exif',
@@ -94,7 +94,7 @@ export const TOOL_GROUPS = [
         zh: {name: '二维码', desc: '输入链接或文字实时生成二维码，支持中文、自定义尺寸与纠错级别。'},
         en: {
           name: 'QR code',
-          desc: 'Turn a link or text into a QR code with configurable size, margin, error correction and colours.',
+          desc: 'Turn a link or text into a QR code with configurable size, margin, error correction and colors.',
         },
       },
       {

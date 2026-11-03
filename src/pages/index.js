@@ -24,13 +24,13 @@ function HomepageHeader() {
             className="button button--primary button--lg"
             to="/docs/info/about"
             style={{borderRadius: '30px', padding: '0.8rem 2rem'}}>
-            {isEn ? 'Start Here' : '写在开始'}
+            {isEn ? 'Start here' : '写在开始'}
           </Link>
           <Link
             className="button button--lg custom-blog-btn"
             to="/blog"
             style={{borderRadius: '30px', padding: '0.8rem 2rem'}}>
-            {isEn ? 'My Blog' : '我的博客'}
+            {isEn ? 'Read the blog' : '我的博客'}
           </Link>
         </div>
       </div>
