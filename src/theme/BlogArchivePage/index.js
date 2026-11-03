@@ -13,6 +13,8 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 const MONTHS_EN = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const PAGE_SIZE = 20;
+// 查询词上限：防止超长 URL 或粘贴内容撑满界面、写进历史记录
+const MAX_QUERY = 200;
 
 /** 从查询串读取筛选状态（仅浏览器端） */
 function readUrlState() {
@@ -22,9 +24,9 @@ function readUrlState() {
   const params = new URLSearchParams(window.location.search);
   const page = Number(params.get('page') || '1');
   return {
-    query: params.get('q') ?? '',
-    tag: params.get('tag') ?? '',
-    monthKey: params.get('month') ?? '',
+    query: (params.get('q') ?? '').slice(0, MAX_QUERY),
+    tag: (params.get('tag') ?? '').slice(0, 60),
+    monthKey: (params.get('month') ?? '').slice(0, 7),
     page: Number.isFinite(page) && page > 0 ? Math.floor(page) : 1,
   };
 }
@@ -250,8 +252,9 @@ export default function BlogArchivePage({archive}) {
               <input
                 type="search"
                 value={query}
+                maxLength={MAX_QUERY}
                 placeholder={isEnglish ? 'Search titles or tags…' : '搜索标题或标签…'}
-                onChange={(event) => setQuery(event.target.value)}
+                onChange={(event) => setQuery(event.target.value.slice(0, MAX_QUERY))}
                 aria-label={isEnglish ? 'Search posts' : '搜索文章'}
               />
             </label>

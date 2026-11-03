@@ -23,3 +23,45 @@
 # 文件名固定、内容可能变的资源：一小时缓存 + 到期回源校验。
 /img/*
   Cache-Control: public, max-age=3600, must-revalidate
+
+# ===== 大体积静态文件 =====
+# 只对这些精确路径生效，不使用通配符，HTML 与其它文件保持 max-age=0。
+# 它们都是构建产物：内容更新后最多在边缘停留一个缓存周期，
+# 且部署新版本时 Pages 会重新生成文件，不会长期陈旧。
+
+# 站内搜索索引：约 1 MB，每个访客只需拉一次
+/search-index.json
+  Cache-Control: public, max-age=600, stale-while-revalidate=3600
+
+/en/search-index.json
+  Cache-Control: public, max-age=600, stale-while-revalidate=3600
+
+# RSS / Atom：约 840 KB
+/blog/rss.xml
+  Cache-Control: public, max-age=1800, stale-while-revalidate=86400
+
+/blog/atom.xml
+  Cache-Control: public, max-age=1800, stale-while-revalidate=86400
+
+/en/blog/rss.xml
+  Cache-Control: public, max-age=1800, stale-while-revalidate=86400
+
+/en/blog/atom.xml
+  Cache-Control: public, max-age=1800, stale-while-revalidate=86400
+
+# 站点地图与 llms.txt：小文件，但没必要每次回源
+/sitemap.xml
+  Cache-Control: public, max-age=1800
+
+/en/sitemap.xml
+  Cache-Control: public, max-age=1800
+
+/llms.txt
+  Cache-Control: public, max-age=3600
+
+/en/llms.txt
+  Cache-Control: public, max-age=3600
+
+# robots.txt 可能会临时改规则，缓存时间放短
+/robots.txt
+  Cache-Control: public, max-age=600
