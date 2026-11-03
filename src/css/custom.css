@@ -1523,3 +1523,120 @@ article header a[class*='tag_'] {
     text-align: center;
   }
 }
+
+
+/* ===== 归档页：筛选下拉与分页 ===== */
+.archive-select {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.archive-select select {
+  min-height: 44px;
+  padding: 0.45rem 0.6rem;
+  border-radius: 10px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-surface-color);
+  color: var(--ifm-font-color-base);
+  font-size: 0.9rem;
+}
+
+.archive-clear {
+  min-height: 44px;
+  padding: 0 0.9rem;
+  border-radius: 999px;
+  border: 1px dashed var(--ifm-color-emphasis-300);
+  background: transparent;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.archive-clear:hover {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}
+
+.archive-status {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 0 1.5rem;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  font-variant-numeric: tabular-nums;
+}
+
+.archive-pager {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 2.5rem 0 1rem;
+}
+
+.archive-pager__pages {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.archive-pager__btn,
+.archive-pager__page {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 0.75rem;
+  border-radius: 10px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: transparent;
+  color: inherit;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+.archive-pager__page--active {
+  background: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+  color: #fff;
+}
+
+.archive-pager__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.archive-pager__gap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  opacity: 0.6;
+}
+
+.archive-pager__btn:focus-visible,
+.archive-pager__page:focus-visible,
+.archive-clear:focus-visible,
+.archive-select select:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+@media (max-width: 767px) {
+  .archive-select {
+    flex: 1 1 160px;
+  }
+
+  .archive-select select {
+    width: 100%;
+  }
+
+  .archive-status {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}
