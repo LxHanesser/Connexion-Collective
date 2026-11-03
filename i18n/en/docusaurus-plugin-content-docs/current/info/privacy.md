@@ -50,7 +50,9 @@ The comment section is provided by a third-party comment service, and comments a
 
 ## 5. Cookies and local storage
 
-- The Site **sets no cookies of its own**; only if the advertising consent feature is enabled may a consent record be stored in your browser (`localStorage`) to remember your choice — that record is never uploaded
+- The Site **sets no cookies of its own**
+- To remember the interface language you pick, a `lang` key (`zh` or `en`) is stored in `localStorage`; it is never uploaded and is removed when you clear site data
+- Only if the advertising consent feature is enabled may a consent record be stored in `localStorage` to remember your choice — that record is never uploaded
 - Intermediate results in the tools exist only in memory and disappear on refresh
 - Our hosting and security providers may set **strictly necessary security cookies** to keep the service available and prevent abuse; these are not used for advertising or cross-site tracking
 
