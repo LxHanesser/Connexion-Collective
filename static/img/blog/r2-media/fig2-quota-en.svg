@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="1200" height="560" role="img" aria-label="Pages quota usage: 1.6% of files, 2.2% of the single-file limit, 0.5% of build time">
+  <defs>
+    <style>
+      .t { font-family: system-ui,-apple-system,"Segoe UI",sans-serif; fill:#e2e8f0; }
+      .h { font-size:44px; font-weight:700; }
+      .sub { font-size:24px; fill:#94a3b8; }
+      .label { font-size:30px; font-weight:600; }
+      .val { font-size:22px; fill:#94a3b8; }
+      .pct { font-size:30px; font-weight:700; fill:#38bdf8; }
+      .track { fill:#1e293b; }
+      .fill { fill:#38bdf8; }
+      .note { font-size:24px; fill:#94a3b8; }
+    </style>
+  </defs>
+  <rect width="1200" height="560" fill="#0f172a"/>
+  <text class="t h" x="60" y="88">How far from the Pages limits</text>
+  <text class="t sub" x="60" y="132">The real constraint is not file count, but single-file size and build time</text>
+
+  <text class="t label" x="60" y="228">Deployed files</text>
+  <text class="t val" x="60" y="262">328 / 20,000</text>
+  <rect class="track" x="330" y="206" width="670" height="20" rx="10"/>
+  <rect class="fill" x="330" y="206" width="24" height="20" rx="10"/>
+  <text class="t pct" x="1030" y="226">1.6%</text>
+
+  <text class="t label" x="60" y="352">Largest file</text>
+  <text class="t val" x="60" y="386">0.55 MB / 25 MiB</text>
+  <rect class="track" x="330" y="330" width="670" height="20" rx="10"/>
+  <rect class="fill" x="330" y="330" width="20" height="20" rx="10"/>
+  <text class="t pct" x="1030" y="350">2.2%</text>
+
+  <text class="t label" x="60" y="476">Build time</text>
+  <text class="t val" x="60" y="510">6.6 s / 20 min</text>
+  <rect class="track" x="330" y="454" width="670" height="20" rx="10"/>
+  <rect class="fill" x="330" y="454" width="16" height="20" rx="10"/>
+  <text class="t pct" x="1030" y="474">0.5%</text>
+</svg>

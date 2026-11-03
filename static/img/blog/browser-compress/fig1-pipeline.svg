@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" width="1000" height="300" role="img" aria-label="浏览器图片压缩流程：选文件、解码、缩放、编码、下载，全程不上传">
+  <defs>
+    <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/>
+    </marker>
+    <style>
+      .b { fill:#fff; stroke:#d7dee7; stroke-width:1.5; rx:12; }
+      .acc { fill:#f0f9f4; stroke:#2e8555; stroke-width:1.5; rx:12; }
+      .t { font-family: system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; fill:#1c1e21; }
+      .h { font-size:15px; font-weight:600; }
+      .s { font-size:12px; fill:#64748b; }
+      .m { font-family:"Cascadia Code",Consolas,monospace; font-size:11.5px; fill:#0f172a; }
+      .ar { stroke:#94a3b8; stroke-width:1.8; fill:none; marker-end:url(#a1); }
+      .note { font-size:12.5px; fill:#475569; }
+    </style>
+  </defs>
+  <rect width="1000" height="300" fill="#f8fafc"/>
+
+  <text class="t h" x="30" y="40">一张图片在浏览器里经历的五个步骤</text>
+  <text class="t note" x="30" y="64">没有任何一步需要服务器：文件从磁盘读入，压缩后直接回到磁盘。</text>
+
+  <rect class="b" x="30" y="96" width="160" height="80"/>
+  <text class="t h" x="110" y="128" text-anchor="middle">选择文件</text>
+  <text class="t s" x="110" y="150" text-anchor="middle">file input / 拖拽</text>
+
+  <path class="ar" d="M190 136 H228"/>
+  <rect class="b" x="228" y="96" width="160" height="80"/>
+  <text class="t h" x="308" y="128" text-anchor="middle">解码</text>
+  <text class="t m" x="308" y="150" text-anchor="middle">createImageBitmap</text>
+
+  <path class="ar" d="M388 136 H426"/>
+  <rect class="b" x="426" y="96" width="160" height="80"/>
+  <text class="t h" x="506" y="128" text-anchor="middle">缩放</text>
+  <text class="t m" x="506" y="150" text-anchor="middle">canvas.width</text>
+
+  <path class="ar" d="M586 136 H624"/>
+  <rect class="b" x="624" y="96" width="160" height="80"/>
+  <text class="t h" x="704" y="128" text-anchor="middle">编码</text>
+  <text class="t m" x="704" y="150" text-anchor="middle">toBlob(type, q)</text>
+
+  <path class="ar" d="M784 136 H822"/>
+  <rect class="acc" x="822" y="96" width="148" height="80"/>
+  <text class="t h" x="896" y="128" text-anchor="middle">下载</text>
+  <text class="t s" x="896" y="150" text-anchor="middle">Blob 存回磁盘</text>
+
+  <text class="t note" x="30" y="216">关键点：解码时处理 EXIF 方向，缩放只做一次，编码质量按目标体积试两三次。</text>
+  <text class="t note" x="30" y="242">PNG 是无损格式，质量参数对它无效 —— 想显著变小必须改用有损格式。</text>
+  <text class="t note" x="30" y="268">移动端注意画布尺寸上限：超过约 16384 像素的图会直接失败。</text>
+</svg>

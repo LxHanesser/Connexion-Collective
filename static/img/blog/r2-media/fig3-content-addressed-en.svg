@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" aria-label="Content addressing: hero.webp becomes hero-a1b2c3d4e5f6.webp after hashing">
+  <defs>
+    <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#7b8aa3"/>
+    </marker>
+    <style>
+      .t { font-family: system-ui,-apple-system,"Segoe UI",sans-serif; fill:#e2e8f0; }
+      .h { font-size:44px; font-weight:700; }
+      .sub { font-size:24px; fill:#94a3b8; }
+      .box { fill:#1b2537; stroke:#334155; stroke-width:2; rx:14; }
+      .accent { fill:#16324a; stroke:#38bdf8; stroke-width:2; rx:14; }
+      .mono { font-family:"Cascadia Code",Consolas,monospace; font-size:30px; fill:#e2e8f0; }
+      .mono-hl { font-family:"Cascadia Code",Consolas,monospace; font-size:30px; fill:#38bdf8; }
+      .ar { stroke:#7b8aa3; stroke-width:2.5; fill:none; marker-end:url(#arr2); }
+      .note { font-size:24px; fill:#94a3b8; }
+    </style>
+  </defs>
+  <rect width="1200" height="460" fill="#0f172a"/>
+  <text class="t h" x="60" y="84">The filename is the version</text>
+  <text class="t sub" x="60" y="126">Change the image, change the URL — no manual cache purge</text>
+
+  <rect class="box" x="60" y="190" width="300" height="104"/>
+  <text class="mono" x="210" y="252" text-anchor="middle">hero.webp</text>
+
+  <path class="ar" d="M360 242 H445"/>
+  <rect class="accent" x="445" y="190" width="310" height="104"/>
+  <text class="mono-hl" x="600" y="252" text-anchor="middle">sha256 → 12 chars</text>
+
+  <path class="ar" d="M755 242 H840"/>
+  <rect class="box" x="840" y="190" width="310" height="104"/>
+  <text class="mono" x="995" y="252" text-anchor="middle">hero-a1b2c3d4e5f6.webp</text>
+
+  <text class="t note" x="60" y="360">content changes → hash changes → URL changes → nothing depends on a manual purge</text>
+  <text class="t note" x="60" y="400">the same URL always means the same bytes, which is why immutable for a year is safe</text>
+</svg>

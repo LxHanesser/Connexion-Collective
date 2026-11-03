@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 580" width="1200" height="580" role="img" aria-label="Request path: visitor browser, WAF referer check, edge cache, R2 bucket">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#7b8aa3"/>
+    </marker>
+    <style>
+      .box { fill:#1b2537; stroke:#334155; stroke-width:2; rx:14; }
+      .accent { fill:#16324a; stroke:#38bdf8; stroke-width:2; rx:14; }
+      .t { font-family: system-ui,-apple-system,"Segoe UI",sans-serif; fill:#e2e8f0; }
+      .h { font-size:44px; font-weight:700; }
+      .sub { font-size:24px; fill:#94a3b8; }
+      .box-t { font-size:32px; font-weight:600; fill:#e2e8f0; }
+      .cap { font-size:24px; fill:#94a3b8; }
+      .ar { stroke:#7b8aa3; stroke-width:2.5; fill:none; marker-end:url(#arr); }
+      .note { font-size:24px; fill:#94a3b8; }
+      .hl { fill:#38bdf8; }
+    </style>
+  </defs>
+  <rect width="1200" height="580" fill="#0f172a"/>
+  <text class="t h" x="60" y="92">Where a single image request goes</text>
+  <text class="t sub" x="60" y="136">Public bucket plus a custom domain — no server involved at any step</text>
+
+  <rect class="box" x="60" y="210" width="230" height="112"/>
+  <text class="t box-t" x="175" y="278" text-anchor="middle">Visitor browser</text>
+
+  <path class="ar" d="M290 266 H345"/>
+  <rect class="accent" x="345" y="210" width="230" height="112"/>
+  <text class="t box-t" x="460" y="278" text-anchor="middle">WAF hotlink check</text>
+
+  <path class="ar" d="M575 266 H630"/>
+  <rect class="accent" x="630" y="210" width="230" height="112"/>
+  <text class="t box-t" x="745" y="278" text-anchor="middle">Edge cache</text>
+
+  <path class="ar" d="M860 266 H915"/>
+  <rect class="box" x="915" y="210" width="225" height="112"/>
+  <text class="t box-t" x="1027" y="278" text-anchor="middle">R2 bucket</text>
+
+  <text class="t cap" x="175" y="368" text-anchor="middle">request carries Referer</text>
+  <text class="t cap" x="460" y="368" text-anchor="middle">not allow-listed → 403</text>
+  <text class="t cap" x="745" y="368" text-anchor="middle">hit → returned directly</text>
+  <text class="t cap" x="1027" y="368" text-anchor="middle">miss → one origin read</text>
+
+  <text class="t note" x="60" y="470">Acceptance: embedded on our own pages → 200; embedded elsewhere → 403;</text>
+  <text class="t note" x="60" y="504">a direct link → 200 (empty Referer is allowed).</text>
+  <text class="t note hl" x="60" y="546">No Workers, no signed URLs, no private bucket — still a purely static site.</text>
+</svg>

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 340" width="1000" height="340" role="img" aria-label="PDF 合并与拆分的两种操作：多份合并成一份，或把一份按页码拆成多份">
+  <defs>
+    <marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/>
+    </marker>
+    <style>
+      .p { fill:#fff; stroke:#d7dee7; stroke-width:1.5; rx:6; }
+      .acc { fill:#f0f9f4; stroke:#2e8555; stroke-width:1.5; rx:6; }
+      .t { font-family: system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; fill:#1c1e21; }
+      .h { font-size:15px; font-weight:600; }
+      .s { font-size:11.5px; fill:#64748b; }
+      .ar { stroke:#94a3b8; stroke-width:1.8; fill:none; marker-end:url(#a3); }
+      .note { font-size:12px; fill:#475569; }
+    </style>
+  </defs>
+  <rect width="1000" height="340" fill="#f8fafc"/>
+
+  <!-- merge -->
+  <text class="t h" x="30" y="34">合并：多份 → 一份</text>
+  <rect class="p" x="30" y="56" width="70" height="46"/>
+  <text class="t s" x="65" y="84" text-anchor="middle">A.pdf</text>
+  <rect class="p" x="30" y="112" width="70" height="46"/>
+  <text class="t s" x="65" y="140" text-anchor="middle">B.pdf</text>
+  <path class="ar" d="M100 79 H150 V128"/>
+  <path class="ar" d="M100 135 H150"/>
+  <rect class="p" x="150" y="92" width="110" height="64"/>
+  <text class="t s" x="205" y="118" text-anchor="middle">逐页读取</text>
+  <text class="t s" x="205" y="136" text-anchor="middle">copyPages</text>
+  <path class="ar" d="M260 124 H310"/>
+  <rect class="acc" x="310" y="92" width="110" height="64"/>
+  <text class="t s" x="365" y="118" text-anchor="middle">新文档</text>
+  <text class="t s" x="365" y="136" text-anchor="middle">addPage</text>
+  <path class="ar" d="M420 124 H470"/>
+  <rect class="p" x="470" y="92" width="80" height="64"/>
+  <text class="t s" x="510" y="118" text-anchor="middle">merged</text>
+  <text class="t s" x="510" y="136" text-anchor="middle">.pdf</text>
+
+  <!-- split -->
+  <text class="t h" x="30" y="206">拆分：一份 → 多份</text>
+  <rect class="p" x="30" y="228" width="90" height="72"/>
+  <text class="t s" x="75" y="256" text-anchor="middle">source.pdf</text>
+  <text class="t s" x="75" y="276" text-anchor="middle">共 6 页</text>
+  <path class="ar" d="M120 264 H170 V240 H210"/>
+  <path class="ar" d="M170 264 H210"/>
+  <path class="ar" d="M120 264 H170 V292 H210"/>
+  <rect class="acc" x="210" y="216" width="110" height="46"/>
+  <text class="t s" x="265" y="244" text-anchor="middle">第 1–3 页</text>
+  <rect class="p" x="210" y="270" width="110" height="46"/>
+  <text class="t s" x="265" y="298" text-anchor="middle">第 4–6 页</text>
+
+  <text class="t note" x="560" y="240">两种操作共用同一个模型：</text>
+  <text class="t note" x="560" y="262">「读入页面 → 放进新文档 → 保存」。</text>
+  <text class="t note" x="560" y="290">合并只是多循环几次，</text>
+  <text class="t note" x="560" y="312">拆分只是换一个页码范围。</text>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 280" width="1000" height="280" role="img" aria-label="SVG 优化流程：读取、解析、安全清理、精度压缩、序列化">
+  <defs>
+    <marker id="a4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/>
+    </marker>
+    <style>
+      .b { fill:#fff; stroke:#d7dee7; stroke-width:1.5; rx:12; }
+      .warn { fill:#fff7ed; stroke:#d97706; stroke-width:1.5; rx:12; }
+      .t { font-family: system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; fill:#1c1e21; }
+      .h { font-size:15px; font-weight:600; }
+      .s { font-size:11.5px; fill:#64748b; }
+      .ar { stroke:#94a3b8; stroke-width:1.8; fill:none; marker-end:url(#a4); }
+      .note { font-size:12.5px; fill:#475569; }
+    </style>
+  </defs>
+  <rect width="1000" height="280" fill="#f8fafc"/>
+  <text class="t h" x="30" y="40">优化器的四个动作，风险从左到右递增</text>
+
+  <rect class="b" x="30" y="70" width="170" height="78"/>
+  <text class="t h" x="115" y="100" text-anchor="middle">读取文本</text>
+  <text class="t s" x="115" y="122" text-anchor="middle">DOMParser</text>
+
+  <path class="ar" d="M200 109 H238"/>
+  <rect class="warn" x="238" y="70" width="180" height="78"/>
+  <text class="t h" x="328" y="100" text-anchor="middle">安全清理</text>
+  <text class="t s" x="328" y="122" text-anchor="middle">script / on* / 外部引用</text>
+
+  <path class="ar" d="M418 109 H456"/>
+  <rect class="b" x="456" y="70" width="170" height="78"/>
+  <text class="t h" x="541" y="100" text-anchor="middle">删元数据</text>
+  <text class="t s" x="541" y="122" text-anchor="middle">注释 / 编辑器属性</text>
+
+  <path class="ar" d="M626 109 H664"/>
+  <rect class="b" x="664" y="70" width="150" height="78"/>
+  <text class="t h" x="739" y="100" text-anchor="middle">压缩精度</text>
+  <text class="t s" x="739" y="122" text-anchor="middle">6 位 → 2 位</text>
+
+  <path class="ar" d="M814 109 H852"/>
+  <rect class="b" x="852" y="70" width="118" height="78"/>
+  <text class="t h" x="911" y="100" text-anchor="middle">序列化</text>
+  <text class="t s" x="911" y="122" text-anchor="middle">XMLSerializer</text>
+
+  <text class="t note" x="30" y="190">先做安全清理再谈体积 —— 顺序反了，优化器本身就成了注入点。</text>
+  <text class="t note" x="30" y="216">不能删：id、defs、以及被 url(#id) 引用的元素。</text>
+  <text class="t note" x="30" y="242">精度 2 位是常规安全值；曲线路径建议保留 3 位。</text>
+</svg>

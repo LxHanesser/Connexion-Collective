@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 320" width="1000" height="320" role="img" aria-label="QR code generation pipeline: text, byte encoding, error correction, matrix and mask, canvas drawing, phone scan">
+  <defs>
+    <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/>
+    </marker>
+    <style>
+      .b { fill:#fff; stroke:#d7dee7; stroke-width:1.5; rx:12; }
+      .acc { fill:#eef6ff; stroke:#2563eb; stroke-width:1.5; rx:12; }
+      .t { font-family: system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; fill:#1c1e21; }
+      .h { font-size:15px; font-weight:600; }
+      .s { font-size:11.5px; fill:#64748b; }
+      .ar { stroke:#94a3b8; stroke-width:1.8; fill:none; marker-end:url(#a2); }
+      .note { font-size:12.5px; fill:#475569; }
+    </style>
+  </defs>
+  <rect width="1000" height="320" fill="#f8fafc"/>
+
+  <text class="t h" x="30" y="40">How a QR code is actually computed</text>
+  <text class="t note" x="30" y="64">The first four steps decide whether it scans at all; the last one only decides how it looks.</text>
+
+  <rect class="b" x="30" y="96" width="150" height="84"/>
+  <text class="t h" x="105" y="126" text-anchor="middle">Input text</text>
+  <text class="t s" x="105" y="148" text-anchor="middle">UTF-8 bytes</text>
+  <text class="t s" x="105" y="166" text-anchor="middle">sets version</text>
+
+  <path class="ar" d="M180 138 H214"/>
+  <rect class="b" x="214" y="96" width="150" height="84"/>
+  <text class="t h" x="289" y="126" text-anchor="middle">Byte encoding</text>
+  <text class="t s" x="289" y="148" text-anchor="middle">mode + length + data</text>
+  <text class="t s" x="289" y="166" text-anchor="middle">terminator, padding</text>
+
+  <path class="ar" d="M364 138 H398"/>
+  <rect class="b" x="398" y="96" width="150" height="84"/>
+  <text class="t h" x="473" y="126" text-anchor="middle">ECC</text>
+  <text class="t s" x="473" y="148" text-anchor="middle">Reed–Solomon</text>
+  <text class="t s" x="473" y="166" text-anchor="middle">over GF(256)</text>
+
+  <path class="ar" d="M548 138 H582"/>
+  <rect class="acc" x="582" y="96" width="170" height="84"/>
+  <text class="t h" x="667" y="126" text-anchor="middle">Matrix + mask</text>
+  <text class="t s" x="667" y="148" text-anchor="middle">finders, timing</text>
+  <text class="t s" x="667" y="166" text-anchor="middle">best of 8 masks</text>
+
+  <path class="ar" d="M752 138 H786"/>
+  <rect class="b" x="786" y="96" width="184" height="84"/>
+  <text class="t h" x="878" y="126" text-anchor="middle">Draw on canvas</text>
+  <text class="t s" x="878" y="148" text-anchor="middle">one square per module</text>
+  <text class="t s" x="878" y="166" text-anchor="middle">keep the quiet zone</text>
+
+  <text class="t note" x="30" y="224">A higher error-correction level needs a larger version for the same text, but survives smudges and partial occlusion.</text>
+  <text class="t note" x="30" y="250">Masking is not encryption: it only breaks up runs of same-colour modules so the locator patterns stay findable.</text>
+  <text class="t note" x="30" y="276">The quiet zone is the most common mistake — leave at least four modules of margin on every side.</text>
+  <text class="t note" x="30" y="302">After drawing, scan it with two or three different phone brands; a simulator does not count.</text>
+</svg>

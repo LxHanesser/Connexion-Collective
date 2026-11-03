@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 280" width="1000" height="280" role="img" aria-label="Static search architecture: inverted index built at build time, loaded and scored in the browser">
+  <defs>
+    <marker id="a7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/>
+    </marker>
+    <style>
+      .b { fill:#fff; stroke:#d7dee7; stroke-width:1.5; rx:12; }
+      .acc { fill:#f0f9f4; stroke:#2e8555; stroke-width:1.5; rx:12; }
+      .t { font-family: system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; fill:#1c1e21; }
+      .h { font-size:14px; font-weight:600; }
+      .s { font-size:11.5px; fill:#64748b; }
+      .ar { stroke:#94a3b8; stroke-width:1.8; fill:none; marker-end:url(#a7); }
+      .note { font-size:12.5px; fill:#475569; }
+      .line { stroke:#cbd5e1; stroke-width:1; stroke-dasharray:4 4; }
+    </style>
+  </defs>
+  <rect width="1000" height="280" fill="#f8fafc"/>
+  <text class="t h" x="30" y="32">Index at build time, look things up at runtime</text>
+
+  <rect class="b" x="30" y="52" width="200" height="60"/>
+  <text class="t h" x="130" y="78" text-anchor="middle">Crawl pages</text>
+  <text class="t s" x="130" y="98" text-anchor="middle">title + body</text>
+
+  <path class="ar" d="M230 82 H280"/>
+  <rect class="b" x="280" y="52" width="200" height="60"/>
+  <text class="t h" x="380" y="78" text-anchor="middle">Tokenise</text>
+  <text class="t s" x="380" y="98" text-anchor="middle">bigrams / word split</text>
+
+  <path class="ar" d="M480 82 H530"/>
+  <rect class="acc" x="530" y="52" width="220" height="60"/>
+  <text class="t h" x="640" y="78" text-anchor="middle">search-index.json</text>
+  <text class="t s" x="640" y="98" text-anchor="middle">build artefact, shipped with the site</text>
+
+  <path class="ar" d="M750 82 H800"/>
+  <rect class="b" x="800" y="52" width="170" height="60"/>
+  <text class="t h" x="885" y="78" text-anchor="middle">Browser</text>
+  <text class="t s" x="885" y="98" text-anchor="middle">load + score</text>
+
+  <path class="line" d="M30 130 H970"/>
+
+  <text class="t h" x="30" y="168">Runtime</text>
+  <rect class="b" x="140" y="144" width="170" height="56"/>
+  <text class="t s" x="225" y="168" text-anchor="middle">User query</text>
+  <text class="t s" x="225" y="186" text-anchor="middle">tokenised live</text>
+
+  <path class="ar" d="M310 172 H360"/>
+  <rect class="b" x="360" y="144" width="170" height="56"/>
+  <text class="t s" x="445" y="168" text-anchor="middle">Postings</text>
+  <text class="t s" x="445" y="186" text-anchor="middle">sum term frequency</text>
+
+  <path class="ar" d="M530 172 H580"/>
+  <rect class="b" x="580" y="144" width="170" height="56"/>
+  <text class="t s" x="665" y="168" text-anchor="middle">Title weighting</text>
+  <text class="t s" x="665" y="186" text-anchor="middle">sort, take top N</text>
+
+  <path class="ar" d="M750 172 H800"/>
+  <rect class="b" x="800" y="144" width="170" height="56"/>
+  <text class="t s" x="885" y="168" text-anchor="middle">Render + highlight</text>
+  <text class="t s" x="885" y="186" text-anchor="middle">text fragments, no HTML</text>
+
+  <text class="t note" x="30" y="240">The index is a build artefact: never hand-written, rebuilt on every publish.</text>
+  <text class="t note" x="30" y="264">Chinese uses bigrams; English splits on spaces and drops stop words.</text>
+</svg>

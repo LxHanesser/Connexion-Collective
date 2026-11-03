@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 320" width="1000" height="320" role="img" aria-label="二维码生成流程：文本、字节编码、纠错码、矩阵布局与掩码、Canvas 绘制、手机扫描">
+  <defs>
+    <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/>
+    </marker>
+    <style>
+      .b { fill:#fff; stroke:#d7dee7; stroke-width:1.5; rx:12; }
+      .acc { fill:#eef6ff; stroke:#2563eb; stroke-width:1.5; rx:12; }
+      .t { font-family: system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; fill:#1c1e21; }
+      .h { font-size:15px; font-weight:600; }
+      .s { font-size:11.5px; fill:#64748b; }
+      .ar { stroke:#94a3b8; stroke-width:1.8; fill:none; marker-end:url(#a2); }
+      .note { font-size:12.5px; fill:#475569; }
+    </style>
+  </defs>
+  <rect width="1000" height="320" fill="#f8fafc"/>
+
+  <text class="t h" x="30" y="40">一个二维码是怎么被算出来的</text>
+  <text class="t note" x="30" y="64">前四步决定「能不能扫出来」，最后一步只决定「画得好不好看」。</text>
+
+  <rect class="b" x="30" y="96" width="150" height="84"/>
+  <text class="t h" x="105" y="126" text-anchor="middle">原始文本</text>
+  <text class="t s" x="105" y="148" text-anchor="middle">UTF-8 字节</text>
+  <text class="t s" x="105" y="166" text-anchor="middle">决定长度与版本</text>
+
+  <path class="ar" d="M180 138 H214"/>
+  <rect class="b" x="214" y="96" width="150" height="84"/>
+  <text class="t h" x="289" y="126" text-anchor="middle">字节编码</text>
+  <text class="t s" x="289" y="148" text-anchor="middle">模式 + 长度 + 数据</text>
+  <text class="t s" x="289" y="166" text-anchor="middle">补终止符与填充</text>
+
+  <path class="ar" d="M364 138 H398"/>
+  <rect class="b" x="398" y="96" width="150" height="84"/>
+  <text class="t h" x="473" y="126" text-anchor="middle">纠错码</text>
+  <text class="t s" x="473" y="148" text-anchor="middle">GF(256) 上的</text>
+  <text class="t s" x="473" y="166" text-anchor="middle">Reed–Solomon</text>
+
+  <path class="ar" d="M548 138 H582"/>
+  <rect class="acc" x="582" y="96" width="170" height="84"/>
+  <text class="t h" x="667" y="126" text-anchor="middle">矩阵 + 掩码</text>
+  <text class="t s" x="667" y="148" text-anchor="middle">定位图形 / 时序线</text>
+  <text class="t s" x="667" y="166" text-anchor="middle">8 种掩码选最优</text>
+
+  <path class="ar" d="M752 138 H786"/>
+  <rect class="b" x="786" y="96" width="184" height="84"/>
+  <text class="t h" x="878" y="126" text-anchor="middle">Canvas 绘制</text>
+  <text class="t s" x="878" y="148" text-anchor="middle">模块 = 正方形</text>
+  <text class="t s" x="878" y="166" text-anchor="middle">四周留静区</text>
+
+  <text class="t note" x="30" y="224">纠错等级越高，同样的文字需要更大的版本；但被遮挡、打印模糊时更容易扫出来。</text>
+  <text class="t note" x="30" y="250">掩码不是加密：它只是把黑白分布打散，避免大片同色导致定位失败。</text>
+  <text class="t note" x="30" y="276">最容易被忽略的是静区 —— 二维码四周必须留出至少 4 个模块的空白。</text>
+  <text class="t note" x="30" y="302">画完之后一定要用两三个不同品牌的手机各扫一次，模拟器不算数。</text>
+</svg>
