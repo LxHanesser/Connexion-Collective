@@ -283,7 +283,7 @@ const config = {
               },
               {
                 html: isEnglish
-                  ? '<div class="footer-brand__actions"><a class="footer-cta" href="/subscribe">Subscribe</a><a class="footer-cta" href="/blog/archive" data-random-post title="Open a random post">🎲 Surprise me</a><a class="footer-cta" href="https://github.com/LxHanesser" target="_blank" rel="noopener noreferrer">GitHub</a></div>'
+                  ? '<div class="footer-brand__actions"><a class="footer-cta" href="/subscribe">Subscribe</a><a class="footer-cta" href="/en/blog/archive" data-random-post title="Open a random post">🎲 Surprise me</a><a class="footer-cta" href="https://github.com/LxHanesser" target="_blank" rel="noopener noreferrer">GitHub</a></div>'
                   : '<div class="footer-brand__actions"><a class="footer-cta" href="/subscribe">订阅更新</a><a class="footer-cta" href="/blog/archive" data-random-post title="随机打开一篇博客">🎲 随便看看</a><a class="footer-cta" href="https://github.com/LxHanesser" target="_blank" rel="noopener noreferrer">GitHub</a></div>',
               },
             ],
