@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="1000" height="520" role="img" aria-label="Node.js 与 Git 安装向导里必须确认的选项">
+  <defs>
+    <style>
+      .t { font-family: system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; fill: #1c1e21; }
+      .h { font-size: 13.50px; font-weight: 600; }
+      .s { font-size: 11.25px; fill: #64748b; }
+      .m { font-family: "Cascadia Code", Consolas, monospace; font-size: 11.25px; fill: #0f172a; }
+      .card { fill: #ffffff; stroke: #d7dee7; stroke-width: 1.5; rx: 10; }
+      .row { fill: #f8fafc; stroke: #e2e8f0; stroke-width: 1; rx: 6; }
+      .ok { fill: #2e8555; }
+    </style>
+  </defs>
+  <rect width="1000" height="520" fill="#f8fafc"/>
+
+  <!-- Node installer -->
+  <rect class="card" x="24" y="24" width="460" height="300"/>
+  <text class="t h" x="44" y="54">Node.js installer (MSI)</text>
+  <text class="t s" x="44" y="76">Click Next throughout; pause only on this page:</text>
+
+  <rect class="row" x="44" y="92" width="420" height="46"/>
+  <rect x="58" y="104" width="16" height="16" rx="3" fill="#2e8555"/>
+  <path d="M61 112 l4 4 l7 -8" stroke="#ffffff" stroke-width="2" fill="none"/>
+  <text class="t m" x="86" y="116">Add to PATH</text>
+  <text class="t s" x="86" y="132">Makes node and npm available in any folder — keep it checked</text>
+
+  <rect class="row" x="44" y="146" width="420" height="46"/>
+  <rect x="58" y="158" width="16" height="16" rx="3" fill="#2e8555"/>
+  <path d="M61 166 l4 4 l7 -8" stroke="#ffffff" stroke-width="2" fill="none"/>
+  <text class="t m" x="86" y="170">npm package manager</text>
+  <text class="t s" x="86" y="186">npm is installed alongside Node; no separate install</text>
+
+  <rect class="row" x="44" y="200" width="420" height="46"/>
+  <rect x="58" y="212" width="16" height="16" rx="3" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+  <text class="t m" x="86" y="224" fill="#64748b">Tools for Native Modules</text>
+  <text class="t s" x="86" y="240">Not needed for typical front-end work; skipping avoids a pile of build tools</text>
+
+  <text class="t s" x="44" y="276">Click Finish. node -v should print a version in the terminal.</text>
+  <text class="t s" x="44" y="300">If nothing happens, close and reopen the terminal (PATH is read at startup).</text>
+
+  <!-- Git installer -->
+  <rect class="card" x="508" y="24" width="468" height="300"/>
+  <text class="t h" x="528" y="54">Git for Windows installer</text>
+  <text class="t s" x="528" y="76">Click Next throughout; only these three pages matter:</text>
+
+  <rect class="row" x="528" y="92" width="428" height="46"/>
+  <text class="t m" x="544" y="114">PATH environment</text>
+  <text class="t s" x="544" y="130">Choose “Git from the command line and also from 3rd-party software” (default)</text>
+
+  <rect class="row" x="528" y="146" width="428" height="46"/>
+  <text class="t m" x="544" y="168">Initial branch name</text>
+  <text class="t s" x="544" y="184">Choose Override and enter main — matches today's default</text>
+
+  <rect class="row" x="528" y="200" width="428" height="46"/>
+  <text class="t m" x="544" y="222">Line ending conversions</text>
+  <text class="t s" x="544" y="238">Keep the default (Checkout Windows-style, commit Unix-style)</text>
+
+  <text class="t s" x="528" y="276">The editor page is your choice; Notepad is fine and can be changed later.</text>
+  <text class="t s" x="528" y="300">You also get “Git Bash”, where most commands in this guide run.</text>
+
+  <!-- bottom note -->
+  <rect x="24" y="344" width="952" height="152" rx="10" fill="#f0f9f4" stroke="#2e8555" stroke-width="1.5"/>
+  <text class="t h" x="48" y="376" fill="#14532d">Two things to do after installing</text>
+  <text class="t m" x="48" y="406">git config --global user.name "Your Name"</text>
+  <text class="t m" x="48" y="430">git config --global user.email "you@example.com"</text>
+  <text class="t s" x="48" y="456" fill="#166534">These two lines sign your commits; without them the first commit fails.</text>
+  <text class="t s" x="48" y="480" fill="#166534">Use the same email as your GitHub account, or commits will not count toward your contribution graph.</text>
+</svg>

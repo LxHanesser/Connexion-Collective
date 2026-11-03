@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 430" width="1000" height="430" role="img" aria-label="验证环境是否装好的命令与期望输出">
+  <defs>
+    <style>
+      .t { font-family: system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; fill: #1c1e21; }
+      .h { font-size: 13.50px; font-weight: 600; }
+      .s { font-size: 11.25px; fill: #64748b; }
+      .term { fill: #0f172a; rx: 10; }
+      .tt { font-family: "Cascadia Code", Consolas, monospace; font-size: 12.15px; fill: #e2e8f0; }
+      .p { fill: #4ade80; }
+      .o { fill: #93c5fd; }
+    </style>
+  </defs>
+  <rect width="1000" height="430" fill="#f8fafc"/>
+  <text class="t h" x="24" y="36" font-size="16">Verify: three commands, three version numbers</text>
+  <text class="t s" x="24" y="58">Open PowerShell (or Git Bash) and run each one. A version number means it is installed and PATH is right.</text>
+
+  <rect class="term" x="24" y="76" width="620" height="300"/>
+  <text class="tt p" x="48" y="112">PS C:\Users\you&gt;</text>
+  <text class="tt" x="228" y="112">node -v</text>
+  <text class="tt o" x="48" y="138">v20.11.1</text>
+
+  <text class="tt p" x="48" y="182">PS C:\Users\you&gt;</text>
+  <text class="tt" x="228" y="182">npm -v</text>
+  <text class="tt o" x="48" y="208">10.2.4</text>
+
+  <text class="tt p" x="48" y="252">PS C:\Users\you&gt;</text>
+  <text class="tt" x="228" y="252">git --version</text>
+  <text class="tt o" x="48" y="278">git version 2.43.0.windows.1</text>
+
+  <text class="tt" x="48" y="330" fill="#64748b"># versions need not match exactly — any output is fine</text>
+
+  <!-- right explanations -->
+  <rect x="668" y="76" width="308" height="300" rx="10" fill="#ffffff" stroke="#d7dee7" stroke-width="1.5"/>
+  <text class="t h" x="690" y="108">What each command proves</text>
+
+  <text class="t s" x="690" y="140" style="font-weight:600; fill:#1c1e21">node -v</text>
+  <text class="t s" x="690" y="160">Node runtime is available</text>
+
+  <text class="t s" x="690" y="196" style="font-weight:600; fill:#1c1e21">npm -v</text>
+  <text class="t s" x="690" y="216">Package manager installed with Node</text>
+
+  <text class="t s" x="690" y="252" style="font-weight:600; fill:#1c1e21">git --version</text>
+  <text class="t s" x="690" y="272">Git is available</text>
+
+  <text class="t s" x="690" y="312">If all three pass, the environment is ready —</text>
+  <text class="t s" x="690" y="332">you can start cloning projects.</text>
+
+  <text class="t s" x="24" y="404">Tip: if one reports “not recognized”, reopen the terminal first; if it persists, check PATH in the previous guide.</text>
+</svg>

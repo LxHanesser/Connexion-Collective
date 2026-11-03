@@ -12,7 +12,7 @@ This site is Docusaurus on Cloudflare Pages. Deploying it is not the hard part. 
 This post walks the whole path, and ends with a checklist you can run through line by line.
 
 <div className="blog-diagram">
-<img src="/img/blog/docusaurus-pages/fig1-deploy-flow.svg" alt="Deployment flow: local repo to GitHub to Cloudflare build to edge to visitor, with preview deployments for non-main branches" width="1000" height="470" loading="lazy" />
+<img src="/img/blog/docusaurus-pages/fig1-deploy-flow-en.svg" alt="Deployment flow: local repo to GitHub to Cloudflare build to edge to visitor, with preview deployments for non-main branches" width="1000" height="470" loading="lazy" />
 </div>
 <p className="blog-diagram__hint">← swipe horizontally to see the full diagram →</p>
 
@@ -98,7 +98,7 @@ The upside of `npm ci` is determinism: what you installed locally is what CI ins
 Once the build passes, look at what actually lands in `build/` — everything later in this post revolves around that directory:
 
 <div className="blog-diagram">
-<img src="/img/blog/docusaurus-pages/fig2-build-output.svg" alt="The build directory: index.html, 404.html, hashed assets, sitemap, _headers" width="1000" height="520" loading="lazy" />
+<img src="/img/blog/docusaurus-pages/fig2-build-output-en.svg" alt="The build directory: index.html, 404.html, hashed assets, sitemap, _headers" width="1000" height="520" loading="lazy" />
 </div>
 <p className="blog-diagram__hint">← swipe horizontally to see the full diagram →</p>
 
@@ -177,7 +177,7 @@ Pages reads a `_headers` file at the root of the output directory. In a Docusaur
 ```
 
 <div className="blog-diagram">
-<img src="/img/blog/docusaurus-pages/fig3-cache.svg" alt="Cache strategy: HTML revalidates on every request while hashed assets are cached for a year" width="1000" height="430" loading="lazy" />
+<img src="/img/blog/docusaurus-pages/fig3-cache-en.svg" alt="Cache strategy: HTML revalidates on every request while hashed assets are cached for a year" width="1000" height="430" loading="lazy" />
 </div>
 <p className="blog-diagram__hint">← swipe horizontally to see the full diagram →</p>
 

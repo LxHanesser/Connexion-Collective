@@ -25,7 +25,7 @@ This post starts from why the command fails and ends with a verified environment
 When you type a word into a terminal, Windows walks through a list of directories called **PATH**, looking for a matching program:
 
 <div className="blog-diagram">
-<img src="/img/blog/windows-env/fig1-path.svg" alt="How command lookup works: you type npm, Windows searches the PATH directories, runs it if found, otherwise reports the command as not recognized" width="1000" height="500" loading="lazy" />
+<img src="/img/blog/windows-env/fig1-path-en.svg" alt="How command lookup works: you type npm, Windows searches the PATH directories, runs it if found, otherwise reports the command as not recognized" width="1000" height="500" loading="lazy" />
 </div>
 <p className="blog-diagram__hint">← swipe horizontally to see the full diagram →</p>
 
@@ -43,7 +43,7 @@ The installers for Node.js and Git add themselves to PATH by default — as long
 Two are required, two are optional:
 
 <div className="blog-diagram">
-<img src="/img/blog/windows-env/fig2-checklist.svg" alt="Install list: Node.js and Git are required, VS Code and Windows Terminal optional, with official URLs" width="1000" height="440" loading="lazy" />
+<img src="/img/blog/windows-env/fig2-checklist-en.svg" alt="Install list: Node.js and Git are required, VS Code and Windows Terminal optional, with official URLs" width="1000" height="440" loading="lazy" />
 </div>
 <p className="blog-diagram__hint">← swipe horizontally to see the full diagram →</p>
 
@@ -72,7 +72,7 @@ Open [nodejs.org/en/download](https://nodejs.org/en/download), pick the **LTS** 
 Run the installer and click `Next` all the way through, pausing on one page:
 
 <div className="blog-diagram">
-<img src="/img/blog/windows-env/fig3-installers.svg" alt="The options that matter in the Node.js and Git installers: Add to PATH, npm, and the default branch main" width="1000" height="520" loading="lazy" />
+<img src="/img/blog/windows-env/fig3-installers-en.svg" alt="The options that matter in the Node.js and Git installers: Add to PATH, npm, and the default branch main" width="1000" height="520" loading="lazy" />
 </div>
 <p className="blog-diagram__hint">← swipe horizontally to see the full diagram →</p>
 
@@ -151,7 +151,7 @@ git config --global --list
 ## 5. Three commands to confirm the environment
 
 <div className="blog-diagram">
-<img src="/img/blog/windows-env/fig4-verify.svg" alt="Verifying the environment: node -v, npm -v and git --version with expected output" width="1000" height="430" loading="lazy" />
+<img src="/img/blog/windows-env/fig4-verify-en.svg" alt="Verifying the environment: node -v, npm -v and git --version with expected output" width="1000" height="430" loading="lazy" />
 </div>
 <p className="blog-diagram__hint">← swipe horizontally to see the full diagram →</p>
 
@@ -210,7 +210,7 @@ If you remember one rule: **cloned project, use `npm ci`**.
 Node is installed and `node -v` works, but `npm` throws a wall of red text:
 
 <div className="blog-diagram">
-<img src="/img/blog/windows-env/fig5-execution-policy.svg" alt="PowerShell refuses to load npm.ps1 because script execution is disabled, fixed with one Set-ExecutionPolicy command" width="1000" height="450" loading="lazy" />
+<img src="/img/blog/windows-env/fig5-execution-policy-en.svg" alt="PowerShell refuses to load npm.ps1 because script execution is disabled, fixed with one Set-ExecutionPolicy command" width="1000" height="450" loading="lazy" />
 </div>
 <p className="blog-diagram__hint">← swipe horizontally to see the full diagram →</p>
 
