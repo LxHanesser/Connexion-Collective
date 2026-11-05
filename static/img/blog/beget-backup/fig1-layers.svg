@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" width="1000" height="300" role="img" aria-label="破坏性攻击路径：管理面失守后生产数据与同账号备份一起被删除，离线不可变副本是最后一道防线">
+  <defs>
+    <marker id="a5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/>
+    </marker>
+    <style>
+      .b { fill:#fff; stroke:#d7dee7; stroke-width:1.5; rx:12; }
+      .warn { fill:#fff7ed; stroke:#c2410c; stroke-width:1.5; rx:12; }
+      .acc { fill:#f0f9f4; stroke:#2e8555; stroke-width:1.5; rx:12; }
+      .t { font-family: system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; fill:#1c1e21; }
+      .h { font-size:14px; font-weight:600; }
+      .s { font-size:11.5px; fill:#64748b; }
+      .ar { stroke:#94a3b8; stroke-width:1.8; fill:none; marker-end:url(#a5); }
+      .note { font-size:12px; fill:#475569; }
+    </style>
+  </defs>
+  <rect width="1000" height="300" fill="#f8fafc"/>
+  <text class="t h" x="30" y="34">破坏性攻击：数据和备份一起被删</text>
+
+  <rect class="b" x="30" y="58" width="200" height="80"/>
+  <text class="t h" x="130" y="88" text-anchor="middle">管理面失守</text>
+  <text class="t s" x="130" y="110" text-anchor="middle">凭据 / 权限被拿到</text>
+
+  <path class="ar" d="M230 98 H258"/>
+  <rect class="b" x="258" y="58" width="200" height="80"/>
+  <text class="t h" x="358" y="88" text-anchor="middle">批量操作</text>
+  <text class="t s" x="358" y="110" text-anchor="middle">删除脚本 / 擦除任务</text>
+
+  <path class="ar" d="M458 98 H486"/>
+  <rect class="warn" x="486" y="58" width="210" height="80"/>
+  <text class="t h" x="591" y="88" text-anchor="middle">生产数据被删</text>
+  <text class="t s" x="591" y="110" text-anchor="middle">云主机 / 数据库 / 文件</text>
+
+  <path class="ar" d="M696 98 H724"/>
+  <rect class="warn" x="724" y="58" width="246" height="80"/>
+  <text class="t h" x="847" y="88" text-anchor="middle">备份被删</text>
+  <text class="t s" x="847" y="110" text-anchor="middle">与生产共用账号和删除权限</text>
+
+  <text class="t note" x="486" y="164">同一套凭据 = 同一套删除权限，副本再多也等于一份。</text>
+
+  <rect class="acc" x="30" y="188" width="450" height="72"/>
+  <text class="t h" x="50" y="214">离线 / 不可变副本</text>
+  <text class="t s" x="50" y="236">对象锁（WORM）、冷存储、断网硬盘；删除需要另外一套权限</text>
+
+  <rect class="b" x="500" y="188" width="470" height="72"/>
+  <text class="t h" x="520" y="214">3-2-1-1-0</text>
+  <text class="t s" x="520" y="236">3 份副本 · 2 种介质 · 1 份异地 · 1 份离线/不可变 · 0 次恢复失败</text>
+</svg>

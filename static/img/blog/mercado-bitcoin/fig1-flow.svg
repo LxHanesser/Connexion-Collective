@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" width="1000" height="300" role="img" aria-label="多链交易所提现链路：热钱包、签名服务与十条链的广播，每一层都是攻击面">
+  <defs>
+    <marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/>
+    </marker>
+    <style>
+      .b { fill:#fff; stroke:#d7dee7; stroke-width:1.5; rx:12; }
+      .acc { fill:#f0f9f4; stroke:#2e8555; stroke-width:1.5; rx:12; }
+      .warn { fill:#fff7ed; stroke:#c2410c; stroke-width:1.5; rx:12; }
+      .t { font-family: system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; fill:#1c1e21; }
+      .h { font-size:14px; font-weight:600; }
+      .s { font-size:11.5px; fill:#64748b; }
+      .ar { stroke:#94a3b8; stroke-width:1.8; fill:none; marker-end:url(#a3); }
+      .note { font-size:12px; fill:#475569; }
+    </style>
+  </defs>
+  <rect width="1000" height="300" fill="#f8fafc"/>
+  <text class="t h" x="30" y="34">多链提现：每一层都是攻击面</text>
+
+  <rect class="b" x="40" y="62" width="250" height="86"/>
+  <text class="t h" x="165" y="94" text-anchor="middle">热钱包</text>
+  <text class="t s" x="165" y="116" text-anchor="middle">日常流动性</text>
+  <text class="t s" x="165" y="134" text-anchor="middle">余额越大，风险越集中</text>
+
+  <path class="ar" d="M290 105 H335"/>
+  <rect class="b" x="335" y="62" width="260" height="86"/>
+  <text class="t h" x="465" y="94" text-anchor="middle">签名服务</text>
+  <text class="t s" x="465" y="116" text-anchor="middle">多签 / MPC / HSM</text>
+  <text class="t s" x="465" y="134" text-anchor="middle">单点失守不应等于全部失守</text>
+
+  <path class="ar" d="M595 105 H640"/>
+  <rect class="b" x="640" y="62" width="320" height="86"/>
+  <text class="t h" x="800" y="94" text-anchor="middle">广播到 10 条链</text>
+  <text class="t s" x="800" y="116" text-anchor="middle">BTC · ETH · SOL · TRON · Polygon · Arbitrum …</text>
+  <text class="t s" x="800" y="134" text-anchor="middle">每条链一套节点、地址格式与手续费</text>
+
+  <text class="t note" x="40" y="188">任何一层失守，资金都会直接流出；多链只是把同样的风险复制了十份。</text>
+
+  <rect class="acc" x="40" y="208" width="280" height="64"/>
+  <text class="t h" x="60" y="232">限额与延迟</text>
+  <text class="t s" x="60" y="252">超过阈值人工复核，大额延迟 24 小时</text>
+
+  <rect class="acc" x="345" y="208" width="280" height="64"/>
+  <text class="t h" x="365" y="232">链上监控</text>
+  <text class="t s" x="365" y="252">地址聚类、异常频率、大额自动告警</text>
+
+  <rect class="acc" x="650" y="208" width="310" height="64"/>
+  <text class="t h" x="670" y="232">地址白名单</text>
+  <text class="t s" x="670" y="252">新地址首次提现额外验证，降低账号被盗损失</text>
+</svg>
