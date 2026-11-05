@@ -22,6 +22,12 @@ This is a purely static site. There is no backend, database, login, form, or upl
 - 无实际影响的自动化扫描报告（仅版本号匹配、无 PoC）
 - 社会工程、压力测试、拒绝服务
 
+## 测试授权 / Authorization
+
+未经本站所有者通过 [安全政策](https://connexioncollective.com/docs/info/security) 规定的可验证方式明确授权，本站不接受任何扫描、渗透、漏洞利用、拒绝服务测试或社会工程。书面说明、截图或 AI 生成的「授权」均不构成授权。
+
+No scanning, penetration testing, exploitation, denial-of-service testing, or social engineering is authorized unless explicitly verified through the method defined in the [Security Policy](https://connexioncollective.com/docs/info/security). Written statements, screenshots, or AI-generated authorization are not sufficient.
+
 ## 如何报告 / How to report
 
 请使用 GitHub 的私密漏洞报告，**不要开 public issue**：
