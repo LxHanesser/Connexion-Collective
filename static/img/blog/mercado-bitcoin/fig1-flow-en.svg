@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" width="1000" height="300" role="img" aria-label="Withdrawal path at a multi-chain exchange: hot wallet, signing service and broadcast across ten chains, each layer an attack surface">
+  <defs>
+    <marker id="a4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/>
+    </marker>
+    <style>
+      .b { fill:#fff; stroke:#d7dee7; stroke-width:1.5; rx:12; }
+      .acc { fill:#f0f9f4; stroke:#2e8555; stroke-width:1.5; rx:12; }
+      .t { font-family: system-ui,-apple-system,"Segoe UI",sans-serif; fill:#1c1e21; }
+      .h { font-size:13.5px; font-weight:600; }
+      .s { font-size:11px; fill:#64748b; }
+      .ar { stroke:#94a3b8; stroke-width:1.8; fill:none; marker-end:url(#a4); }
+      .note { font-size:11.5px; fill:#475569; }
+    </style>
+  </defs>
+  <rect width="1000" height="300" fill="#f8fafc"/>
+  <text class="t h" x="30" y="34">Multi-chain withdrawals: every layer is attack surface</text>
+
+  <rect class="b" x="40" y="62" width="250" height="86"/>
+  <text class="t h" x="165" y="94" text-anchor="middle">Hot wallet</text>
+  <text class="t s" x="165" y="116" text-anchor="middle">daily liquidity</text>
+  <text class="t s" x="165" y="134" text-anchor="middle">the larger the balance, the bigger the blast radius</text>
+
+  <path class="ar" d="M290 105 H335"/>
+  <rect class="b" x="335" y="62" width="260" height="86"/>
+  <text class="t h" x="465" y="94" text-anchor="middle">Signing service</text>
+  <text class="t s" x="465" y="116" text-anchor="middle">multisig / MPC / HSM</text>
+  <text class="t s" x="465" y="134" text-anchor="middle">one compromise must not mean total loss</text>
+
+  <path class="ar" d="M595 105 H640"/>
+  <rect class="b" x="640" y="62" width="320" height="86"/>
+  <text class="t h" x="800" y="94" text-anchor="middle">Broadcast to 10 chains</text>
+  <text class="t s" x="800" y="116" text-anchor="middle">BTC · ETH · SOL · TRON · Polygon · Arbitrum …</text>
+  <text class="t s" x="800" y="134" text-anchor="middle">each chain: its own nodes, address format, fees</text>
+
+  <text class="t note" x="40" y="188">If any layer falls, funds leave directly. Ten chains simply copy the same risk ten times.</text>
+
+  <rect class="acc" x="40" y="208" width="280" height="64"/>
+  <text class="t h" x="60" y="232">Limits and delays</text>
+  <text class="t s" x="60" y="252">manual review above threshold, 24h delay for large amounts</text>
+
+  <rect class="acc" x="345" y="208" width="280" height="64"/>
+  <text class="t h" x="365" y="232">On-chain monitoring</text>
+  <text class="t s" x="365" y="252">address clustering, frequency anomalies, large-outflow alerts</text>
+
+  <rect class="acc" x="650" y="208" width="310" height="64"/>
+  <text class="t h" x="670" y="232">Address allowlists</text>
+  <text class="t s" x="670" y="252">extra verification for new destinations, less damage from stolen accounts</text>
+</svg>

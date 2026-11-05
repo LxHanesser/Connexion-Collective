@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" width="1000" height="300" role="img" aria-label="PHP 对象注入链路：用户输入进入 unserialize，触发魔术方法，串成 gadget chain，最终执行危险操作">
+  <defs>
+    <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/>
+    </marker>
+    <style>
+      .b { fill:#fff; stroke:#d7dee7; stroke-width:1.5; rx:12; }
+      .acc { fill:#f0f9f4; stroke:#2e8555; stroke-width:1.5; rx:12; }
+      .warn { fill:#fff7ed; stroke:#c2410c; stroke-width:1.5; rx:12; }
+      .t { font-family: system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; fill:#1c1e21; }
+      .h { font-size:14px; font-weight:600; }
+      .s { font-size:11.5px; fill:#64748b; }
+      .ar { stroke:#94a3b8; stroke-width:1.8; fill:none; marker-end:url(#a1); }
+      .note { font-size:12px; fill:#475569; }
+    </style>
+  </defs>
+  <rect width="1000" height="300" fill="#f8fafc"/>
+  <text class="t h" x="30" y="34">对象注入链路：从一次内容提交到代码执行</text>
+
+  <rect class="b" x="30" y="70" width="165" height="92"/>
+  <text class="t h" x="112" y="104" text-anchor="middle">用户输入</text>
+  <text class="t s" x="112" y="126" text-anchor="middle">序列化字符串</text>
+  <text class="t s" x="112" y="144" text-anchor="middle">来自表单/评论/资料</text>
+
+  <path class="ar" d="M195 116 H220"/>
+  <rect class="b" x="220" y="70" width="165" height="92"/>
+  <text class="t h" x="302" y="104" text-anchor="middle">unserialize()</text>
+  <text class="t s" x="302" y="126" text-anchor="middle">按字符串还原对象</text>
+  <text class="t s" x="302" y="144" text-anchor="middle">类名由输入决定</text>
+
+  <path class="ar" d="M385 116 H410"/>
+  <rect class="b" x="410" y="70" width="165" height="92"/>
+  <text class="t h" x="492" y="104" text-anchor="middle">魔术方法</text>
+  <text class="t s" x="492" y="126" text-anchor="middle">__wakeup / __destruct</text>
+  <text class="t s" x="492" y="144" text-anchor="middle">还原时自动触发</text>
+
+  <path class="ar" d="M575 116 H600"/>
+  <rect class="b" x="600" y="70" width="165" height="92"/>
+  <text class="t h" x="682" y="104" text-anchor="middle">Gadget Chain</text>
+  <text class="t s" x="682" y="126" text-anchor="middle">A → B → C</text>
+  <text class="t s" x="682" y="144" text-anchor="middle">插件越多，链条越长</text>
+
+  <path class="ar" d="M765 116 H790"/>
+  <rect class="warn" x="790" y="70" width="180" height="92"/>
+  <text class="t h" x="880" y="104" text-anchor="middle">危险操作</text>
+  <text class="t s" x="880" y="126" text-anchor="middle">写文件 / 执行命令</text>
+  <text class="t s" x="880" y="144" text-anchor="middle">取决于装了哪些类</text>
+
+  <text class="t note" x="30" y="206">影响面不取决于漏洞本身，而取决于目标站点装了哪些插件 —— 同一个 payload 在不同站点结果完全不同。</text>
+
+  <rect class="acc" x="30" y="226" width="940" height="50"/>
+  <text class="t h" x="50" y="248">防御</text>
+  <text class="t s" x="50" y="266">用户输入不进入 unserialize　·　必须用时 allowed_classes=false　·　优先 json_decode　·　减少插件与编辑权限</text>
+</svg>
