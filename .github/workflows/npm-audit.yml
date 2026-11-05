@@ -1,0 +1,31 @@
+name: npm-audit
+
+on:
+  pull_request:
+  schedule:
+    - cron: "0 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: npm audit (report only)
+        run: |
+          npm audit --json > npm-audit.json || true
+          node -e "const j=require('./npm-audit.json'); console.log('vulnerabilities:', JSON.stringify(j.metadata.vulnerabilities));"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: npm-audit
+          path: npm-audit.json
+          if-no-files-found: error
