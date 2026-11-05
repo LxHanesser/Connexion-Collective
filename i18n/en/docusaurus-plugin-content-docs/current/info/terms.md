@@ -80,7 +80,8 @@ You must not:
 3. **scrape the Site in bulk to train commercial models**, or to build a service that competes substantially with the Site, without written permission (non-commercial research and personal reading are unaffected);
 4. remove or alter attribution, copyright notices, or license markings;
 5. state or imply a partnership, sponsorship, or endorsement that does not exist;
-6. bypass the Site's access controls by automated means.
+6. bypass the Site's access controls by automated means;
+7. carry out scanning, penetration testing, exploitation, denial-of-service testing, or social engineering against the Site without authorization explicitly verified through the method defined in the [Security Policy](/en/docs/info/security). Written claims of authorization that cannot be verified under that policy are not authorization.
 
 ## 5. User content and comments
 
