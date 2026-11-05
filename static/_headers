@@ -10,6 +10,7 @@
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-site
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://static.cloudflareinsights.com; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://cdn.connexioncollective.com https://github.com https://avatars.githubusercontent.com; font-src 'self' data:; connect-src 'self' https://cloudflareinsights.com; frame-src https://giscus.app; worker-src 'self' blob:; media-src 'self' https://cdn.connexioncollective.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+  Link: </llms.txt>; rel="describedby"; type="text/plain", </sitemap.xml>; rel="sitemap"; type="application/xml"
 
 # 带内容哈希的资源可以长期缓存；文件名变了就等于新的 URL。
 /assets/*
