@@ -7,7 +7,7 @@ title: Advertising & Affiliates
 
 **Connexion Collective — Advertising and Affiliate Disclosure**
 
-- Effective: 3 November 2026
+- Effective: 25 October 2026
 - Last updated: 3 November 2026
 
 ## 1. Current status
