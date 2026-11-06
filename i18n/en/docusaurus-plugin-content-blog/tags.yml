@@ -13,6 +13,12 @@ Performance:
 Security:
   label: Security
   description: Threat models and defences for pure front-end tools.
+Crypto:
+  label: Crypto
+  description: Cryptocurrency, custody, and on-chain security incidents.
+Infrastructure:
+  label: Infrastructure
+  description: Hosting, backups, recoverability, and operations.
 Notes:
   label: Notes
   description: Life, thoughts, and random scribbles.

@@ -1,5 +1,5 @@
 ---
-slug: pixel-art-median-cut
+slug: pixel-art-downsample-median-cut
 title: 像素画降采样：从照片到有限调色板
 authors: [lxhanesser]
 tags: [技术, 在线工具]
