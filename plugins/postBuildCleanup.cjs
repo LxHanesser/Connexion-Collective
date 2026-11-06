@@ -61,6 +61,24 @@ module.exports = function postBuildCleanupPlugin(context) {
       console.log(
         `[post-build-cleanup] 移除 generator meta：${metasRemoved} 处 / ${pagesTouched} 个页面`,
       );
+
+      // Cloudflare Pages 只把根目录的 _headers 当配置文件，不会对外提供。
+      // i18n 构建会把 static/_headers 复制到 en/ 等语言目录，嵌套文件会被当成
+      // 普通静态资源公开。默认语言保留根目录那份，其它语言目录里的副本删掉。
+      let nestedHeadersRemoved = 0;
+      const isDefaultLocale =
+        !context?.i18n?.currentLocale ||
+        context.i18n.currentLocale === context.i18n.defaultLocale;
+      if (!isDefaultLocale) {
+        const nested = path.join(outDir, '_headers');
+        if (fs.existsSync(nested)) {
+          fs.unlinkSync(nested);
+          nestedHeadersRemoved += 1;
+        }
+      }
+      if (nestedHeadersRemoved > 0) {
+        console.log(`[post-build-cleanup] 移除语言目录 _headers：${nestedHeadersRemoved} 个`);
+      }
     },
   };
 };
