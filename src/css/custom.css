@@ -612,6 +612,51 @@ main[class*='blog-list'] > article:nth-child(2n) {
     width: 100%;
     margin-right: 0;
   }
+
+  /* 列表卡片收紧：作者区、摘要、正文图片。
+     blog-list-page 类在 <html> 上，不在 <main> 上。 */
+  html.blog-list-page article {
+    margin-bottom: 1rem !important;
+  }
+
+  /* 标题更紧凑 */
+  html.blog-list-page article h2 {
+    font-size: 1.25rem;
+    line-height: 1.35;
+  }
+
+  /* 列表页隐藏作者行：站点只有一位作者，文章页仍保留 */
+  html.blog-list-page article header .margin-top--md.row {
+    display: none;
+  }
+
+  html.blog-list-page article header .margin-vert--md {
+    padding: 0.4rem 0;
+    margin-bottom: 0.75rem !important;
+    gap: 0.5rem;
+  }
+
+  /* 摘要最多显示约 5 行，避免单张卡片过长 */
+  html.blog-list-page article .markdown {
+    max-height: 9em;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent);
+    mask-image: linear-gradient(to bottom, #000 82%, transparent);
+  }
+
+  /* 列表页不渲染正文图片，图片只在文章页出现 */
+  html.blog-list-page article .markdown img {
+    display: none;
+  }
+
+  /* 标签在列表页不是必要信息，保留「阅读全文」 */
+  html.blog-list-page article footer {
+    margin-top: 0.5rem !important;
+  }
+
+  html.blog-list-page article footer .col--9 {
+    display: none;
+  }
 }
 /* 优化文章头部的元信息（作者、时间、标签） */
 article header .margin-vert--md {

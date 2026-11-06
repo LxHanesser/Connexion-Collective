@@ -11,14 +11,14 @@ description: 从零把 Docusaurus 接到 Cloudflare Pages：构建配置、自�
 
 这篇文章把整条链路完整写一遍，最后附一份可以直接对着检查的上线清单。
 
+{/* truncate */}
+
 <div className="blog-diagram">
 <img src="/img/blog/docusaurus-pages/fig1-deploy-flow.svg" alt="部署链路：本地仓库 → GitHub → Cloudflare 构建 → 边缘节点 → 访客，非 main 分支走预览部署" width="1000" height="470" loading="lazy" />
 </div>
 <p className="blog-diagram__hint">← 左右滑动查看完整示意图 →</p>
 
 *构建发生在 Cloudflare 的机器上，本地既不需要服务器，也不需要上传 `build/`。*
-
-{/* truncate */}
 
 ## 为什么是 Pages
 
