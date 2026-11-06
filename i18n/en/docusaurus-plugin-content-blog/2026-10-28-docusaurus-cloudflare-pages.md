@@ -11,14 +11,14 @@ This site is Docusaurus on Cloudflare Pages. Deploying it is not the hard part. 
 
 This post walks the whole path, and ends with a checklist you can run through line by line.
 
+{/* truncate */}
+
 <div className="blog-diagram">
 <img src="/img/blog/docusaurus-pages/fig1-deploy-flow-en.svg" alt="Deployment flow: local repo to GitHub to Cloudflare build to edge to visitor, with preview deployments for non-main branches" width="1000" height="470" loading="lazy" />
 </div>
 <p className="blog-diagram__hint">← swipe horizontally to see the full diagram →</p>
 
 *The build runs on Cloudflare's machines. You need neither a server nor an upload of `build/`.*
-
-{/* truncate */}
 
 ## Why Pages
 

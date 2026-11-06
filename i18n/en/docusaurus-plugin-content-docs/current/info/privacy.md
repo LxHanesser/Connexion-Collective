@@ -7,7 +7,7 @@ title: Privacy Policy
 
 **Connexion Collective — Privacy Policy**
 
-- Effective: 3 November 2026
+- Effective: 25 October 2026
 - Last updated: 3 November 2026
 
 This policy explains what information Connexion Collective (the "Site") processes when you visit, on what legal basis, for how long, and what rights you can exercise — including under China's PIPL, the EU/UK GDPR, and the California Consumer Privacy Act as amended by the CPRA.

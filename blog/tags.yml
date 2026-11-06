@@ -19,3 +19,9 @@
 安全:
   label: 安全
   description: 纯前端工具的威胁模型与防护措施。
+加密:
+  label: 加密
+  description: 加密货币、托管与链上安全事件。
+基础设施:
+  label: 基础设施
+  description: 托管、备份、可恢复性与运维。

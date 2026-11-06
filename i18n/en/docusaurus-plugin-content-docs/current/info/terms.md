@@ -7,7 +7,7 @@ title: Terms
 
 **Connexion Collective — Terms of Use**
 
-- Effective: 3 November 2026
+- Effective: 25 October 2026
 - Last updated: 3 November 2026
 
 Welcome to Connexion Collective (the "Site"), a personal website offering articles, browser-based tools, and reference material.

@@ -1,5 +1,5 @@
 ---
-slug: pixel-art-median-cut
+slug: pixel-art-downsample-median-cut
 title: "Pixel art from photos: downsampling and a median-cut palette"
 authors: [lxhanesser]
 tags: [Engineering, Web tools]
