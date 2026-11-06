@@ -8,8 +8,7 @@ No authentication is required for public pages, RSS/Atom feeds,
 ## Restricted areas
 
 - `docs.connexioncollective.com` is protected by Cloudflare Access.
-- The `pdf-vault-b2y.pages.dev` and preview deployments are also behind
-  Cloudflare Access.
+- Preview deployments are also behind Cloudflare Access.
 
 ## Security testing
 
