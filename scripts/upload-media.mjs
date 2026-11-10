@@ -106,6 +106,15 @@ function quote(value) {
   return `"${text.replace(/"/g, '""')}"`;
 }
 
+// 当前调用 wrangler 需要经过 shell。命令参数来自本地文件名/桶名，
+// 仍拒绝 shell 元字符，避免文件名被解释成命令片段。
+const SHELL_UNSAFE = /[\r\n&|<>^%"!]/;
+function assertSafeShellValue(value, label) {
+  if (typeof value !== 'string' || SHELL_UNSAFE.test(value)) {
+    throw new Error(`${label} 含 shell 特殊字符，已拒绝执行：${value}`);
+  }
+}
+
 function humanSize(bytes) {
   if (bytes < 1024) return `${bytes} B`;
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`;
@@ -156,6 +165,8 @@ async function main() {
   }
 
   console.log(`桶: ${opts.bucket}   前缀: ${opts.prefix}/   ${opts.dryRun ? '模式: DRY-RUN' : '模式: 上传'}`);
+  assertSafeShellValue(opts.bucket, '桶名');
+  assertSafeShellValue(opts.prefix, '前缀');
 
   if (media.length === 0) {
     const skipped = allFiles.length;
@@ -192,6 +203,8 @@ async function main() {
     console.log(`  → ${item.key}`);
     if (opts.dryRun) continue;
 
+    assertSafeShellValue(item.key, 'R2 key');
+    assertSafeShellValue(item.source, '源文件路径');
     const parts = [
       wranglerRunner(), 'r2', 'object', 'put',
       quote(`${opts.bucket}/${item.key}`),
