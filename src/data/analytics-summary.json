@@ -1,81 +1,11 @@
 {
-  "updated": "2026-11-02T01:25:10.466Z",
+  "updated": "2026-11-16T12:11:00.002Z",
   "earliest": "2026-10-24",
-  "latest": "2026-11-02",
-  "totalViews": 1463,
-  "totalVisits": 471,
-  "daysTracked": 10,
+  "latest": "2026-11-16",
+  "totalViews": 2068,
+  "totalVisits": 754,
+  "daysTracked": 20,
   "series": [
-    {
-      "date": "2026-07-06",
-      "views": 0,
-      "visits": 0
-    },
-    {
-      "date": "2026-07-07",
-      "views": 0,
-      "visits": 0
-    },
-    {
-      "date": "2026-07-08",
-      "views": 0,
-      "visits": 0
-    },
-    {
-      "date": "2026-07-09",
-      "views": 0,
-      "visits": 0
-    },
-    {
-      "date": "2026-07-10",
-      "views": 0,
-      "visits": 0
-    },
-    {
-      "date": "2026-07-11",
-      "views": 0,
-      "visits": 0
-    },
-    {
-      "date": "2026-07-12",
-      "views": 0,
-      "visits": 0
-    },
-    {
-      "date": "2026-07-13",
-      "views": 0,
-      "visits": 0
-    },
-    {
-      "date": "2026-07-14",
-      "views": 0,
-      "visits": 0
-    },
-    {
-      "date": "2026-07-15",
-      "views": 0,
-      "visits": 0
-    },
-    {
-      "date": "2026-07-16",
-      "views": 0,
-      "visits": 0
-    },
-    {
-      "date": "2026-07-17",
-      "views": 0,
-      "visits": 0
-    },
-    {
-      "date": "2026-07-18",
-      "views": 0,
-      "visits": 0
-    },
-    {
-      "date": "2026-07-19",
-      "views": 0,
-      "visits": 0
-    },
     {
       "date": "2026-07-20",
       "views": 0,
@@ -558,7 +488,7 @@
     },
     {
       "date": "2026-10-24",
-      "views": 20,
+      "views": 30,
       "visits": 10
     },
     {
@@ -568,108 +498,202 @@
     },
     {
       "date": "2026-10-26",
-      "views": 300,
-      "visits": 140
+      "views": 260,
+      "visits": 100
     },
     {
       "date": "2026-10-27",
-      "views": 280,
-      "visits": 90
+      "views": 210,
+      "visits": 50
     },
     {
       "date": "2026-10-28",
-      "views": 150,
+      "views": 160,
       "visits": 40
     },
     {
       "date": "2026-10-29",
-      "views": 40,
-      "visits": 10
+      "views": 50,
+      "visits": 30
     },
     {
       "date": "2026-10-30",
-      "views": 50,
-      "visits": 10
+      "views": 30,
+      "visits": 0
     },
     {
       "date": "2026-10-31",
-      "views": 10,
-      "visits": 0
+      "views": 30,
+      "visits": 10
     },
     {
       "date": "2026-11-01",
       "views": 20,
-      "visits": 0
+      "visits": 20
     },
     {
       "date": "2026-11-02",
-      "views": 3,
-      "visits": 1
+      "views": 0,
+      "visits": 0
+    },
+    {
+      "date": "2026-11-03",
+      "views": 230,
+      "visits": 120
+    },
+    {
+      "date": "2026-11-04",
+      "views": 0,
+      "visits": 0
+    },
+    {
+      "date": "2026-11-05",
+      "views": 120,
+      "visits": 50
+    },
+    {
+      "date": "2026-11-06",
+      "views": 130,
+      "visits": 60
+    },
+    {
+      "date": "2026-11-07",
+      "views": 20,
+      "visits": 10
+    },
+    {
+      "date": "2026-11-08",
+      "views": 20,
+      "visits": 20
+    },
+    {
+      "date": "2026-11-09",
+      "views": 0,
+      "visits": 0
+    },
+    {
+      "date": "2026-11-10",
+      "views": 60,
+      "visits": 20
+    },
+    {
+      "date": "2026-11-11",
+      "views": 60,
+      "visits": 30
+    },
+    {
+      "date": "2026-11-12",
+      "views": 10,
+      "visits": 0
+    },
+    {
+      "date": "2026-11-13",
+      "views": 20,
+      "visits": 10
+    },
+    {
+      "date": "2026-11-14",
+      "views": 0,
+      "visits": 0
+    },
+    {
+      "date": "2026-11-15",
+      "views": 10,
+      "visits": 0
+    },
+    {
+      "date": "2026-11-16",
+      "views": 8,
+      "visits": 4
     }
   ],
   "topPages": [
     {
       "path": "/",
-      "views": 291
-    },
-    {
-      "path": "/docs/info/about",
-      "views": 220
-    },
-    {
-      "path": "/tools",
-      "views": 130
+      "views": 551
     },
     {
       "path": "/blog",
-      "views": 111
+      "views": 191
     },
     {
-      "path": "/blog/r2-media-hosting",
-      "views": 80
-    },
-    {
-      "path": "/docs/info/changelog",
-      "views": 60
+      "path": "/docs/info/about",
+      "views": 171
     },
     {
       "path": "/docs/info/terms",
+      "views": 150
+    },
+    {
+      "path": "/en",
+      "views": 121
+    },
+    {
+      "path": "/docs/info/changelog",
+      "views": 81
+    },
+    {
+      "path": "/tools",
+      "views": 70
+    },
+    {
+      "path": "/tools/image-compress",
       "views": 60
     },
     {
-      "path": "/search",
-      "views": 50
-    },
-    {
-      "path": "/tools/qr-code",
-      "views": 40
-    },
-    {
-      "path": "/en/docs/info/terms",
-      "views": 30
-    },
-    {
-      "path": "/subscribe",
-      "views": 30
-    },
-    {
       "path": "/stats",
-      "views": 21
+      "views": 52
     },
     {
       "path": "/blog/archive",
+      "views": 50
+    },
+    {
+      "path": "/blog/r2-media-hosting",
+      "views": 50
+    },
+    {
+      "path": "/docs/info/privacy",
+      "views": 40
+    },
+    {
+      "path": "/blog/binance-63b-incident",
+      "views": 30
+    },
+    {
+      "path": "/en/docs/info/about",
+      "views": 30
+    },
+    {
+      "path": "/search",
+      "views": 30
+    },
+    {
+      "path": "/tools/watermark",
+      "views": 30
+    },
+    {
+      "path": "/blog/php-object-injection-2026",
       "views": 20
     },
     {
-      "path": "/blog/hello-world",
+      "path": "/blog/windows-dev-environment",
       "views": 20
     },
     {
-      "path": "/en/docs/info/changelog",
+      "path": "/docs/intro",
       "views": 20
     },
     {
-      "path": "/en/tools/image-compress",
+      "path": "/en/blog/archive",
+      "views": 20
+    },
+    {
+      "path": "/en/blog/browser-image-compression",
+      "views": 20
+    },
+    {
+      "path": "/en/docs/info/terms",
       "views": 20
     },
     {
@@ -677,23 +701,23 @@
       "views": 20
     },
     {
-      "path": "/tools/image-base64",
+      "path": "/restricted",
       "views": 20
     },
     {
-      "path": "/tools/image-compress",
+      "path": "/tools/mc-datapack",
       "views": 20
     },
     {
-      "path": "/tools/pixel-art",
-      "views": 20
+      "path": "/en/stats",
+      "views": 11
     },
     {
-      "path": "/tools/svg-optimize",
-      "views": 20
+      "path": "/blog/browser-image-compression",
+      "views": 10
     },
     {
-      "path": "/blog/docusaurus-cloudflare-pages",
+      "path": "/blog/hello-world",
       "views": 10
     },
     {
@@ -701,31 +725,7 @@
       "views": 10
     },
     {
-      "path": "/blog/online-tools-07-mobile-audit",
-      "views": 10
-    },
-    {
-      "path": "/blog/online-tools-10-qr",
-      "views": 10
-    },
-    {
-      "path": "/en/blog/archive",
-      "views": 10
-    },
-    {
-      "path": "/en/blog/hello-world",
-      "views": 10
-    },
-    {
-      "path": "/en/blog/pdf-in-the-browser",
-      "views": 10
-    },
-    {
-      "path": "/en/docs/category/about-site",
-      "views": 10
-    },
-    {
-      "path": "/en/docs/info/about",
+      "path": "/blog/mouse-sensitivity-math",
       "views": 10
     }
   ]
